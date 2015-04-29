@@ -6,7 +6,7 @@
 #    By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/12 17:20:35 by rbaum             #+#    #+#              #
-#    Updated: 2015/04/26 19:08:56 by rbaum            ###   ########.fr        #
+#    Updated: 2015/04/29 12:13:13 by rbaum            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -29,7 +29,7 @@ INC_PATH =		./inc/
 
 SRC_NAME =		main.c
 
-SDL_STUFF = 	/nfs/zfs-student-5/users/2014_paris/rbaum/Library/Frameworks/SDL2.framework/SDL2
+SDL_STUFF = 	./inc/SDL2.framework/SDL2
 
 OBJ_NAME =		$(SRC_NAME:.c=.o)
 

@@ -12,19 +12,38 @@
 
 #include "wolf.h"
 
+t_wolf		*singleton(void)
+{
+	static t_wolf wolf;
+
+	return (&wolf);
+}
+
 int			main(void) 
 {
 	SDL_Window		*win;
 
 
 	SDL_Init(SDL_INIT_EVERYTHING);
-	win = SDL_CreateWindow("test", 0, 0, 800, 600, SDL_WINDOW_OPENGL);
+	win = SDL_CreateWindow
+	("test", 0, 0, WIDTH, HEIGHT, 0);
 	SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
 
-    // Close and destroy the window
-    SDL_DestroyWindow(win);
+//    SDL_DestroyWindow(win);
 
-    // Clean up
-    SDL_Quit();
+    while (1)
+    {
+    	while (SDL_PollEvent(&S->event))
+    	if (S->event.type == SDL_KEYDOWN)
+		{
+		if (S->event.key.keysym.sym == 27)
+		{
+			SDL_DestroyWindow(S->window);
+			SDL_Quit();
+			exit(1);
+		}
+    	}
+	}
+//    SDL_Quit();
     return 0;
 }
