@@ -18,6 +18,24 @@ t_wolf		*singleton(void)
 
 	return (&wolf);
 }
+void		running(void)
+{
+	while (1)
+	{
+		while (SDL_PollEvent(&S->event))
+		{
+			if (S->event.type == SDL_KEYDOWN)
+			{
+				if (S->event.key.keysym.sym == 27)
+				{
+					SDL_DestroyWindow(S->window);
+					SDL_Quit();
+					exit(1);
+				}
+			}
+		}
+	}
+}
 
 int			main(void) 
 {
@@ -28,22 +46,6 @@ int			main(void)
 	win = SDL_CreateWindow
 	("test", 0, 0, WIDTH, HEIGHT, 0);
 	SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
-
-//    SDL_DestroyWindow(win);
-
-    while (1)
-    {
-    	while (SDL_PollEvent(&S->event))
-    	if (S->event.type == SDL_KEYDOWN)
-		{
-		if (S->event.key.keysym.sym == 27)
-		{
-			SDL_DestroyWindow(S->window);
-			SDL_Quit();
-			exit(1);
-		}
-    	}
-	}
-//    SDL_Quit();
-    return 0;
+	running();
+	return 0;
 }
