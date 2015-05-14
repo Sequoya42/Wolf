@@ -6,7 +6,7 @@
 #    By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/12 17:20:35 by rbaum             #+#    #+#              #
-#    Updated: 2015/04/29 12:13:13 by rbaum            ###   ########.fr        #
+#    Updated: 2015/05/01 16:08:36 by rbaum            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,7 +27,7 @@ LIBFT_PATH =	./libft/
 
 INC_PATH =		./inc/
 
-SRC_NAME =		main.c
+SRC_NAME =		main.c 		get_map.c 	tmp.c\
 
 SDL_STUFF = 	./inc/SDL2.framework/SDL2
 
@@ -35,7 +35,7 @@ OBJ_NAME =		$(SRC_NAME:.c=.o)
 
 LIBFT_NAME =	libft.a
 
-INC_NAME =		push_swap.h
+INC_NAME =		wolf.h
 
 SRC =			$(addprefix $(SRC_PATH),$(SRC_NAME))
 

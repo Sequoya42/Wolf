@@ -6,7 +6,7 @@
 /*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/26 19:09:40 by rbaum             #+#    #+#             */
-/*   Updated: 2015/04/29 12:13:03 by rbaum            ###   ########.fr       */
+/*   Updated: 2015/05/14 20:28:06 by rbaum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,21 @@ typedef struct 			s_wolf
 	SDL_Event			event;
 	SDL_Renderer		*render;
 	int					**map;
+	int					map_height;
+	int					map_width;
+
 
 }						t_wolf;
+
+
+
+t_wolf		*singleton(void);
+
+int			get_map(char *s);
+
+/* TEMPORAIRE */
+
+void		aff_map_term(void);
+/* TEMPORAIRE */
 
 #endif

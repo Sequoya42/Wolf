@@ -6,7 +6,7 @@
 /*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/26 19:19:29 by rbaum             #+#    #+#             */
-/*   Updated: 2015/04/26 19:23:05 by rbaum            ###   ########.fr       */
+/*   Updated: 2015/05/14 20:24:12 by rbaum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_wolf		*singleton(void)
 
 	return (&wolf);
 }
+
 void		running(void)
 {
 	while (1)
@@ -37,15 +38,19 @@ void		running(void)
 	}
 }
 
-int			main(void) 
+int			main(int ac, char **av)
 {
-	SDL_Window		*win;
+//	SDL_Window		*win;
 
-
-	SDL_Init(SDL_INIT_EVERYTHING);
-	win = SDL_CreateWindow
-	("test", 0, 0, WIDTH, HEIGHT, 0);
-	SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
-	running();
+	if (ac != 2)
+		return (0);
+	ft_bzero(S, 1);
+//	SDL_Init(SDL_INIT_EVERYTHING);
+//	win = SDL_CreateWindow
+//	("test", 0, 0, WIDTH, HEIGHT, 0);
+	if (get_map(av[1]) == -1)
+		return (-1);
+	aff_map_term();
+//	running();
 	return 0;
 }
