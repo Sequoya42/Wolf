@@ -23,7 +23,7 @@
 
 #define WIDTH 	800
 #define HEIGHT	600
-#define INCR	50
+#define INCR	10
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -41,6 +41,7 @@ typedef struct 			s_wolf
 	SDL_Event			event;
 	SDL_Renderer		*renderer;
 	SDL_Rect			rect;
+	SDL_Point			points;
 	int					**map;
 	int					map_height;
 	int					map_width;

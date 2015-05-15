@@ -49,11 +49,11 @@ INCLIBFT_PATH =	$(LIBFT_PATH)
 
 all:			libft $(NAME)
 
-$(NAME):		$(OBJ) $(INC)
+$(NAME):		$(OBJ)
 				@$(CC) -L$(LIBFT_PATH) -lft -o $(NAME) $(OBJ) $(SDL_STUFF)
 				@echo "Wolf initialised"
 
-$(OBJ_PATH)%.o:	$(SRC_PATH)%.c
+$(OBJ_PATH)%.o:	$(SRC_PATH)%.c $(INC)
 				@mkdir -p $(OBJ_PATH)
 				@$(CC) $(CFLAG) -I$(INC_PATH) -I$(INCLIBFT_PATH) -o $@ -c $<
 

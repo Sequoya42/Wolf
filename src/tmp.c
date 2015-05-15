@@ -37,5 +37,7 @@ void		test_rendering(void)
 	SDL_RenderClear(S->renderer);
 	SDL_SetRenderDrawColor(S->renderer, 0, 0, 255, 255);
 	SDL_RenderFillRect(S->renderer, &S->rect);
+
+
 	SDL_RenderPresent(S->renderer);
 }
