@@ -31,3 +31,11 @@ void		aff_map_term(void)
 		i++;
 	}
 }
+void		test_rendering(void)
+{
+	SDL_SetRenderDrawColor(S->renderer, 255, 128, 0, 255);
+	SDL_RenderClear(S->renderer);
+	SDL_SetRenderDrawColor(S->renderer, 0, 0, 255, 255);
+	SDL_RenderFillRect(S->renderer, &S->rect);
+	SDL_RenderPresent(S->renderer);
+}

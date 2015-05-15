@@ -17,11 +17,13 @@
 # include <math.h>
 # include "libft.h"
 # include "SDL2.framework/Headers/SDL.h"
+# include <stdio.h> // REMOVE THIS
 
 # define S (singleton())
 
 #define WIDTH 	800
 #define HEIGHT	600
+#define INCR	50
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -33,12 +35,12 @@
 # define KWHT  "\x1B[37m"
 
 
-
 typedef struct 			s_wolf
 {
 	SDL_Window			*window;
 	SDL_Event			event;
-	SDL_Renderer		*render;
+	SDL_Renderer		*renderer;
+	SDL_Rect			rect;
 	int					**map;
 	int					map_height;
 	int					map_width;
@@ -48,13 +50,15 @@ typedef struct 			s_wolf
 
 
 
+
 t_wolf		*singleton(void);
 
 int			get_map(char *s);
+void		running(void);
 
 /* TEMPORAIRE */
-
 void		aff_map_term(void);
+void		test_rendering(void);
 /* TEMPORAIRE */
 
 #endif

@@ -27,7 +27,7 @@ LIBFT_PATH =	./libft/
 
 INC_PATH =		./inc/
 
-SRC_NAME =		main.c 		get_map.c 	tmp.c\
+SRC_NAME =		main.c 		get_map.c 	tmp.c 	events.c\
 
 SDL_STUFF = 	./inc/SDL2.framework/SDL2
 
@@ -49,7 +49,7 @@ INCLIBFT_PATH =	$(LIBFT_PATH)
 
 all:			libft $(NAME)
 
-$(NAME):		$(OBJ)
+$(NAME):		$(OBJ) $(INC)
 				@$(CC) -L$(LIBFT_PATH) -lft -o $(NAME) $(OBJ) $(SDL_STUFF)
 				@echo "Wolf initialised"
 
