@@ -22,15 +22,16 @@ void		key_events(void)
 			SDL_Quit();
 			exit(1);
 		}
-		if (S->event.key.keysym.sym == SDLK_RIGHT && S->rect.x < (WIDTH - INCR))
+		if (KEY == SDLK_RIGHT && S->rect.x < (WIDTH - INCR))
 			S->rect.x += INCR;
-		if (S->event.key.keysym.sym == SDLK_LEFT && S->rect.x > 0)
+		if (KEY == SDLK_LEFT && S->rect.x > 0)
 			S->rect.x -= INCR;
-		if (S->event.key.keysym.sym == SDLK_DOWN && S->rect.y < (HEIGHT - INCR))
+		if (KEY == SDLK_DOWN && S->rect.y < (HEIGHT - INCR))
 			S->rect.y += INCR;
-		if (S->event.key.keysym.sym == SDLK_UP && S->rect.y > 0)
+		if (KEY == SDLK_UP && S->rect.y > 0)
 			S->rect.y -= INCR;
 	}
+
 }
 
 void		running(void)
@@ -41,7 +42,6 @@ void		running(void)
 		{
 			key_events();
 			test_rendering();
-			printf("%d\n%d\n", S->rect.x, S->rect.y);
 		}
 		SDL_Delay(16);
 	}

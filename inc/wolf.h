@@ -24,6 +24,21 @@
 #define WIDTH 	800
 #define HEIGHT	600
 #define INCR	10
+#define	WALL	64
+#define POV		32
+#define	FOV		60
+
+#define KEY 	S->event.key.keysym.sym
+#define	ANG 	S->angle
+#define POSX 	S->posx * WALL + POV
+#define	POSY 	S->posy * WALL + POV
+
+#define Y		S->posy
+#define X 		S->posx
+#define	VALUE	S->map[Y][X]
+#define MH 		S->map_height
+#define	MW 		S->map_width
+
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -37,14 +52,20 @@
 
 typedef struct 			s_wolf
 {
+			// SDL STUFF
 	SDL_Window			*window;
 	SDL_Event			event;
 	SDL_Renderer		*renderer;
 	SDL_Rect			rect;
 	SDL_Point			points;
+			// MAP STUFF
 	int					**map;
 	int					map_height;
 	int					map_width;
+			// CAMERA STUFF
+	int					angle;
+	int					posx;
+	int					posy;
 
 
 }						t_wolf;
@@ -54,8 +75,10 @@ typedef struct 			s_wolf
 
 t_wolf		*singleton(void);
 
-int			get_map(char *s);
 void		running(void);
+int			get_map(char *s);
+int			ft_init(void);
+
 
 /* TEMPORAIRE */
 void		aff_map_term(void);

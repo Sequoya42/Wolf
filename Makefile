@@ -27,7 +27,8 @@ LIBFT_PATH =	./libft/
 
 INC_PATH =		./inc/
 
-SRC_NAME =		main.c 		get_map.c 	tmp.c 	events.c\
+SRC_NAME =		main.c 		get_map.c 	tmp.c 	events.c 	raycast.c\
+				short_func.c\
 
 SDL_STUFF = 	./inc/SDL2.framework/SDL2
 
