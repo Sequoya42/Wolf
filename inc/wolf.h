@@ -27,14 +27,23 @@
 #define	WALL	64
 #define POV		32
 #define	FOV		60
+#define	DIST	WIDTH / tan(30 D)
+#define ARC		FOV / WIDTH
+#define	COL		DIST * WALL / LENGTH
 
 #define KEY 	S->event.key.keysym.sym
 #define	ANG 	S->angle
 #define POSX 	S->posx * WALL + POV
 #define	POSY 	S->posy * WALL + POV
 
+#define	ALPHA	S->aplha
+#define XA 		WALL / tan(ALPHA)
+#define YA		WALL * (tan(ALPHA))
+
+#define W 		64
 #define Y		S->posy
 #define X 		S->posx
+#define D 		/ 57.2
 #define	VALUE	S->map[Y][X]
 #define MH 		S->map_height
 #define	MW 		S->map_width
@@ -63,9 +72,12 @@ typedef struct 			s_wolf
 	int					map_height;
 	int					map_width;
 			// CAMERA STUFF
-	int					angle;
-	int					posx;
-	int					posy;
+	double				angle;
+	double				alpha;
+	double				posx;
+	double				posy;
+	double				ray_x;
+	double				ray_y;
 
 
 }						t_wolf;

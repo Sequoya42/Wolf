@@ -26,7 +26,7 @@ int		ft_init(void)
 	S->rect.y = 50;
 	S->rect.w = 10;
 	S->rect.h = 10;
-	ANG = 0;
+	ANG = 90;
 	if ((SDL_Init(SDL_INIT_EVERYTHING)) == -1)
 	return (ft_error(NULL, NULL, "Cannot init SDL"));
 	S->window = SDL_CreateWindow

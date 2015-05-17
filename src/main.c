@@ -20,7 +20,7 @@ int			main(int ac, char **av)
 		return (-1);
 	if (get_map(av[1]) == -1)
 		return (-1);
-
+	printf("$d\n", DIST);
 	// aff_map_term();
 	running();
 	return 0;
