@@ -24,7 +24,7 @@ void		aff_map_term(void)
 		X = 0;
 		while (X < MW)
 		{
-			ft_putnbrn(VALUE);
+//			ft_putnbrn(VALUE);
 			X++;
 		}
 		ft_putchar('\n');
@@ -33,10 +33,6 @@ void		aff_map_term(void)
 }
 void		test_rendering(void)
 {
-	S->rect.x = 50;
-	S->rect.y = 50;
-	S->rect.w = 10;
-	S->rect.h = 10;
 	SDL_SetRenderDrawColor(S->renderer, 255, 128, 0, 255);
 	SDL_RenderClear(S->renderer);
 	SDL_SetRenderDrawColor(S->renderer, 0, 0, 255, 255);

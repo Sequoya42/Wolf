@@ -14,72 +14,96 @@
 
 double		raycast_horizontal(void)
 {
-	int		y;
-	int		x;
-	int		w;
+	double	y;
+	double	x;
+	double	w;
 	double	dx;
+	int		t;
 
+	ft_putstr(KCYN);
 	w = (ALPHA > 180) ? - 64 : 64;
-	x = POSX + (POSY - IY)/tan(ALPHA);
-	y = (w > 0) ? (POSY / WALL) * (WALL) - 1 : (POSY / WALL) * (WALL) + 64;
-	while (S->map[y / WALL][x / WALL] == 0)
+	t = POSY / WALL;
+	y = t * 64;
+	if (w > 0)
+		y -= 1;
+	else
+		y += 64;
+//	y = (w > 0) ? (POSY / WALL)  - 1 : (POSY / WALL) + 64;
+
+	x = POSX + (POSY - y) /tan(ALPHA D);
+	if (S->map[(int)y / WALL][(int)x / WALL] == 0)
 	{
-		x += XA;
-		y += WALL;
+	 while (S->map[(int)y / WALL][(int)x / WALL] == 0)
+	 {
+	 	x += XA;
+	 	y += WALL;
+	 		printf("%f\t\t\t%f\n", ceil(y), floor(y));
+	 }
 	}
-	dx = abs((PX - x) / cos(ALPHA));
-	dx *= cos (ALPHA - ANG);
+	dx = abs((int)((POSX - x) / cos(ALPHA D)));
+//	dx *= cos (abs((int)(ALPHA - ANG)) D);
 	return (dx);
 }
 
 double		raycast_vertical(void)
 {
-	int 	x;
-	int		y;
-	int		w;
+	double 	x;
+	double	y;
+	double	w;
 	double	dy;
-
+	ft_putstr(KGRN);
 	w = (ALPHA < 90 || ALPHA > 270) ? 64 : - 64;
 	x = (ALPHA < 90 || ALPHA > 270) ?
-	 (POSX / WALL) * WALL + 64 : (POSX / WALL) * WALL - 1;
-	y = POSY + (POSX - x) * tan(ALPHA);
-	while (S->map[y / WALL][x / WALL] == 0)
+	 (POSX / WALL) + 64 : (POSX / WALL) - 1;
+	y = POSY + (POSX - x) * tan(ALPHA D);
+//	if (S->map[y / WALL][x / WALL] == 0)
+	{
+//	while (S->map[y / WALL][x / WALL] == 0)
 	{
 		x += WALL;
 		y += YA;
 	}
-	dy = abs((POSY - y) / sin(ALPHA));
-	dy *= cos (ALPHA - ANG);
+	}
+	dy = abs((int)((POSY - y) / sin(ALPHA D)));
+//	dy *= cos (abs((int)(ALPHA - ANG)) D);
 	return (dy);
 }
 
-int			draw_ray(double length, int i)
-{
-	int 	x;
-	double	wh;
 
-	wh = WALL / length * DIST;
-	z = (WIDTH / 2) - (length / 2);
-	x = 0;
-	while (x < )
-
-}
 
 void		raycast(void)
 {
 	int		i;
 	double	length;
+	double	h;
+	double	v;
+	double	arc;
 
 	i = WIDTH;
-	if (ANG > 360)
+	arc = (double)ARC;
+	if (ANG >= 360)
 		ANG -= 360;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 	ALPHA = ANG - 30;
+	SDL_RenderClear(S->renderer);
 	while (i > 0)
 	{
-		length = (raycast_horizontal() > raycast_vertical()) ?
-		raycast_horizontal() : raycast_vertical();
-		draw_ray(length, i);
-		ALPHA += arc;
+		if (ALPHA >= 360)
+		ALPHA -= 360;
+		if (ALPHA < 0)
+		ALPHA += 360;
+		h = raycast_horizontal();
+//		v = raycast_vertical();
+		v = 1;
+		if (h > v)
+			length = h;
+		else
+			length = v;
+			draw_ray(length, i);
+//		ALPHA += arc;
+//		printf("%f\n", ALPHA);
 		i--;
 	}
+	SDL_RenderPresent(S->renderer);
+//	S->forward = POSX;
+	SDL_Delay(16);
 }

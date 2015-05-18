@@ -21,6 +21,7 @@
 
 # define S (singleton())
 
+#define INCR	10
 #define WIDTH 	800
 #define HEIGHT	600
 #define INCR	10
@@ -35,8 +36,10 @@
 #define	ANG 	S->angle
 #define POSX 	S->posx * WALL + POV
 #define	POSY 	S->posy * WALL + POV
+#define FORW 	S->forward
+#define BACK 	S->backward
 
-#define	ALPHA	S->aplha
+#define	ALPHA	S->alpha
 #define XA 		WALL / tan(ALPHA)
 #define YA		WALL * (tan(ALPHA))
 
@@ -74,23 +77,28 @@ typedef struct 			s_wolf
 			// CAMERA STUFF
 	double				angle;
 	double				alpha;
-	double				posx;
-	double				posy;
+	double 				posx;
+	double 				posy;
 	double				ray_x;
 	double				ray_y;
+	double				forward;
+	double				backward;
 
 
 }						t_wolf;
-
-
-
 
 t_wolf		*singleton(void);
 
 void		running(void);
 int			get_map(char *s);
 int			ft_init(void);
+void		raycast(void);
+void		key_events(void);
 
+
+int			draw_ray(double length, int i);
+double		raycast_vertical(void);
+double		raycast_horizontal(void);
 
 /* TEMPORAIRE */
 void		aff_map_term(void);
