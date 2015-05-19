@@ -16,6 +16,7 @@ void		move_right(void)
 {
 		if (KEY == SDLK_RIGHT && S->rect.x < (WIDTH - INCR))
 		{
+			if (ANG < 350)
 			ANG += 10;
 		}
 }
@@ -24,6 +25,7 @@ void		move_left(void)
 {
 		if (KEY == SDLK_LEFT && S->rect.x > 0)
 		{
+			if (ANG > 10)
 			ANG -= 10;
 		}
 }

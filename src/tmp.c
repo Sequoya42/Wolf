@@ -16,19 +16,22 @@ void		aff_map_term(void)
 {
 	ft_putnbrn(S->map_height);
 	ft_putnbrn(S->map_width);
-	X = 0;
-	Y = 0;
+//	X = 0;
+//	Y = 0;
+	int x = 0;
+	int y = 0;
 	ft_putchar('\n');
-	while (Y < MH)
+	while (y < MH)
 	{
-		X = 0;
-		while (X < MW)
+		x = 0;
+		while (x < MW)
 		{
-//			ft_putnbrn(VALUE);
-			X++;
+		//	ft_putnbrn(VALUE);
+			ft_putnbrn(S->map[y][x]);
+			x++;
 		}
 		ft_putchar('\n');
-		Y++;
+		y++;
 	}
 }
 void		test_rendering(void)

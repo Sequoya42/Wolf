@@ -28,26 +28,25 @@
 #define	WALL	64
 #define POV		32
 #define	FOV		60
-#define	DIST	WIDTH / tan(30 D)
-#define ARC		FOV / WIDTH
-#define	COL		DIST * WALL / LENGTH
+#define	DIST	(WIDTH / tan(30 D))
+#define ARC		(FOV / WIDTH)
 
 #define KEY 	S->event.key.keysym.sym
-#define	ANG 	S->angle
-#define POSX 	S->posx * WALL + POV
-#define	POSY 	S->posy * WALL + POV
+#define	ANG 	(S->angle)
+#define POSX 	(S->posy * WALL + POV)
+#define	POSY 	(S->posx * WALL + POV)
 #define FORW 	S->forward
 #define BACK 	S->backward
 
-#define	ALPHA	S->alpha
-#define XA 		WALL / tan(ALPHA)
-#define YA		WALL * (tan(ALPHA))
+#define	ALPHA	(S->alpha)
+#define XA 		(WALL / (tan(ALPHA D)))
+#define YA		(WALL * (tan(ALPHA D)))
 
 #define W 		64
 #define Y		S->posy
 #define X 		S->posx
 #define D 		/ 57.2
-#define	VALUE	S->map[Y][X]
+#define	VALUE	S->map[(int)Y][(int)X]
 #define MH 		S->map_height
 #define	MW 		S->map_width
 
@@ -77,8 +76,8 @@ typedef struct 			s_wolf
 			// CAMERA STUFF
 	double				angle;
 	double				alpha;
-	double 				posx;
-	double 				posy;
+	int 				posx;
+	int 				posy;
 	double				ray_x;
 	double				ray_y;
 	double				forward;

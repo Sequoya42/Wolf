@@ -35,35 +35,32 @@ int		ft_init(void)
 
 int			draw_ray(double length, int i)
 {
-	int 	x;
+	double 	x;
 	double	wh;
-	int		z;
+	double	z;
 
 	ft_putstr(KMAG);
 	wh = WALL / length * DIST;
-	z = (HEIGHT / 2) - (wh / 2);
-	x = 0;
-//	z = 300;
-
-	SDL_SetRenderDrawColor(S->renderer, 255, 255, 0, 255); //YELLOW
+	 z = (HEIGHT / 2) - (wh / 2);
+	 x = z;
+	// SDL_SetRenderDrawColor(S->renderer, 255, 255, 0, 255); //YELLOW
+	// while (x < z)
+	// {
+	// 	SDL_RenderDrawPoint(S->renderer, i, x);
+	// 	x += 0.10;
+	// }
+	SDL_SetRenderDrawColor(S->renderer, 0, 128, 0, 255); // GREEN
+	z = (HEIGHT / 2) + (wh / 2);//DRAW WALL
 	while (x < z)
 	{
 		SDL_RenderDrawPoint(S->renderer, i, x);
-		x++;
+		x += 0.10;
 	}
-	SDL_SetRenderDrawColor(S->renderer, 0, 128, 0, 255); // GREEN
-	z = (HEIGHT / 2) + (wh / 2);//DRAW WALL
-//	z = 500;
-		while (x < z)
-	{
-		SDL_RenderDrawPoint(S->renderer, i, x);
-		x++;
-	}
-	SDL_SetRenderDrawColor(S->renderer, 255, 100, 205, 255); // PINK
-		while (x < WIDTH)
-	{
-		SDL_RenderDrawPoint(S->renderer, i, x);
-		x++;
-	}
+	 SDL_SetRenderDrawColor(S->renderer, 255, 250, 205, 255); // PINK
+	// while (x < WIDTH)
+	// {
+	// 	SDL_RenderDrawPoint(S->renderer, i, x);
+	// 	x += 0.10;
+	// }
 	return (0);
 }

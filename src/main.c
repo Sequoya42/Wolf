@@ -20,10 +20,9 @@ int			main(int ac, char **av)
 		return (-1);
 	if (get_map(av[1]) == -1)
 		return (-1);
-	// aff_map_term();
-	running();
 
-//	raycast();
+	 aff_map_term();
+	running();
 	return 0;
 }
 
@@ -38,10 +37,7 @@ void		running(void)
 		while (SDL_PollEvent(&S->event))
 		{
 			key_events();
-//			test_rendering();
 			raycast();
-
-		// SDL_Delay(1000);
 		}
 
 	}
