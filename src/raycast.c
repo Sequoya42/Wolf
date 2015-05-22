@@ -6,7 +6,7 @@
 /*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/16 17:52:30 by rbaum             #+#    #+#             */
-/*   Updated: 2015/05/16 17:52:37 by rbaum            ###   ########.fr       */
+/*   Updated: 2015/05/19 22:28:22 by rbaum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,29 @@ double		raycast_horizontal(void)
 {
 	double	y;
 	double	x;
-	int		ya;
+	double	ya;
+	double	xa;
 	double	dx;
 
-	ft_putstr(KYEL);
-	ya = (ALPHA > 180) ? - 64 : 64;
-	y = ((int)(POSY / WALL)) * WALL;
-	y = (ya > 0) ? y - 1 : y + 64;
-	x = POSX + (POSY - y) /tan(ALPHA D);
-	while (S->map[(int)(x / WALL)][(int)(y / WALL)] != 1)
+	ya = (ALPHA > 180.0) ? - 64.0 : 64.0;
+	xa = (ALPHA < 90.0 || ALPHA > 270.0) ? 
+	(64.0 / tan(ALPHA D)) :  (-64.0 / tan(ALPHA D));
+	y = (double)((int)(POSY / (double)WALL)) * (double)WALL;
+	y = (ya > 0.0) ? y - 0.001 : y + 64.0;
+	x = (POSX + (POSY - y)) /(tan(ALPHA D));
+//	printf("ya: %f\t\txa: %f\ny: %f\t\tx: %f\nposx: %f\t\tposy: %f\n",
+//m	 ya, xa, y, x, POSX, POSY);
+	while (SAFE && VALUE != 1)
 	{
-
-		x += XA;
+			printf("ya: %f\t\txa: %f\ny: %f\t\tx: %f\nposx: %f\t\tposy: %f\n",
+	 ya, xa, y, x, POSX, POSY);
+		x += xa;
 		y += ya;
 	}
-	dx = fabs(((POSX - x) / cos(ALPHA D)));
-	dx *= cos(fabs(((ALPHA - ANG) D)));
+	dx = fabs(((POSX - x) / cos(ALPHA  D)));
+	dx *= (cos(((ALPHA - ANG) D)));
+	ft_putendl(KYEL);
+	printf("dx = %f\n", dx);
 	return (dx);
 }
 
@@ -40,23 +47,26 @@ double		raycast_vertical(void)
 	double 	x;
 	double	y;
 	double	xa;
+	double	ya;
 	double	dy;
 
-	ft_putstr(KGRN);
-	xa = (ALPHA < 90 || ALPHA > 270) ? - 64 :  64;
-	x = ((int)(POSX / WALL)) * WALL;
-	x = (ALPHA < 90 || ALPHA > 270) ? x + 64 : x - 1;
+	xa = (ALPHA < 90.0 || ALPHA > 270.0) ? - 64.0 :  64.0;
+	ya = (ALPHA > 180.0) ? 
+	(- 64.0 * tan(ALPHA D)) : (64.0 * tan(ALPHA D));
+		xa = 64.0;
+		ya = 64.0 * tan(ALPHA D);
+	x = ((int)(POSX / WALL)) * WALL + 64;
+	x = (ALPHA < 90.0 || ALPHA > 270.0) ? x + 64.0 : x - 0.001;
 	y = POSY + (POSX - x) * tan(ALPHA D);
-	while (S->map[(int)(x / WALL)][(int)(y / WALL)] == 0)
-		{
-					ft_putendl("dans la boucle");
-			printf("%d\t\t%d\n", (int)(x / WALL), (int)(y / WALL));
-			x += xa;
-			y += YA;
-		}
-		ft_putendl("\t\t\t\tapres");
+	while (SAFE && VALUE != 1)
+	{
+		x += xa;
+		y += ya;
+	}
 	dy = fabs(((POSX - x) / cos(ALPHA D)));
-	dy *= cos(fabs((ALPHA - ANG)) D);
+	dy *= (cos(((ALPHA - ANG)) D));
+		ft_putendl(KCYN);
+	printf("dy = %f\n", dy);
 	return (dy);
 }
 
@@ -70,29 +80,32 @@ void		raycast(void)
 
 	i = 0;
 	arc = 0.075;
-	if (ANG >= 360)
-		ANG -= 360;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-	ALPHA = ANG - 30;
+	ALPHA = ANG - 30.0;
 	SDL_RenderClear(S->renderer);
+	printf("debut--------------------\n");
 	while (i < WIDTH)
 	{
-		if (ALPHA > 360)
-			ALPHA -= 360;
-		if (ALPHA < 0)
-			ALPHA += 360;
+		printf("\n----------DEBUT-----------\n");
+		// if (ALPHA > 360.0)
+		// 	ALPHA -= 360.0;
+		// if (ALPHA <= 0.0)
+		// 	ALPHA += 360.0;
 		h = raycast_horizontal();
-//		h = 0;
-//		v = raycast_vertical();
-		v = 0;
-		if (h >= v)
+		v = raycast_vertical();
+		ft_putendl(KMAG);
+		printf("iteration: %d\t\talpha : %f\n",i, ALPHA);
+//		printf("\t\t\t\t\t%f\t\t%f\n", h, v);
+		if (h < v)
 			length = h;
 		else
 			length = v;
-			draw_ray(length, i);
+		draw_ray(length, i);
 		ALPHA += arc;
 		i++;
+			printf("\n-----------FIN--------------\n");
 	}
+	printf("fin-----------------\n");
+//	exit(0);
 	SDL_RenderPresent(S->renderer);
-//	S->forward = POSX;
 	SDL_Delay(16);
 }

@@ -20,18 +20,12 @@ int			main(int ac, char **av)
 		return (-1);
 	if (get_map(av[1]) == -1)
 		return (-1);
-
-	 aff_map_term();
 	running();
 	return 0;
 }
 
 void		running(void)
 {
-	S->rect.x = 50;
-	S->rect.y = 50;
-	S->rect.w = 10;
-	S->rect.h = 10;
 	while (1)
 	{
 		while (SDL_PollEvent(&S->event))
@@ -39,6 +33,5 @@ void		running(void)
 			key_events();
 			raycast();
 		}
-
 	}
 }

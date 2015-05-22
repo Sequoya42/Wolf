@@ -25,31 +25,34 @@
 #define WIDTH 	800
 #define HEIGHT	600
 #define INCR	10
-#define	WALL	64
+#define	WALL	(64.0)
 #define POV		32
 #define	FOV		60
-#define	DIST	(WIDTH / tan(30 D))
-#define ARC		(FOV / WIDTH)
+#define	DIST	((WIDTH /2) / tan(30 D))
 
 #define KEY 	S->event.key.keysym.sym
 #define	ANG 	(S->angle)
-#define POSX 	(S->posy * WALL + POV)
-#define	POSY 	(S->posx * WALL + POV)
+#define POSX 	(S->posx)
+#define	POSY 	(S->posy)
 #define FORW 	S->forward
 #define BACK 	S->backward
 
 #define	ALPHA	(S->alpha)
-#define XA 		(WALL / (tan(ALPHA D)))
-#define YA		(WALL * (tan(ALPHA D)))
+#define XA 		(64 / (tan(ALPHA D)))
+#define YA		(64 * (tan(ALPHA D)))
 
 #define W 		64
 #define Y		S->posy
 #define X 		S->posx
-#define D 		/ 57.2
-#define	VALUE	S->map[(int)Y][(int)X]
+#define D 		 * (M_PI / 180)
+
 #define MH 		S->map_height
 #define	MW 		S->map_width
 
+#define MAPX 	(abs((int)(x / WALL)))
+#define MAPY	(abs((int)(y / WALL)))
+#define	VALUE	(S->map[MAPY][MAPX])
+#define SAFE	(MAPX > 0 && MAPX < MH && MAPY > 0 && MAPY < MW)
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -76,14 +79,10 @@ typedef struct 			s_wolf
 			// CAMERA STUFF
 	double				angle;
 	double				alpha;
-	int 				posx;
-	int 				posy;
-	double				ray_x;
-	double				ray_y;
-	double				forward;
-	double				backward;
-
-
+	double				xmov;
+	double				ymov;
+	double 				posx;
+	double 				posy;
 }						t_wolf;
 
 t_wolf		*singleton(void);

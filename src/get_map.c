@@ -82,7 +82,7 @@ int		get_map(char *s)
 	if (get_length(s) == -1)
 		return (-1);
 	read_map(s);
-	X = MW / 2;
-	Y = MH / 2;
+	X = MW / 2.0 * (double)WALL;
+	Y = MH / 2.0 * (double)WALL;
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/12 17:20:35 by rbaum             #+#    #+#              #
-#    Updated: 2015/05/01 16:08:36 by rbaum            ###   ########.fr        #
+#    Updated: 2015/05/21 22:41:21 by rbaum            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,7 +27,7 @@ LIBFT_PATH =	./libft/
 
 INC_PATH =		./inc/
 
-SRC_NAME =		main.c 		get_map.c 	tmp.c 	events.c 	raycast.c\
+SRC_NAME =		main.c 		get_map.c 	events.c 	raycast.c\
 				short_func.c\
 
 SDL_STUFF = 	./inc/SDL2.framework/SDL2

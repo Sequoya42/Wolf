@@ -22,7 +22,9 @@ t_wolf		*singleton(void)
 int		ft_init(void)
 {
 	ft_bzero(S, 1 * sizeof(t_wolf));
-	ANG = 90;
+	ANG = 45.0;
+	S->xmov = 0;
+	S->ymov = 0;
 	if ((SDL_Init(SDL_INIT_EVERYTHING)) == -1)
 	return (ft_error(NULL, NULL, "Cannot init SDL"));
 	S->window = SDL_CreateWindow
@@ -41,8 +43,8 @@ int			draw_ray(double length, int i)
 
 	ft_putstr(KMAG);
 	wh = WALL / length * DIST;
-	 z = (HEIGHT / 2) - (wh / 2);
-	 x = z;
+	 x = (HEIGHT / 2) - (wh / 2);
+
 	// SDL_SetRenderDrawColor(S->renderer, 255, 255, 0, 255); //YELLOW
 	// while (x < z)
 	// {
@@ -50,11 +52,14 @@ int			draw_ray(double length, int i)
 	// 	x += 0.10;
 	// }
 	SDL_SetRenderDrawColor(S->renderer, 0, 128, 0, 255); // GREEN
-	z = (HEIGHT / 2) + (wh / 2);//DRAW WALL
+	z = ((HEIGHT / 2) + (wh / 2));//DRAW WALL
+	ft_putendl(KGRN);
+		 printf("\t\twh = %f\t\tx = %f\t\tz = %f\n", wh, x, z);
+//	printf("%f\t\t%f\n", x, z);
 	while (x < z)
 	{
 		SDL_RenderDrawPoint(S->renderer, i, x);
-		x += 0.10;
+		x += 1;
 	}
 	 SDL_SetRenderDrawColor(S->renderer, 255, 250, 205, 255); // PINK
 	// while (x < WIDTH)
