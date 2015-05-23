@@ -82,7 +82,9 @@ int		get_map(char *s)
 	if (get_length(s) == -1)
 		return (-1);
 	read_map(s);
-	POSX = (double)((double)MW / 2.0 * (double)WALL);
-	POSY = (double)((double)MH / 2.0 * (double)WALL);
+	// POSX = (double)((double)MW / 2.0 * (double)WALL);
+	// POSY = (double)((double)MH / 2.0 * (double)WALL);
+	POSX = 8 * WALL;
+	POSY = 5 * WALL;
 	return (0);
 }

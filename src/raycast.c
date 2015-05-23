@@ -20,11 +20,10 @@ double		raycast_horizontal(double tang)
 	double	xa;
 	double	dx;
 
-//	ya = (ALPHA > 180.0) ? 64.0 : -64.0;
-	ya = 64.0;
-	xa = (double)(-ya / tang);
+	ya = (ALPHA > 180.0) ? 64.0 : -64.0;
+	xa = - ya / tang;
 	y = (double)(POSY - ((int)POSY % 64));
-//	y = (ALPHA > 180.0) ? y - 1.0 : y + 64.0;
+	 y = (ALPHA < 180.0) ? y - 0.0001 : y + 64.0;
 	x = POSX + ((POSY - y) / tang);
 	while (SAFE && VALUE != 1)
 	{
@@ -32,7 +31,7 @@ double		raycast_horizontal(double tang)
 		y += ya;
 	}
 	dx = fabs(((POSX - x) / cos(ALPHA  D)));
-//	dx *= (cos(((ALPHA - ANG) D)));
+	dx *= (cos(((ALPHA - ANG) D)));
 	return (dx);
 }
 
@@ -44,10 +43,10 @@ double		raycast_vertical(double tang)
 	double	ya;
 	double	dy;
 
-	xa = (ALPHA < 90.0 || ALPHA > 270.0) ? 64.0 :  -64.0;
-	ya = (double)(-xa * tang);
+	xa = (ALPHA > 90.0 && ALPHA < 270.0) ? -64.0 :  64.0;
+	ya = - xa * tang;
 	x = (double)(POSX - ((int)POSX % 64));
-	x = (ALPHA < 90.0 || ALPHA > 270.0) ? x + 64.0 : x - 1.0;
+	x = (ALPHA < 90.0 || ALPHA > 270.0) ? x + 64.0 : x - 0.0001;
 	y = POSY + ((POSX - x) * tang);
 	while (SAFE && VALUE != 1)
 	{
@@ -55,7 +54,7 @@ double		raycast_vertical(double tang)
 		y += ya;
 	}
 	dy = fabs(((POSX - x) / cos(ALPHA D)));
-	dy *= (cos(((ALPHA - ANG)) D));
+	 dy *= (cos(((ALPHA - ANG)) D));
 	return (dy);
 }
 
@@ -72,17 +71,19 @@ void		raycast(void)
 	ALPHA = ANG - 30.0;
 	SDL_RenderClear(S->renderer);
 	tang = (double)tan(ALPHA D);
+	POSX = (double)(POSX - ((int)POSX % 64));
+	POSY = (double)(POSY - ((int)POSY % 64));
 	while (i >= 0)
 	{
-		 if (ALPHA >= 360.0)
-		 	ALPHA -= 360.0;
-		 if (ALPHA < 0.0)
-		 	ALPHA += 360.0;
 		h = raycast_horizontal(tang);
 		v = raycast_vertical(tang);
-		printf("iteration: %d\t\talpha : %f\t\t angle: %f\n",i, ALPHA, ANG);
+//		printf("iteration: %d\t\talpha : %f\t\t angle: %f\n",i, ALPHA, ANG);
 		draw_ray(h, v, i);
 		ALPHA += arc;
+		if (ALPHA >= 360)
+			ALPHA -= 360;
+		if (ALPHA < 0)
+			ALPHA += 360;
 		tang = (double)tan(ALPHA D);
 		i--;
 	}

@@ -21,12 +21,10 @@
 
 # define S (singleton())
 
-#define INCR	10
 #define WIDTH 	800
 #define HEIGHT	600
-#define INCR	10
 #define	WALL	(double)(64.0)
-#define POV		32
+ #define POV		32
 #define	FOV		60
 #define	DIST	(double)(400.0 / tan(30 D))
 
@@ -41,7 +39,6 @@
 #define XA 		(64.0 / (tan(ALPHA D)))
 #define YA		(64.0 * (tan(ALPHA D)))
 
-#define W 		64
 #define D 		 * (double)(M_PI / 180.0)
 
 #define MH 		S->map_height
@@ -50,7 +47,7 @@
 #define MAPX 	(abs((int)(x / WALL)))
 #define MAPY	(abs((int)(y / WALL)))
 #define	VALUE	(S->map[MAPY][MAPX])
-#define SAFE	(MAPX >= 0 && MAPX < MW && MAPY >= 0 && MAPY < MH)
+#define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
 #define	MOVE	(S->map[(int)(POSY / WALL)][(int)(POSX / WALL)] != 1)
 
 # define KNRM  "\x1B[0m"
@@ -86,8 +83,8 @@ typedef struct 			s_wolf
 			// CAMERA STUFF
 	double				angle;
 	double				alpha;
-	double 				posx;
-	double 				posy;
+	int 				posx;
+	int 				posy;
 }						t_wolf;
 
 t_wolf		*singleton(void);

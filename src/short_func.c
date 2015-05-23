@@ -70,9 +70,9 @@ int			draw_ray(double dx, double dy, int x)
 
 	ft_putstr(KMAG);
 	wh = dx < dy ? (WALL / dx) : (WALL / dy);
-	dx < dy ? ft_putendl(KCYN) : ft_putendl(KGRN);
-	printf("dx: %f\t\tdy: %f\n", dx, dy);
-	ft_putendl(KNRM);
+	// dx < dy ? ft_putendl(KCYN) : ft_putendl(KGRN);
+	// printf("dx: %f\t\tdy: %f\n", dx, dy);
+	// ft_putendl(KNRM);
 	wh *= DIST;
 	 y = (HEIGHT / 2) - (wh / 2);
 	 c = choose_color(dx, dy);
