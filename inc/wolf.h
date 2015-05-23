@@ -25,26 +25,24 @@
 #define WIDTH 	800
 #define HEIGHT	600
 #define INCR	10
-#define	WALL	(64.0)
+#define	WALL	(double)(64.0)
 #define POV		32
 #define	FOV		60
-#define	DIST	((WIDTH /2) / tan(30 D))
+#define	DIST	(double)(400.0 / tan(30 D))
 
 #define KEY 	S->event.key.keysym.sym
-#define	ANG 	(S->angle)
-#define POSX 	(S->posx)
-#define	POSY 	(S->posy)
+#define	ANG 	S->angle
+#define POSX 	S->posx
+#define	POSY 	S->posy
 #define FORW 	S->forward
 #define BACK 	S->backward
 
 #define	ALPHA	(S->alpha)
-#define XA 		(64 / (tan(ALPHA D)))
-#define YA		(64 * (tan(ALPHA D)))
+#define XA 		(64.0 / (tan(ALPHA D)))
+#define YA		(64.0 * (tan(ALPHA D)))
 
 #define W 		64
-#define Y		S->posy
-#define X 		S->posx
-#define D 		 * (M_PI / 180)
+#define D 		 * (M_PI / 180.0)
 
 #define MH 		S->map_height
 #define	MW 		S->map_width
@@ -52,7 +50,7 @@
 #define MAPX 	(abs((int)(x / WALL)))
 #define MAPY	(abs((int)(y / WALL)))
 #define	VALUE	(S->map[MAPY][MAPX])
-#define SAFE	(MAPX > 0 && MAPX < MH && MAPY > 0 && MAPY < MW)
+#define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -63,6 +61,14 @@
 # define KCYN  "\x1B[36m"
 # define KWHT  "\x1B[37m"
 
+
+
+typedef struct			s_color
+{		
+	char				g;
+	char				b;
+	char				r;
+}						t_color;
 
 typedef struct 			s_wolf
 {
@@ -79,8 +85,6 @@ typedef struct 			s_wolf
 			// CAMERA STUFF
 	double				angle;
 	double				alpha;
-	double				xmov;
-	double				ymov;
 	double 				posx;
 	double 				posy;
 }						t_wolf;
@@ -95,8 +99,8 @@ void		key_events(void);
 
 
 int			draw_ray(double length, int i);
-double		raycast_vertical(void);
-double		raycast_horizontal(void);
+double		raycast_vertical(double tang);
+double		raycast_horizontal(double tang);
 
 /* TEMPORAIRE */
 void		aff_map_term(void);
