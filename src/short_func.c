@@ -22,7 +22,7 @@ t_wolf		*singleton(void)
 int		ft_init(void)
 {
 	ft_bzero(S, 1 * sizeof(t_wolf));
-	ANG = 45.0;
+	ANG = 90.4;
 	if ((SDL_Init(SDL_INIT_EVERYTHING)) == -1)
 	return (ft_error(NULL, NULL, "Cannot init SDL"));
 	S->window = SDL_CreateWindow
@@ -42,21 +42,26 @@ t_color		set_color(char r, char g, char b)
 	return (c);
 }
 
-t_color		choose_color(void)
+t_color		choose_color(double dx, double dy)
 {
 	t_color c;
-	if (ALPHA >= 45 && ALPHA < 135)
-		c = set_color(138, 43, 226);
-	else if (ALPHA >= 135 && ALPHA < 225)
-		c = set_color(165, 42, 42);
-	else if (ALPHA >=225 && ALPHA <= 315)
-		c = set_color(205, 173, 0);
-	else
-		c = set_color(85, 107, 47);
+	if (dx < dy && ALPHA >= 0 && ALPHA < 180)
+		c = set_color(138, 43, 226);//blue violet
+	else if (dx < dy && ALPHA >= 180 && ALPHA < 360)
+		c = set_color(165, 42, 42); // brown red
+	else if (dy < dx && ALPHA >= 90  && ALPHA < 270)
+		c = set_color(205, 173, 0); // gold 3
+	else //if (dy > dx && (ALPHA >= 270 || ALPHA < 90))
+		c = set_color(85, 107, 47);// green olive
+	// if (dx < dy)
+	// 	c = set_color(85, 107, 47);// green olive
+	// else
+ // 		c = set_color(205, 173, 0); // gold 3
 	return (c);
+
 }
 
-int			draw_ray(double length, int x)
+int			draw_ray(double dx, double dy, int x)
 {
 	t_color	c;
 	double 	y;
@@ -64,10 +69,13 @@ int			draw_ray(double length, int x)
 	double	z;
 
 	ft_putstr(KMAG);
-	wh = (double)(WALL / length);
+	wh = dx < dy ? (WALL / dx) : (WALL / dy);
+	dx < dy ? ft_putendl(KCYN) : ft_putendl(KGRN);
+	printf("dx: %f\t\tdy: %f\n", dx, dy);
+	ft_putendl(KNRM);
 	wh *= DIST;
 	 y = (HEIGHT / 2) - (wh / 2);
-	 c = choose_color();
+	 c = choose_color(dx, dy);
  	SDL_SetRenderDrawColor(S->renderer, c.r, c.g, c.b, 255);
 	z = ((HEIGHT / 2) + (wh / 2));
 	while (y < z)

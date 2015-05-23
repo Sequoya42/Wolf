@@ -19,8 +19,6 @@ void		move_right(void)
 			while (ANG < 0)
 				ANG += 360;
 			ANG -= 5;
-						while (ANG < 0)
-				ANG += 360;
 		}
 }
 
@@ -28,18 +26,15 @@ void		move_left(void)
 {
 		if (KEY == SDLK_LEFT)
 		{
-			
 			while (ANG >= 360)
 				ANG -= 360;
 			ANG += 5;
-						while (ANG >= 360)
-				ANG -= 360;
 		}
 }
 
 void		move_backward(void)
 {
-		if (KEY == SDLK_DOWN)// && SAFE)
+		if (KEY == SDLK_DOWN && MOVE)// && SAFE)
 		{
 			POSX -= cos(ANG) * 10;
 			POSY -= sin(ANG) * 10;
@@ -48,7 +43,7 @@ void		move_backward(void)
 
 void		move_forward(void)
 {
-		if (KEY == SDLK_UP)// && SAFE)
+		if (KEY == SDLK_UP && MOVE)// && SAFE)
 		{
 			POSX += cos(ANG) * 10;
 			POSY += sin(ANG) * 10;

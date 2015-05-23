@@ -42,7 +42,7 @@
 #define YA		(64.0 * (tan(ALPHA D)))
 
 #define W 		64
-#define D 		 * (M_PI / 180.0)
+#define D 		 * (double)(M_PI / 180.0)
 
 #define MH 		S->map_height
 #define	MW 		S->map_width
@@ -50,7 +50,8 @@
 #define MAPX 	(abs((int)(x / WALL)))
 #define MAPY	(abs((int)(y / WALL)))
 #define	VALUE	(S->map[MAPY][MAPX])
-#define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
+#define SAFE	(MAPX >= 0 && MAPX < MW && MAPY >= 0 && MAPY < MH)
+#define	MOVE	(S->map[(int)(POSY / WALL)][(int)(POSX / WALL)] != 1)
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -98,7 +99,7 @@ void		raycast(void);
 void		key_events(void);
 
 
-int			draw_ray(double length, int i);
+int			draw_ray(double dx, double dy, int i);
 double		raycast_vertical(double tang);
 double		raycast_horizontal(double tang);
 
