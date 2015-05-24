@@ -46,9 +46,13 @@
 
 #define MAPX 	(abs((int)(x / WALL)))
 #define MAPY	(abs((int)(y / WALL)))
+#define PX  	(abs((int)(POSX / WALL)))
+#define PY  	(abs((int)(POSY / WALL)))
+
 #define	VALUE	(S->map[MAPY][MAPX])
 #define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
-#define	MOVE	(S->map[(int)(POSY / WALL)][(int)(POSX / WALL)] != 1)
+#define	MOVEUP	(S->map[PX][PY] != 1 && S->map[PX + 4][PY] != 1 && S->map[PX][PY + 4] != 1)
+#define	MOVEDW	(S->map[PX][PY] != 1 && S->map[PX - 4][PY] != 1 && S->map[PX][PY - ] != 1)
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"

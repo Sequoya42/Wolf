@@ -43,8 +43,10 @@ int		get_length(char *m)
 		while (line[z++])
 			S->map_width++;
 		S->map_height++;
+		free(line);
 	}
 	close(fd);
+	free(line);
 	S->map_width /= S->map_height;
 	init_map();
 	return (1);
@@ -70,9 +72,11 @@ void		read_map(char *m)
 			x++;
 			i++;
 		}
+		free(line);
 		y++;
 		x = 0;
 	}
+	free(line);
 	close(fd);
 }
 
@@ -82,9 +86,9 @@ int		get_map(char *s)
 	if (get_length(s) == -1)
 		return (-1);
 	read_map(s);
-	// POSX = (double)((double)MW / 2.0 * (double)WALL);
-	// POSY = (double)((double)MH / 2.0 * (double)WALL);
-	POSX = 8 * WALL;
-	POSY = 5 * WALL;
+	POSX = MW / 2 * WALL;
+	POSY = MH / 2 * WALL;
+	// POSX = 8 * WALL;
+	// POSY = 5 * WALL;
 	return (0);
 }

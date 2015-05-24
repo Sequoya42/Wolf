@@ -45,7 +45,7 @@ double		raycast_vertical(double tang)
 
 	xa = (ALPHA > 90.0 && ALPHA < 270.0) ? -64.0 :  64.0;
 	ya = - xa * tang;
-	x = (double)(POSX - ((int)POSX % 64));
+	x = (double)(POSX - (POSX % 64));
 	x = (ALPHA < 90.0 || ALPHA > 270.0) ? x + 64.0 : x - 0.0001;
 	y = POSY + ((POSX - x) * tang);
 	while (SAFE && VALUE != 1)
@@ -71,8 +71,6 @@ void		raycast(void)
 	ALPHA = ANG - 30.0;
 	SDL_RenderClear(S->renderer);
 	tang = (double)tan(ALPHA D);
-	POSX = (double)(POSX - ((int)POSX % 64));
-	POSY = (double)(POSY - ((int)POSY % 64));
 	while (i >= 0)
 	{
 		h = raycast_horizontal(tang);

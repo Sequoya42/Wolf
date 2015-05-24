@@ -14,57 +14,62 @@
 
 void		move_right(void)
 {
-		if (KEY == SDLK_RIGHT)
-		{
-					ANG -= 5;
-			while (ANG < 0)
-				ANG += 360;
+	if (KEY == SDLK_RIGHT)
+	{
+		ANG -= 5;
+		while (ANG < 0)
+			ANG += 360;
 
-		}
+	}
 }
 
 void		move_left(void)
 {
-		if (KEY == SDLK_LEFT)
-		{
-					ANG += 5;
-			while (ANG >= 360)
-				ANG -= 360;
-
-		}
+	if (KEY == SDLK_LEFT)
+	{
+		ANG += 5;
+		while (ANG >= 360)
+			ANG -= 360;
+	}
 }
 
-void		move_backward(void)
+void		move_backward(int inc)
 {
-		if (KEY == SDLK_UP && MOVE)// && SAFE)
-		{
+	int	ix;
+	int	iy;
 
-				POSX += (cos(ANG) * 64);
-				POSY += (sin(ANG) * 64);
-				printf("%d\t\t%d\n", POSX, POSY);
-		}
+	ix = cos(ANG D) * inc;
+	iy = sin(ANG D) * inc;
+	iy *= -1;
+	if (KEY == SDLK_UP)// && MOVEDW && MOVEUP)
+	{
+		POSX += ix;
+		POSY += iy;
+	} 
 }
 
-void		move_forward(void)
+void		move_forward(int inc)
 {
-		if (KEY == SDLK_DOWN && MOVE)// && SAFE)
-		{
-			// if (ANG < 180)
-			// {
-			POSX += (cos(ANG) * 10);
-			POSY += (sin(ANG) * 10);
-	printf("%d\t\t%d\n", POSX, POSY);
-			// }
-			// else
-			// {
-			// }
-		}
+	int	ix;
+	int	iy;
+
+	ix = cos(ANG D) * inc;
+	ix *= -1;
+	iy = sin(ANG D) * inc;
+	if (KEY == SDLK_DOWN)// && MOVEUP && MOVEDW)
+	{
+		POSX += ix;
+		POSY += iy;
+	}
 }
 
 
 
 void		key_events(void)
 {
+	int inc;
+
+	inc = 20;
 	if (S->event.type == SDL_KEYDOWN)
 	{
 		if (S->event.key.keysym.sym == 27)
@@ -75,8 +80,8 @@ void		key_events(void)
 		}
 		move_right();
 		move_left();
-		move_forward();
-		move_backward();
+		move_forward(inc);
+		move_backward(inc);
 	}
 }
 

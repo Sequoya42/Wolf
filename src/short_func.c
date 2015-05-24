@@ -83,6 +83,12 @@ int			draw_ray(double dx, double dy, int x)
 		SDL_RenderDrawPoint(S->renderer, x, y);
 		y += 1;
 	}
+	SDL_SetRenderDrawColor(S->renderer, 0, 102, 0, 255);
+	while (y < WIDTH)
+	{
+	SDL_RenderDrawPoint(S->renderer, x, y);
+		y += 1;
+	}
 	 SDL_SetRenderDrawColor(S->renderer, 0, 191, 255, 255);
 	return (0);
 }
