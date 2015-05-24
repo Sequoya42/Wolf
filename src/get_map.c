@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rbaum <rbaum@student->42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 13:08:33 by rbaum             #+#    #+#             */
 /*   Updated: 2015/05/14 20:23:22 by rbaum            ###   ########.fr       */
@@ -12,47 +12,47 @@
 
 #include "wolf.h"
 
-void	init_map(void)
+void	init_map(t_wolf *t)
 {
 	int i;
 
 	i = 0;
-	if ((S->map = malloc(sizeof(int *) * (S->map_height + 1))) == NULL)
+	if ((t->map = malloc(sizeof(int *) * (MH + 1))) == NULL)
 		return ;
-	while (i <= S->map_height)
+	while (i <= MH)
 	{
-		if ((S->map[i] = malloc(sizeof(int) * (S->map_width + 1))) == NULL)
+		if ((t->map[i] = malloc(sizeof(int) * (MW + 1))) == NULL)
 			return ;
 		i++;
 	}
 	
 }
 
-int		get_length(char *m)
+int		get_length(char *m, t_wolf *t)
 {
 	int		fd;
 	int		z;
 	char	*line;
 	
-	S->map_height = 0;
+	MH = 0;
 	if ((fd = open(m, O_RDONLY)) == -1)
 		return (ft_error(NULL, NULL, "Failed to open"));
 	while (get_next_line(fd, &line))
 	{
 		z = 0;
 		while (line[z++])
-			S->map_width++;
-		S->map_height++;
+			MW++;
+		MH++;
 		free(line);
 	}
 	close(fd);
 	free(line);
-	S->map_width /= S->map_height;
-	init_map();
+	MW /= MH;
+	init_map(t);
 	return (1);
 }
 
-void		read_map(char *m)
+void		read_map(char *m, t_wolf *t)
 {
 	int		fd;
 	int		y;
@@ -68,7 +68,7 @@ void		read_map(char *m)
 		i = 0;
 		while (line[i])
 		{
-			S->map[y][x] = line[i] - 48;
+			t->map[y][x] = line[i] - 48;
 			x++;
 			i++;
 		}
@@ -80,15 +80,13 @@ void		read_map(char *m)
 	close(fd);
 }
 
-int		get_map(char *s)
+int		get_map(char *s, t_wolf *t)
 {
 	s = "maps/map01";//Remove to choose map
-	if (get_length(s) == -1)
+	if (get_length(s, t) == -1)
 		return (-1);
-	read_map(s);
+	read_map(s, t);
 	POSX = MW / 2 * WALL;
 	POSY = MH / 2 * WALL;
-	// POSX = 8 * WALL;
-	// POSY = 5 * WALL;
 	return (0);
 }

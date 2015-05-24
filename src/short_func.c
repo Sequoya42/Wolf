@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   short_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rbaum <rbaum@student->42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/16 17:56:09 by rbaum             #+#    #+#             */
 /*   Updated: 2015/05/16 17:56:13 by rbaum            ###   ########.fr       */
@@ -19,16 +19,16 @@ t_wolf		*singleton(void)
 	return (&wolf);
 }
 
-int		ft_init(void)
+int		ft_init(t_wolf *t)
 {
-	ft_bzero(S, 1 * sizeof(t_wolf));
+//	ft_bzero(t, 1 * sizeof(t_wolf));
 	ANG = 90.4;
 	if ((SDL_Init(SDL_INIT_EVERYTHING)) == -1)
 	return (ft_error(NULL, NULL, "Cannot init SDL"));
-	S->window = SDL_CreateWindow
+	t->window = SDL_CreateWindow
 	("test", 500, 300, WIDTH, HEIGHT, 0);
-	S->renderer = SDL_CreateRenderer(S->window, -1, SDL_RENDERER_ACCELERATED);
-	SDL_RenderSetLogicalSize(S->renderer, WIDTH, HEIGHT);
+	t->renderer = SDL_CreateRenderer(t->window, -1, SDL_RENDERER_ACCELERATED);
+	SDL_RenderSetLogicalSize(t->renderer, WIDTH, HEIGHT);
 	return (0);
 }
 
@@ -42,7 +42,7 @@ t_color		set_color(char r, char g, char b)
 	return (c);
 }
 
-t_color		choose_color(double dx, double dy)
+t_color		choose_color(double dx, double dy, t_wolf *t)
 {
 	t_color c;
 	if (dx < dy && ALPHA >= 0 && ALPHA < 180)
@@ -61,7 +61,7 @@ t_color		choose_color(double dx, double dy)
 
 }
 
-int			draw_ray(double dx, double dy, int x)
+int			draw_ray(double dx, double dy, int x, t_wolf *t)
 {
 	t_color	c;
 	double 	y;
@@ -75,20 +75,20 @@ int			draw_ray(double dx, double dy, int x)
 	// ft_putendl(KNRM);
 	wh *= DIST;
 	 y = (HEIGHT / 2) - (wh / 2);
-	 c = choose_color(dx, dy);
- 	SDL_SetRenderDrawColor(S->renderer, c.r, c.g, c.b, 255);
+	 c = choose_color(dx, dy, t);
+ 	SDL_SetRenderDrawColor(t->renderer, c.r, c.g, c.b, 255);
 	z = ((HEIGHT / 2) + (wh / 2));
 	while (y < z)
 	{
-		SDL_RenderDrawPoint(S->renderer, x, y);
+		SDL_RenderDrawPoint(t->renderer, x, y);
 		y += 1;
 	}
-	SDL_SetRenderDrawColor(S->renderer, 0, 102, 0, 255);
+	SDL_SetRenderDrawColor(t->renderer, 0, 102, 0, 255);
 	while (y < WIDTH)
 	{
-	SDL_RenderDrawPoint(S->renderer, x, y);
+	SDL_RenderDrawPoint(t->renderer, x, y);
 		y += 1;
 	}
-	 SDL_SetRenderDrawColor(S->renderer, 0, 191, 255, 255);
+	 SDL_SetRenderDrawColor(t->renderer, 0, 191, 255, 255);
 	return (0);
 }

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rbaum <rbaum@student->42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/15 18:51:17 by rbaum             #+#    #+#             */
 /*   Updated: 2015/05/15 18:51:17 by rbaum            ###   ########.fr       */
@@ -12,7 +12,7 @@
 
 #include "wolf.h"
 
-void		move_right(void)
+void		move_right(t_wolf *t)
 {
 	if (KEY == SDLK_RIGHT)
 	{
@@ -23,7 +23,7 @@ void		move_right(void)
 	}
 }
 
-void		move_left(void)
+void		move_left(t_wolf *t)
 {
 	if (KEY == SDLK_LEFT)
 	{
@@ -33,55 +33,45 @@ void		move_left(void)
 	}
 }
 
-void		move_backward(int inc)
+void		move_backward(t_wolf *t, int ix, int iy)
 {
-	int	ix;
-	int	iy;
-
-	ix = cos(ANG D) * inc;
-	iy = sin(ANG D) * inc;
-	iy *= -1;
-	if (KEY == SDLK_UP)// && MOVEDW && MOVEUP)
+	if (KEY == SDLK_UP && MOVEDW)// && MOVEUP)
 	{
 		POSX += ix;
-		POSY += iy;
+		POSY -= iy;
 	} 
 }
 
-void		move_forward(int inc)
+void		move_forward(t_wolf *t, int ix, int iy)
 {
-	int	ix;
-	int	iy;
-
-	ix = cos(ANG D) * inc;
-	ix *= -1;
-	iy = sin(ANG D) * inc;
-	if (KEY == SDLK_DOWN)// && MOVEUP && MOVEDW)
+	if (KEY == SDLK_DOWN && MOVEUP)// && MOVEDW)
 	{
-		POSX += ix;
+		POSX -= ix;
 		POSY += iy;
 	}
 }
 
-
-
-void		key_events(void)
+void		key_events(t_wolf *t)
 {
 	int inc;
+	int	ix;
+	int	iy;
 
 	inc = 20;
-	if (S->event.type == SDL_KEYDOWN)
+	ix = cos(ANG D) * inc;
+	iy = sin(ANG D) * inc;
+	if (t->event.type == SDL_KEYDOWN)
 	{
-		if (S->event.key.keysym.sym == 27)
+		if (KEY == 27)
 		{
-			SDL_DestroyWindow(S->window);
+			SDL_DestroyWindow(t->window);
 			SDL_Quit();
 			exit(1);
 		}
-		move_right();
-		move_left();
-		move_forward(inc);
-		move_backward(inc);
+		move_right(t);
+		move_left(t);
+		move_forward(t, ix, iy);
+		move_backward(t, ix, iy);
 	}
 }
 

@@ -14,24 +14,26 @@
 
 int			main(int ac, char **av)
 {
+	t_wolf	t;
+
 	if (ac < 1)//Change to two to change maps
 		return (0);
-		if ((ft_init()) == -1)
+		if ((ft_init(&t)) == -1)
 		return (-1);
-	if (get_map(av[1]) == -1)
+	if (get_map(av[1], &t) == -1)
 		return (-1);
-	running();
+	running(&t);
 	return 0;
 }
 
-void		running(void)
+void		running(t_wolf *t)
 {
 	while (1)
 	{
-		while (SDL_PollEvent(&S->event))
+		while (SDL_PollEvent(&t->event))
 		{
-			key_events();
-			raycast();
+			key_events(t);
+			raycast(t);
 		}
 	}
 }

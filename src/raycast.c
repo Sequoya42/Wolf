@@ -1,9 +1,9 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
+/*   raycast->c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rbaum <rbaum@student->42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/16 17:52:30 by rbaum             #+#    #+#             */
 /*   Updated: 2015/05/19 22:28:22 by rbaum            ###   ########.fr       */
@@ -12,7 +12,7 @@
 
 #include "wolf.h"
 
-double		raycast_horizontal(double tang)
+double		raycast_horizontal(double tang, t_wolf *t)
 {
 	double	y;
 	double	x;
@@ -35,7 +35,7 @@ double		raycast_horizontal(double tang)
 	return (dx);
 }
 
-double		raycast_vertical(double tang)
+double		raycast_vertical(double tang, t_wolf *t)
 {
 	double 	x;
 	double	y;
@@ -58,7 +58,7 @@ double		raycast_vertical(double tang)
 	return (dy);
 }
 
-void		raycast(void)
+void		raycast(t_wolf *t)
 {
 	int		i;
 	double	h;
@@ -69,14 +69,13 @@ void		raycast(void)
 	i = WIDTH;
 	arc = 0.075;
 	ALPHA = ANG - 30.0;
-	SDL_RenderClear(S->renderer);
+	SDL_RenderClear(t->renderer);
 	tang = (double)tan(ALPHA D);
 	while (i >= 0)
 	{
-		h = raycast_horizontal(tang);
-		v = raycast_vertical(tang);
-//		printf("iteration: %d\t\talpha : %f\t\t angle: %f\n",i, ALPHA, ANG);
-		draw_ray(h, v, i);
+		h = raycast_horizontal(tang, t);
+		v = raycast_vertical(tang, t);
+		draw_ray(h, v, i, t);
 		ALPHA += arc;
 		if (ALPHA >= 360)
 			ALPHA -= 360;
@@ -85,6 +84,6 @@ void		raycast(void)
 		tang = (double)tan(ALPHA D);
 		i--;
 	}
-	SDL_RenderPresent(S->renderer);
-	SDL_Delay(16);
+	SDL_RenderPresent(t->renderer);
+//	SDL_Delay(16);
 }
