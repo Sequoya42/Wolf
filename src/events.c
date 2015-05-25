@@ -16,10 +16,9 @@ void		move_right(t_wolf *t)
 {
 	if (KEY == SDLK_RIGHT)
 	{
-		ANG -= 5;
+		ANG -= 3.6;
 		while (ANG < 0)
 			ANG += 360;
-
 	}
 }
 
@@ -27,7 +26,7 @@ void		move_left(t_wolf *t)
 {
 	if (KEY == SDLK_LEFT)
 	{
-		ANG += 5;
+		ANG += 3.6;
 		while (ANG >= 360)
 			ANG -= 360;
 	}
@@ -35,7 +34,7 @@ void		move_left(t_wolf *t)
 
 void		move_backward(t_wolf *t, int ix, int iy)
 {
-	if (KEY == SDLK_UP && MOVEDW)// && MOVEUP)
+	if (KEY == SDLK_UP)// && MOVEUP)// && MOVEUP)
 	{
 		POSX += ix;
 		POSY -= iy;
@@ -44,7 +43,7 @@ void		move_backward(t_wolf *t, int ix, int iy)
 
 void		move_forward(t_wolf *t, int ix, int iy)
 {
-	if (KEY == SDLK_DOWN && MOVEUP)// && MOVEDW)
+	if (KEY == SDLK_DOWN)// && MOVEDW)// && MOVEDW)
 	{
 		POSX -= ix;
 		POSY += iy;
@@ -57,7 +56,7 @@ void		key_events(t_wolf *t)
 	int	ix;
 	int	iy;
 
-	inc = 20;
+	inc = 32;
 	ix = cos(ANG D) * inc;
 	iy = sin(ANG D) * inc;
 	if (t->event.type == SDL_KEYDOWN)
@@ -72,6 +71,7 @@ void		key_events(t_wolf *t)
 		move_left(t);
 		move_forward(t, ix, iy);
 		move_backward(t, ix, iy);
+		raycast(t);
 	}
 }
 

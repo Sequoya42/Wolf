@@ -12,18 +12,18 @@
 
 #include "wolf.h"
 
-double		raycast_horizontal(double tang, t_wolf *t)
+static double		raycast_horizontal(double tang, t_wolf *t)
 {
-	double	y;
-	double	x;
-	double	ya;
-	double	xa;
-	double	dx;
+	double			y;
+	double			x;
+	double			ya;
+	double			xa;
+	double			dx;
 
 	ya = (ALPHA > 180.0) ? 64.0 : -64.0;
 	xa = - ya / tang;
 	y = (double)(POSY - ((int)POSY % 64));
-	 y = (ALPHA < 180.0) ? y - 0.0001 : y + 64.0;
+	y = (ALPHA < 180.0) ? y - 0.0001 : y + 64.0;
 	x = POSX + ((POSY - y) / tang);
 	while (SAFE && VALUE != 1)
 	{
@@ -35,13 +35,13 @@ double		raycast_horizontal(double tang, t_wolf *t)
 	return (dx);
 }
 
-double		raycast_vertical(double tang, t_wolf *t)
+static double		raycast_vertical(double tang, t_wolf *t)
 {
-	double 	x;
-	double	y;
-	double	xa;
-	double	ya;
-	double	dy;
+	double 			x;
+	double			y;
+	double			xa;
+	double			ya;
+	double			dy;
 
 	xa = (ALPHA > 90.0 && ALPHA < 270.0) ? -64.0 :  64.0;
 	ya = - xa * tang;
@@ -58,19 +58,20 @@ double		raycast_vertical(double tang, t_wolf *t)
 	return (dy);
 }
 
-void		raycast(t_wolf *t)
+void				raycast(t_wolf *t)
 {
-	int		i;
-	double	h;
-	double	v;
-	double	arc;
-	double	tang;
+	int				i;
+	double			h;
+	double			v;
+	double			arc;
+	double			tang;
 
 	i = WIDTH;
 	arc = 0.075;
 	ALPHA = ANG - 30.0;
 	SDL_RenderClear(t->renderer);
 	tang = (double)tan(ALPHA D);
+	SDL_RenderClear(t->renderer);
 	while (i >= 0)
 	{
 		h = raycast_horizontal(tang, t);
@@ -84,6 +85,9 @@ void		raycast(t_wolf *t)
 		tang = (double)tan(ALPHA D);
 		i--;
 	}
+	SDL_Delay(16);
+	SDL_UpdateTexture(t->screen, NULL, t->p, WIDTH * sizeof(Uint32));
+	SDL_RenderCopy(t->renderer, t->screen, NULL, NULL);
 	SDL_RenderPresent(t->renderer);
-//	SDL_Delay(16);
+	ft_bzero(t->p, sizeof(Uint32) * WIDTH * HEIGHT);
 }

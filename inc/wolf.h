@@ -19,7 +19,6 @@
 # include "SDL2.framework/Headers/SDL.h"
 # include <stdio.h> // REMOVE THIS
 
-# define S (singleton())
 
 #define WIDTH 	800
 #define HEIGHT	600
@@ -34,8 +33,6 @@
 #define	POSY 	t->posy
 
 #define	ALPHA	(t->alpha)
-#define XA 		(64.0 / (tan(ALPHA D)))
-#define YA		(64.0 * (tan(ALPHA D)))
 
 #define D 		 * (double)(M_PI / 180.0)
 
@@ -44,13 +41,15 @@
 
 #define MAPX 	(abs((int)(x / WALL)))
 #define MAPY	(abs((int)(y / WALL)))
-#define PX  	(abs((int)(POSX / WALL)))
-#define PY  	(abs((int)(POSY / WALL)))
+#define PX  	(abs((int)((POSX  + ix)/ WALL)))
+#define PY  	(abs((int)((POSY - iy)/ WALL)))
+#define PX2  	(abs((int)((POSX  - ix)/ WALL)))
+#define PY2  	(abs((int)((POSY + iy)/ WALL)))
 
 #define	VALUE	(t->map[MAPY][MAPX])
 #define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
 #define	MOVEUP	(t->map[PX][PY] != 1)
-#define	MOVEDW	(t->map[PX][PY] != 1)
+#define	MOVEDW	(t->map[PX2][PY2] != 1)
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -85,9 +84,10 @@ typedef struct 			s_wolf
 	double				alpha;
 	int 				posx;
 	int 				posy;
+//lol
+	Uint32				*p;
+	SDL_Texture			*screen;
 }						t_wolf;
-
-t_wolf		*singleton(void);
 
 void		running(t_wolf *t);
 int			get_map(char *s, t_wolf *t);
@@ -97,8 +97,11 @@ void		key_events(t_wolf *t);
 
 
 int			draw_ray(double dx, double dy, int i, t_wolf *t);
-double		raycast_vertical(double tang, t_wolf *t);
-double		raycast_horizontal(double tang, t_wolf *t);
+// static double		raycast_vertical(double tang, t_wolf *t);
+// static double		raycast_horizontal(double tang, t_wolf *t);
 
+
+// modif raph
+void	create_new_renderer(t_wolf *t);
 
 #endif

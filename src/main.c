@@ -26,14 +26,26 @@ int			main(int ac, char **av)
 	return 0;
 }
 
+int		ft_init(t_wolf *t)
+{
+	ANG = 90.4;
+	if ((SDL_Init(SDL_INIT_EVERYTHING)) == -1)
+	return (ft_error(NULL, NULL, "Cannot init SDL"));
+	t->window = SDL_CreateWindow
+	("test", 500, 300, WIDTH, HEIGHT, 0);
+	t->renderer = SDL_CreateRenderer(t->window, -1, 
+		SDL_RENDERER_ACCELERATED);
+	SDL_RenderSetLogicalSize(t->renderer, WIDTH, HEIGHT);
+	create_new_renderer(t);
+	return (0);
+}
+
 void		running(t_wolf *t)
 {
+	raycast(t);
 	while (1)
 	{
 		while (SDL_PollEvent(&t->event))
-		{
 			key_events(t);
-			raycast(t);
-		}
 	}
 }
