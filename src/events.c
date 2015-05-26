@@ -34,20 +34,22 @@ void		move_left(t_wolf *t)
 
 void		move_forward(t_wolf *t, int ix, int iy)
 {
-	if (KEY == SDLK_UP && MOVEUP)// && MOVEUP)
+	if (KEY == SDLK_UP)// && MOVEUP)// && MOVEUP)
 	{
-		// if (t->map[((int)POSY / 64)][PX] != 1)	
+		if (t->map[((int)POSY / 64)][PX] != 1)	
 			POSX += ix;
-		// if (t->map[PY][((int)POSX / 64)] != 1)
+		if (t->map[PY][((int)POSX / 64)] != 1)
 			POSY -= iy;
 	} 
 }
 
 void		move_backward(t_wolf *t, int ix, int iy)
 {
-	if (KEY == SDLK_DOWN && MOVEDW)// && MOVEDW)
+	if (KEY == SDLK_DOWN)// && MOVEDW)// && MOVEDW)
 	{
+		if (t->map[((int)POSY / 64)][PX] != 1)	
 		POSX -= ix;
+		if (t->map[PY][((int)POSX / 64)] != 1)
 		POSY += iy;
 	}
 }

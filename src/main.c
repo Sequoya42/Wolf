@@ -49,3 +49,9 @@ void		running(t_wolf *t)
 			key_events(t);
 	}
 }
+
+// TODO
+
+// Ombrage (filtre)
+// Deplacer et tourner en meme temps
+// Anti-crenelage
