@@ -32,18 +32,20 @@ void		move_left(t_wolf *t)
 	}
 }
 
-void		move_backward(t_wolf *t, int ix, int iy)
+void		move_forward(t_wolf *t, int ix, int iy)
 {
-	if (KEY == SDLK_UP)// && MOVEUP)// && MOVEUP)
+	if (KEY == SDLK_UP && MOVEUP)// && MOVEUP)
 	{
-		POSX += ix;
-		POSY -= iy;
+		// if (t->map[((int)POSY / 64)][PX] != 1)	
+			POSX += ix;
+		// if (t->map[PY][((int)POSX / 64)] != 1)
+			POSY -= iy;
 	} 
 }
 
-void		move_forward(t_wolf *t, int ix, int iy)
+void		move_backward(t_wolf *t, int ix, int iy)
 {
-	if (KEY == SDLK_DOWN)// && MOVEDW)// && MOVEDW)
+	if (KEY == SDLK_DOWN && MOVEDW)// && MOVEDW)
 	{
 		POSX -= ix;
 		POSY += iy;
@@ -56,7 +58,7 @@ void		key_events(t_wolf *t)
 	int	ix;
 	int	iy;
 
-	inc = 32;
+	inc = 16;
 	ix = cos(ANG D) * inc;
 	iy = sin(ANG D) * inc;
 	if (t->event.type == SDL_KEYDOWN)

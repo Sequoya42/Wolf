@@ -22,7 +22,7 @@
 
 #define WIDTH 	800
 #define HEIGHT	600
-#define	WALL	(double)(64.0)
+#define	WALL	64.0
 #define POV	    32
 #define	FOV		60
 #define	DIST	(double)(400.0 / tan(30 D))
@@ -41,15 +41,17 @@
 
 #define MAPX 	(abs((int)(x / WALL)))
 #define MAPY	(abs((int)(y / WALL)))
-#define PX  	(abs((int)((POSX  + ix)/ WALL)))
-#define PY  	(abs((int)((POSY - iy)/ WALL)))
-#define PX2  	(abs((int)((POSX  - ix)/ WALL)))
-#define PY2  	(abs((int)((POSY + iy)/ WALL)))
+
 
 #define	VALUE	(t->map[MAPY][MAPX])
 #define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
-#define	MOVEUP	(t->map[PX][PY] != 1)
-#define	MOVEDW	(t->map[PX2][PY2] != 1)
+
+#define PX  	(((int)((POSX  + ix)/ WALL)))
+#define PY  	(((int)((POSY - iy)/ WALL)))
+#define PX2  	(((int)((POSX  - ix)/ WALL)))
+#define PY2  	(((int)((POSY + iy)/ WALL)))
+#define	MOVEUP	(t->map[PY][PX] != 1)
+#define	MOVEDW	(t->map[PY2][PX2] != 1)
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -82,8 +84,8 @@ typedef struct 			s_wolf
 			// CAMERA STUFF
 	double				angle;
 	double				alpha;
-	int 				posx;
-	int 				posy;
+	double				posx;
+	double				posy;
 //lol
 	Uint32				*p;
 	SDL_Texture			*screen;
@@ -105,3 +107,4 @@ int			draw_ray(double dx, double dy, int i, t_wolf *t);
 void	create_new_renderer(t_wolf *t);
 
 #endif
+// 

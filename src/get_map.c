@@ -35,6 +35,7 @@ int		get_length(char *m, t_wolf *t)
 	char	*line;
 	
 	MH = 0;
+	MW = 0;
 	if ((fd = open(m, O_RDONLY)) == -1)
 		return (ft_error(NULL, NULL, "Failed to open"));
 	while (get_next_line(fd, &line))
@@ -86,7 +87,7 @@ int		get_map(char *s, t_wolf *t)
 	if (get_length(s, t) == -1)
 		return (-1);
 	read_map(s, t);
-	POSX = MW / 2 * WALL;
-	POSY = MH / 2 * WALL;
+	POSX = ((int)WALL * MW / 2);
+	POSY = ((int)WALL * MH / 2);
 	return (0);
 }

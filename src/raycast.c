@@ -20,17 +20,23 @@ static double		raycast_horizontal(double tang, t_wolf *t)
 	double			xa;
 	double			dx;
 
+	int tx = (int)POSX;
+	int ty = (int)POSY;
+	 // printf("POSX %d\t POSY %d\t", POSX, POSY);
+	 	 // printf("POSX %f\t POSY %f\t", POSX, POSY);
+	 	// printf("tx %d\tty %d\n",tx, ty);
+	 	// printf("MW : %d\t\tMH%d\n", MW, MH);
 	ya = (ALPHA > 180.0) ? 64.0 : -64.0;
 	xa = - ya / tang;
-	y = (double)(POSY - ((int)POSY % 64));
+	y = (double)(ty - ((int)ty % 64));
 	y = (ALPHA < 180.0) ? y - 0.0001 : y + 64.0;
-	x = POSX + ((POSY - y) / tang);
+	x = tx + ((ty - y) / tang);
 	while (SAFE && VALUE != 1)
 	{
 		x += xa;
 		y += ya;
 	}
-	dx = fabs(((POSX - x) / cos(ALPHA  D)));
+	dx = fabs(((tx - x) / cos(ALPHA  D)));
 	dx *= (cos(((ALPHA - ANG) D)));
 	return (dx);
 }
@@ -43,17 +49,19 @@ static double		raycast_vertical(double tang, t_wolf *t)
 	double			ya;
 	double			dy;
 
+	int	tx = (int)POSX;
+	int	ty = (int)POSY;
 	xa = (ALPHA > 90.0 && ALPHA < 270.0) ? -64.0 :  64.0;
 	ya = - xa * tang;
-	x = (double)(POSX - (POSX % 64));
+	x = (double)(tx - ((int)tx % 64));
 	x = (ALPHA < 90.0 || ALPHA > 270.0) ? x + 64.0 : x - 0.0001;
-	y = POSY + ((POSX - x) * tang);
+	y = ty + ((tx - x) * tang);
 	while (SAFE && VALUE != 1)
 	{
 		x += xa;
 		y += ya;
 	}
-	dy = fabs(((POSX - x) / cos(ALPHA D)));
+	dy = fabs(((tx - x) / cos(ALPHA D)));
 	 dy *= (cos(((ALPHA - ANG)) D));
 	return (dy);
 }
