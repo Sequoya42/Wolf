@@ -22,10 +22,6 @@ static double		raycast_horizontal(double tang, t_wolf *t)
 
 	int tx = (int)POSX;
 	int ty = (int)POSY;
-	 // printf("POSX %d\t POSY %d\t", POSX, POSY);
-	 	 // printf("POSX %f\t POSY %f\t", POSX, POSY);
-	 	// printf("tx %d\tty %d\n",tx, ty);
-	 	// printf("MW : %d\t\tMH%d\n", MW, MH);
 	ya = (ALPHA > 180.0) ? 64.0 : -64.0;
 	xa = - ya / tang;
 	y = (double)(ty - ((int)ty % 64));

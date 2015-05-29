@@ -29,6 +29,10 @@ int			main(int ac, char **av)
 int		ft_init(t_wolf *t)
 {
 	ANG = 90.4;
+	t->trip = 0;
+	t->trip2 = 1;
+	t->trip3 = 800;
+	t->choose = 0;
 	if ((SDL_Init(SDL_INIT_EVERYTHING)) == -1)
 	return (ft_error(NULL, NULL, "Cannot init SDL"));
 	t->window = SDL_CreateWindow
@@ -46,12 +50,13 @@ void		running(t_wolf *t)
 	while (1)
 	{
 		while (SDL_PollEvent(&t->event))
+		{
 			key_events(t);
+			if (t->choose == 0)
+			raycast(t);
+			else
+			vector(t);
+		}
+
 	}
 }
-
-// TODO
-
-// Ombrage (filtre)
-// Deplacer et tourner en meme temps
-// Anti-crenelage

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   wolf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbaum <rbaum@student->42.fr>                +#+  +:+       +#+        */
+/*   By: rbaum <rbaum@student->42.fr>                +#+  +:+       +#+       */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/26 19:09:40 by rbaum             #+#    #+#             */
 /*   Updated: 2015/05/14 20:28:06 by rbaum            ###   ########.fr       */
@@ -34,8 +34,7 @@
 
 #define	ALPHA	(t->alpha)
 
-#define D 		 * (double)(M_PI / 180.0)
-
+#define D 		* (double)(M_PI / 180.0)
 #define MH 		t->map_height
 #define	MW 		t->map_width
 
@@ -77,6 +76,8 @@ typedef struct 			s_wolf
 	SDL_Window			*window;
 	SDL_Event			event;
 	SDL_Renderer		*renderer;
+	Uint32				*p;
+	SDL_Texture			*screen;
 			// MAP STUFF
 	int					**map;
 	int					map_height;
@@ -86,25 +87,26 @@ typedef struct 			s_wolf
 	double				alpha;
 	double				posx;
 	double				posy;
-//lol
-	Uint32				*p;
-	SDL_Texture			*screen;
+			// EFFECTS
+	int 				trip;
+	int 				trip2;
+	int 				trip3;
+	int  				choose;
 }						t_wolf;
 
-void		running(t_wolf *t);
+
 int			get_map(char *s, t_wolf *t);
 int			ft_init(t_wolf *t);
-void		raycast(t_wolf *t);
-void		key_events(t_wolf *t);
-
-
 int			draw_ray(double dx, double dy, int i, t_wolf *t);
-// static double		raycast_vertical(double tang, t_wolf *t);
-// static double		raycast_horizontal(double tang, t_wolf *t);
+
+void		raycast(t_wolf *t);
+void		vector(t_wolf *t);
+void		key_events(t_wolf *t);
+void		create_new_renderer(t_wolf *t);
+void		running(t_wolf *t);
 
 
-// modif raph
-void	create_new_renderer(t_wolf *t);
+
 
 #endif
 // 
