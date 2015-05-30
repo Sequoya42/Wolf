@@ -44,6 +44,7 @@
 
 #define	VALUE	(t->map[MAPY][MAPX])
 #define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
+# define MAX_DISTANCE ((double)2500.0)
 
 #define PX  	(((int)((POSX  + ix)/ WALL)))
 #define PY  	(((int)((POSY - iy)/ WALL)))
@@ -63,11 +64,19 @@
 
 
 
+typedef struct 			s_move
+{
+	int 	 	 	 	left;
+	int 	 	 	 	right;
+	int 	 	 	 	up;
+	int 	 	 	 	down;
+}						t_move;
+
 typedef struct			s_color
 {		
-	char				g;
-	char				b;
-	char				r;
+	unsigned char		g;
+	unsigned char		b;
+	unsigned char		r;
 }						t_color;
 
 typedef struct 			s_wolf
@@ -78,6 +87,7 @@ typedef struct 			s_wolf
 	SDL_Renderer		*renderer;
 	Uint32				*p;
 	SDL_Texture			*screen;
+	const Uint8			*keystate;
 			// MAP STUFF
 	int					**map;
 	int					map_height;
@@ -92,6 +102,7 @@ typedef struct 			s_wolf
 	int 				trip2;
 	int 				trip3;
 	int  				choose;
+	t_move				*m;
 }						t_wolf;
 
 
@@ -102,10 +113,10 @@ int			draw_ray(double dx, double dy, int i, t_wolf *t);
 void		raycast(t_wolf *t);
 void		vector(t_wolf *t);
 void		key_events(t_wolf *t);
+void		move(t_wolf *t, int ix, int iy);
+void		rotate(t_wolf *t);
 void		create_new_renderer(t_wolf *t);
 void		running(t_wolf *t);
-
-
 
 
 #endif

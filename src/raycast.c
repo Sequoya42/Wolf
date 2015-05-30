@@ -89,7 +89,6 @@ void				raycast(t_wolf *t)
 		tang = (double)tan(ALPHA D);
 		i--;
 	}
-	SDL_Delay(16);
 	SDL_UpdateTexture(t->screen, NULL, t->p, WIDTH * sizeof(Uint32));
 	SDL_RenderCopy(t->renderer, t->screen, NULL, NULL);
 	SDL_RenderPresent(t->renderer);

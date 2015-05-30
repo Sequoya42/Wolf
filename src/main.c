@@ -18,7 +18,7 @@ int			main(int ac, char **av)
 
 	if (ac < 1)//Change to two to change maps
 		return (0);
-		if ((ft_init(&t)) == -1)
+	if ((ft_init(&t)) == -1)
 		return (-1);
 	if (get_map(av[1], &t) == -1)
 		return (-1);
@@ -33,8 +33,12 @@ int		ft_init(t_wolf *t)
 	t->trip2 = 1;
 	t->trip3 = 800;
 	t->choose = 0;
+	t->m->right = 0;
+	t->m->left = 0;
+	t->m->up = 0;
+	t->m->down = 0;
 	if ((SDL_Init(SDL_INIT_EVERYTHING)) == -1)
-	return (ft_error(NULL, NULL, "Cannot init SDL"));
+		return (ft_error(NULL, NULL, "Cannot init SDL"));
 	t->window = SDL_CreateWindow
 	("test", 500, 300, WIDTH, HEIGHT, 0);
 	t->renderer = SDL_CreateRenderer(t->window, -1, 
@@ -46,17 +50,27 @@ int		ft_init(t_wolf *t)
 
 void		running(t_wolf *t)
 {
-	raycast(t);
+	unsigned int	ti;
+	unsigned int	dif;
+	int inc;
+	int	ix;
+	int	iy;
+
+	inc = 8;
+	t->keystate = SDL_GetKeyboardState(NULL);
 	while (1)
 	{
+		ti = SDL_GetTicks();
+		ix = cos(ANG D) * inc;
+		iy = sin(ANG D) * inc;
 		while (SDL_PollEvent(&t->event))
-		{
 			key_events(t);
-			if (t->choose == 0)
-			raycast(t);
-			else
-			vector(t);
-		}
-
+		move(t, ix, iy);
+		rotate(t);
+		raycast(t);
+		dif = (SDL_GetTicks() - ti);
+		ft_putchar('\r');
+		if (dif < 20)
+			SDL_Delay(20 - dif);
 	}
 }

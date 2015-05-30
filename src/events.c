@@ -12,45 +12,44 @@
 
 #include "wolf.h"
 
-static void		move(t_wolf *t)
+void		rotate(t_wolf *t)
 {
-	if (KEY == SDLK_RIGHT)
+	if (t->keystate[SDL_SCANCODE_RIGHT])
 	{
-		ANG -= 3.6;
+		ANG -= 2.1;
 		while (ANG < 0)
 			ANG += 360;
 	}
-		if (KEY == SDLK_LEFT)
+	else if (t->keystate[SDL_SCANCODE_LEFT])
 	{
-		ANG += 3.6;
+		ANG += 2.1;
 		while (ANG >= 360)
 			ANG -= 360;
 	}
 }
 
-static void		rotate(t_wolf *t, int ix, int iy)
+void		move(t_wolf *t, int ix, int iy)
 {
-	if (KEY == SDLK_UP)// && MOVEUP)// && MOVEUP)
-	{
-		if (t->map[((int)POSY / 64)][PX] != 1)	
-			POSX += ix;
-		if (t->map[PY][((int)POSX / 64)] != 1)
-			POSY -= iy;
-	} 
-		if (KEY == SDLK_DOWN && MOVEDW)// && MOVEDW)
-	{
-		// if (t->map[((int)POSY / 64)][PX] != 1)	
-		POSX -= ix;
-		// if (t->map[PY][((int)POSX / 64)] != 1)
-		POSY += iy;
-	}
 
-	
+	if (t->keystate[SDL_SCANCODE_UP])
+	{
+		if (t->map[PY][PX] != 1)
+			POSX += ix;
+		if (t->map[PY][PX] != 1)
+			POSY -= iy;
+	}
+	else if (t->keystate[SDL_SCANCODE_DOWN] && MOVEDW)
+	{
+		if (t->map[((int)POSY / 64)][PX] != 1)
+			POSX -= ix;
+		if (t->map[PY][((int)POSX / 64)] != 1)
+			POSY += iy;
+	}
 }
 
 void		trip(t_wolf *t)
 {
-		if (KEY == SDLK_p)
+	if (KEY == SDLK_p)
 	{
 		POSX = 4 * 64;
 		POSY = 4 * 64;
@@ -65,15 +64,8 @@ void		trip(t_wolf *t)
 		t->choose = (t->choose == 0) ? 1 : 0;
 }
 
-void		key_events(t_wolf *t)
+void		key_events(t_wolf *t)//, int ix, int iy)
 {
-	int inc;
-	int	ix;
-	int	iy;
-
-	inc = 16;
-	ix = cos(ANG D) * inc;
-	iy = sin(ANG D) * inc;
 	if (t->event.type == SDL_KEYDOWN)
 	{
 		if (KEY == 27)
@@ -82,8 +74,6 @@ void		key_events(t_wolf *t)
 			SDL_Quit();
 			exit(1);
 		}
-		move(t);
-		rotate(t, ix, iy);
 		trip(t);
 	}
 }
