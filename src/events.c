@@ -33,16 +33,16 @@ void		move(t_wolf *t, int ix, int iy)
 
 	if (t->keystate[SDL_SCANCODE_UP])
 	{
-		if (t->map[PY][PX] != 1)
+		if (t->map[((int)POSY / 64)][PX] != 1)
 			POSX += ix;
-		if (t->map[PY][PX] != 1)
+		if (t->map[PY][((int)POSX / 64)] != 1)
 			POSY -= iy;
 	}
-	else if (t->keystate[SDL_SCANCODE_DOWN] && MOVEDW)
+	else if (t->keystate[SDL_SCANCODE_DOWN])// && MOVEDW)
 	{
-		if (t->map[((int)POSY / 64)][PX] != 1)
+		if (t->map[((int)POSY / 64)][PX2] != 1)
 			POSX -= ix;
-		if (t->map[PY][((int)POSX / 64)] != 1)
+		if (t->map[PY2][((int)POSX / 64)] != 1)
 			POSY += iy;
 	}
 }
