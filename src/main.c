@@ -33,10 +33,6 @@ int		ft_init(t_wolf *t)
 	t->trip2 = 1;
 	t->trip3 = 800;
 	t->choose = 0;
-	t->m->right = 0;
-	t->m->left = 0;
-	t->m->up = 0;
-	t->m->down = 0;
 	if ((SDL_Init(SDL_INIT_EVERYTHING)) == -1)
 		return (ft_error(NULL, NULL, "Cannot init SDL"));
 	t->window = SDL_CreateWindow
@@ -69,7 +65,6 @@ void		running(t_wolf *t)
 		rotate(t);
 		raycast(t);
 		dif = (SDL_GetTicks() - ti);
-		ft_putchar('\r');
 		if (dif < 20)
 			SDL_Delay(20 - dif);
 	}

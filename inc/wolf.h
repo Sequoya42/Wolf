@@ -46,10 +46,10 @@
 #define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
 # define MAX_DISTANCE ((double)2500.0)
 
-#define PX  	(((int)((POSX  + ix)/ WALL)))
-#define PY  	(((int)((POSY - iy)/ WALL)))
-#define PX2  	(((int)((POSX  - ix)/ WALL)))
-#define PY2  	(((int)((POSY + iy)/ WALL)))
+#define PX  	(((int)((POSX  + (8 * ix))/ WALL)))
+#define PY  	(((int)((POSY - (8 * iy))/ WALL)))
+#define PX2  	(((int)((POSX  - (8 * ix))/ WALL)))
+#define PY2  	(((int)((POSY + (8 * iy))/ WALL)))
 #define	MOVEUP	(t->map[PY][PX] != 1)
 #define	MOVEDW	(t->map[PY2][PX2] != 1)
 
@@ -62,15 +62,6 @@
 # define KCYN  "\x1B[36m"
 # define KWHT  "\x1B[37m"
 
-
-
-typedef struct 			s_move
-{
-	int 	 	 	 	left;
-	int 	 	 	 	right;
-	int 	 	 	 	up;
-	int 	 	 	 	down;
-}						t_move;
 
 typedef struct			s_color
 {		
@@ -102,7 +93,6 @@ typedef struct 			s_wolf
 	int 				trip2;
 	int 				trip3;
 	int  				choose;
-	t_move				*m;
 }						t_wolf;
 
 
@@ -117,6 +107,10 @@ void		move(t_wolf *t, int ix, int iy);
 void		rotate(t_wolf *t);
 void		create_new_renderer(t_wolf *t);
 void		running(t_wolf *t);
+
+t_color		set_color(char r, char g, char b);
+Uint32 couleur(int r, int g, int b, int m);
+int			shade(t_wolf *t, double wh);
 
 
 #endif

@@ -38,7 +38,7 @@ void		move(t_wolf *t, int ix, int iy)
 		if (t->map[PY][((int)POSX / 64)] != 1)
 			POSY -= iy;
 	}
-	else if (t->keystate[SDL_SCANCODE_DOWN])// && MOVEDW)
+	else if (t->keystate[SDL_SCANCODE_DOWN])
 	{
 		if (t->map[((int)POSY / 64)][PX2] != 1)
 			POSX -= ix;
@@ -46,25 +46,34 @@ void		move(t_wolf *t, int ix, int iy)
 			POSY += iy;
 	}
 }
+#include <time.h>
 
 void		trip(t_wolf *t)
 {
 	if (KEY == SDLK_p)
 	{
-		POSX = 4 * 64;
-		POSY = 4 * 64;
+		srand(time(NULL));
+		while (1)
+		{
+		POSX = rand() % MW * 64;
+		POSY = rand() % MH * 64;
+		if (t->map[(int)(POSX / WALL)][(int)(POSY / WALL)] == 0
+			&& (t->map[(int)(POSX / WALL) + 1][(int)(POSY / WALL) + 1] == 0)
+			&& (t->map[(int)(POSX / WALL) - 1][(int)(POSY / WALL) - 1] == 0))
+			break;
+		}
 	}
 	if (KEY == SDLK_t)
 		t->trip = (t->trip == 0) ? 1 : 0;
 	if (KEY == SDLK_r)
-		t->trip2 = (t->trip2 == 1) ? 8 : 1;
+		t->trip2 = (t->trip2 == 1) ? 5 : 1;
 	if (KEY == SDLK_i)
 		t->trip3 = (t->trip3 == 800) ? 600: 800;
 	if (KEY == SDLK_c)
 		t->choose = (t->choose == 0) ? 1 : 0;
 }
 
-void		key_events(t_wolf *t)//, int ix, int iy)
+void		key_events(t_wolf *t)
 {
 	if (t->event.type == SDL_KEYDOWN)
 	{

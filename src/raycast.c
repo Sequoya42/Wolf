@@ -58,7 +58,7 @@ static double		raycast_vertical(double tang, t_wolf *t)
 		y += ya;
 	}
 	dy = fabs(((tx - x) / cos(ALPHA D)));
-	 dy *= (cos(((ALPHA - ANG)) D));
+	dy *= (cos(((ALPHA - ANG)) D));
 	return (dy);
 }
 
@@ -73,19 +73,15 @@ void				raycast(t_wolf *t)
 	i = WIDTH;
 	arc = 0.075;
 	ALPHA = ANG - 30.0;
-	SDL_RenderClear(t->renderer);
 	tang = (double)tan(ALPHA D);
-	SDL_RenderClear(t->renderer);
 	while (i >= 0)
 	{
 		h = raycast_horizontal(tang, t);
 		v = raycast_vertical(tang, t);
 		draw_ray(h, v, i, t);
 		ALPHA += arc;
-		if (ALPHA >= 360)
-			ALPHA -= 360;
-		if (ALPHA < 0)
-			ALPHA += 360;
+		ALPHA = (ALPHA >= 360) ? ALPHA - 360 : ALPHA;
+		ALPHA = (ALPHA < 0) ? ALPHA + 360 : ALPHA;
 		tang = (double)tan(ALPHA D);
 		i--;
 	}
