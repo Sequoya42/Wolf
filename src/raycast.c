@@ -70,37 +70,36 @@ t_color				get_mix(t_color *buf, int x, int y)
 	unsigned	b;
 
 	ft_bzero(&c, sizeof(t_color));
-	r = buf[x + y * WIDTH].r << 1;
-	g = buf[x + y * WIDTH].g << 1;
-	b = buf[x + y * WIDTH].b << 1;
+	r = buf[x + y * WIDTH].r;
+	g = buf[x + y * WIDTH].g;
+	b = buf[x + y * WIDTH].b;
 	if (x >= 1)
 	{
-		r += buf[x + y * WIDTH - 1].r >> 1;
-		g += buf[x + y * WIDTH - 1].g >> 1;
-		b += buf[x + y * WIDTH - 1].b >> 1;
+		r += buf[x + y * WIDTH - 1].r;
+		g += buf[x + y * WIDTH - 1].g;
+		b += buf[x + y * WIDTH - 1].b;
 	}
 	if (x < WIDTH - 1)
 	{
-		r += buf[x + y * WIDTH + 1].r >> 1;
-		g += buf[x + y * WIDTH + 1].g >> 1;
-		b += buf[x + y * WIDTH + 1].b >> 1;
+		r += buf[x + y * WIDTH + 1].r;
+		g += buf[x + y * WIDTH + 1].g;
+		b += buf[x + y * WIDTH + 1].b;
 	}
-	/*if (y >= 1)
+	if (y >= 1)
 	{
-		r += buf[x + y * WIDTH - WIDTH].r / 2;
-		g += buf[x + y * WIDTH - WIDTH].g / 2;
-		b += buf[x + y * WIDTH - WIDTH].b / 2;
+		r += buf[x + y * WIDTH - WIDTH].r;
+		g += buf[x + y * WIDTH - WIDTH].g;
+		b += buf[x + y * WIDTH - WIDTH].b;
 	}
-
 	if (y < HEIGHT - 1)
 	{
-		r += buf[x + y * WIDTH + WIDTH].r / 2;
-		g += buf[x + y * WIDTH + WIDTH].g / 2;
-		b += buf[x + y * WIDTH + WIDTH].b / 2;
-	}*/
-	c.r = r / 3;
-	c.g = g / 3;
-	c.b = b / 3;
+		r += buf[x + y * WIDTH + WIDTH].r;
+		g += buf[x + y * WIDTH + WIDTH].g;
+		b += buf[x + y * WIDTH + WIDTH].b;
+	}
+	c.r = r / 5;
+	c.g = g / 5;
+	c.b = b / 5;
 	return (c);
 }
 
@@ -154,7 +153,9 @@ void				raycast(t_wolf *t)
 		tang = (double)tan(ALPHA D);
 		i--;
 	}
-	// test(t);
+	// int ibg = 0;
+	// while (ibg++ < 10)
+		// test(t);
 	SDL_UpdateTexture(t->screen, NULL, t->p, WIDTH * sizeof(Uint32));
 	SDL_RenderCopy(t->renderer, t->screen, NULL, NULL);
 	SDL_RenderPresent(t->renderer);

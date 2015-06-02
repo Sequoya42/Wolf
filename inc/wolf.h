@@ -24,7 +24,7 @@
 #define WIDTH 	800
 #define HEIGHT	600
 #define	WALL	64.0
-#define POV	    32
+#define POV		32
 #define	FOV		60
 #define	DIST	(double)(400.0 / tan(30 D))
 
