@@ -33,6 +33,7 @@ int		ft_init(t_wolf *t)
 	t->trip2 = 1;
 	t->trip3 = 800;
 	t->choose = 0;
+	srand(time(NULL));
 	if ((SDL_Init(SDL_INIT_EVERYTHING)) == -1)
 		return (ft_error(NULL, NULL, "Cannot init SDL"));
 	t->window = SDL_CreateWindow

@@ -17,6 +17,7 @@
 # include <math.h>
 # include "libft.h"
 # include "SDL2.framework/Headers/SDL.h"
+#include <time.h>
 # include <stdio.h> // REMOVE THIS
 
 
@@ -64,10 +65,11 @@
 
 
 typedef struct			s_color
-{		
+{
 	unsigned char		g;
 	unsigned char		b;
 	unsigned char		r;
+	unsigned char		buf;
 }						t_color;
 
 typedef struct 			s_wolf
@@ -98,7 +100,7 @@ typedef struct 			s_wolf
 
 int			get_map(char *s, t_wolf *t);
 int			ft_init(t_wolf *t);
-int			draw_ray(double dx, double dy, int i, t_wolf *t);
+void		draw_ray(double dx, double dy, int i, t_wolf *t);
 
 void		raycast(t_wolf *t);
 void		vector(t_wolf *t);
@@ -109,8 +111,11 @@ void		create_new_renderer(t_wolf *t);
 void		running(t_wolf *t);
 
 t_color		set_color(char r, char g, char b);
-Uint32 couleur(int r, int g, int b, int m);
+Uint32 		couleur(int r, int g, int b, int m);
 int			shade(t_wolf *t, double wh);
+t_color		choose_color(double dx, double dy, t_wolf *t);
+void		create_new_renderer(t_wolf *t);
+t_color 	shad(t_color c, double dist);
 
 
 #endif

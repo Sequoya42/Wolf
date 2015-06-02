@@ -46,23 +46,37 @@ void		move(t_wolf *t, int ix, int iy)
 			POSY += iy;
 	}
 }
-#include <time.h>
 
-void		trip(t_wolf *t)
+void		teleport(t_wolf *t)
 {
+	int x;
+	int y;
+
 	if (KEY == SDLK_p)
 	{
-		srand(time(NULL));
 		while (1)
 		{
-		POSX = rand() % MW * 64;
-		POSY = rand() % MH * 64;
-		if (t->map[(int)(POSX / WALL)][(int)(POSY / WALL)] == 0
-			&& (t->map[(int)(POSX / WALL) + 1][(int)(POSY / WALL) + 1] == 0)
-			&& (t->map[(int)(POSX / WALL) - 1][(int)(POSY / WALL) - 1] == 0))
+			POSX = rand() % MW * 64;
+			POSY = rand() % MH * 64;
+			y = (int)(POSX / WALL);
+			x = (int)(POSY / WALL);
+		if (t->map[x][y] == 0
+			&& (t->map[x + 1][y + 1] == 0)
+			&& (t->map[x + 1][y] == 0)
+			&& (t->map[x][y + 1] == 0)
+			&& (t->map[x - 1][y - 1] == 0)
+			&& (t->map[x - 1][y] == 0)
+			&& (t->map[x][y - 1] == 0)
+			&& (t->map[x + 1][y - 1] == 0)
+			&& (t->map[x - 1][y + 1] == 0))
 			break;
 		}
+		printf("x: %d\t\ty: %d\n", x, y);
 	}
+}
+void		trip(t_wolf *t)
+{
+	teleport(t);
 	if (KEY == SDLK_t)
 		t->trip = (t->trip == 0) ? 1 : 0;
 	if (KEY == SDLK_r)
@@ -86,4 +100,3 @@ void		key_events(t_wolf *t)
 		trip(t);
 	}
 }
-

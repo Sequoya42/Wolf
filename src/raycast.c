@@ -62,6 +62,75 @@ static double		raycast_vertical(double tang, t_wolf *t)
 	return (dy);
 }
 
+t_color				get_mix(t_color *buf, int x, int y)
+{
+	t_color		c;
+	unsigned	r;
+	unsigned	g;
+	unsigned	b;
+
+	ft_bzero(&c, sizeof(t_color));
+	r = buf[x + y * WIDTH].r << 1;
+	g = buf[x + y * WIDTH].g << 1;
+	b = buf[x + y * WIDTH].b << 1;
+	if (x >= 1)
+	{
+		r += buf[x + y * WIDTH - 1].r >> 1;
+		g += buf[x + y * WIDTH - 1].g >> 1;
+		b += buf[x + y * WIDTH - 1].b >> 1;
+	}
+	if (x < WIDTH - 1)
+	{
+		r += buf[x + y * WIDTH + 1].r >> 1;
+		g += buf[x + y * WIDTH + 1].g >> 1;
+		b += buf[x + y * WIDTH + 1].b >> 1;
+	}
+	/*if (y >= 1)
+	{
+		r += buf[x + y * WIDTH - WIDTH].r / 2;
+		g += buf[x + y * WIDTH - WIDTH].g / 2;
+		b += buf[x + y * WIDTH - WIDTH].b / 2;
+	}
+
+	if (y < HEIGHT - 1)
+	{
+		r += buf[x + y * WIDTH + WIDTH].r / 2;
+		g += buf[x + y * WIDTH + WIDTH].g / 2;
+		b += buf[x + y * WIDTH + WIDTH].b / 2;
+	}*/
+	c.r = r / 3;
+	c.g = g / 3;
+	c.b = b / 3;
+	return (c);
+}
+
+void				test(t_wolf *t)
+{
+	int				i;
+	int				j;
+	t_color			*buf;
+
+	buf = malloc(sizeof(t_color) * WIDTH * HEIGHT);
+	if (buf == NULL)
+	{
+		printf("error");
+		return ;
+	}
+	j = 0;
+	while (j < HEIGHT)
+	{
+		i = 0;
+		while (i < WIDTH)
+		{
+			buf[i + j * WIDTH] = get_mix((t_color *)t->p, i, j);
+			i++;
+		}
+		j++;
+	}
+	free(t->p);
+	t->p = (Uint32 *)buf;
+}
+
 void				raycast(t_wolf *t)
 {
 	int				i;
@@ -85,6 +154,7 @@ void				raycast(t_wolf *t)
 		tang = (double)tan(ALPHA D);
 		i--;
 	}
+	// test(t);
 	SDL_UpdateTexture(t->screen, NULL, t->p, WIDTH * sizeof(Uint32));
 	SDL_RenderCopy(t->renderer, t->screen, NULL, NULL);
 	SDL_RenderPresent(t->renderer);

@@ -12,72 +12,65 @@
 
 #include "wolf.h"
 
-t_color		choose_color(double dx, double dy, t_wolf *t)
+void		draw_ceiling(t_wolf *t, t_color s, int y, int x)
 {
-	t_color c;
-	if (dx < dy && ALPHA >= 0 && ALPHA < 180)
-		c = set_color(138, 111 , 226);//blue violet
-	else if (dx < dy && ALPHA >= 180 && ALPHA < 360)
-		c = set_color(165, 42, 42); // brown red
-	else if (dy < dx && ALPHA >= 90  && ALPHA < 270)
-		c = set_color(205, 117, 0); // gold 3
-	else
-		c = set_color(0, 102, 124);// mellow blue
-	return (c);
+	int 	i;
 
-}
-
-void		create_new_renderer(t_wolf *t)
-{
-	t->p = (Uint32 *)malloc(sizeof(Uint32) * WIDTH * HEIGHT);
-	t->screen = SDL_CreateTexture(t->renderer, SDL_PIXELFORMAT_ARGB8888,
-		SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
-}
-
-t_color shad(t_color c, double dist)
-{
-	if (dist > MAX_DISTANCE)
-		return (set_color(0, 0, 0));
-	c.r = (unsigned char)((double)c.r * (1.0 - (dist / MAX_DISTANCE)));
-	c.g = (unsigned char)((double)c.g * (1.0 - (dist / MAX_DISTANCE)));
-	c.b = (unsigned char)((double)c.b * (1.0 - (dist / MAX_DISTANCE)));
-	return (c);
-}
-
-int			draw_ray(double dx, double dy, int x, t_wolf *t)
-{
-	t_color	c;
-	t_color	s;
-	double	wh;
-	int 	y;
-	int		z;
-	int		i;
-	int		m;
-
-	c = choose_color(dx, dy, t);
-	wh = (dx < dy) ? dx : dy;
-	c = shad(c, wh);
-	s = shad(s, wh);
-	m = shade(t, wh);
-	wh = (WALL / wh) * DIST;
-	y = (HEIGHT / 2) - (wh / 2);
-	z = ((HEIGHT / 2) + (wh / 2));
 	i = 0;
-	s = set_color(44, 47, 94);
+		s = set_color(44, 47, 94);
 	while (i++ < y)
 		 t->p[(x + (i * t->trip3))] = couleur(s.r, s.g, s.b, 100);
+}
+
+void		draw_walls(t_wolf *t, t_color c, int x, int wh)
+{
+	int z;
+	int y;
+	int m;
+
+	m = shade(t, wh);
+	z = ((HEIGHT / 2) + (wh / 2));
+	y = (HEIGHT / 2) - (wh / 2);
 	y = (y < 0) ? 0 : y;
 	while (y < t->trip3 && y < z)
 	{
 		t->p[(x + (y * t->trip3))] = couleur(c.r , c.g, c.b,m);
 		y += sin(3 * (M_PI / 4)) + t->trip2;
 	}
-	s = set_color(102, 51, 0);
+}
+
+void		draw_floor(t_wolf *t, t_color s, int x, int z)
+{
+	int i = 0;
+
 	while (z < t->trip3)
 	{
-		s = shad(s, z);
+		s = set_color(102, 51, 0);
+		if (i == 0)
+			s = set_color(100, 47, 0);
+		if (i < 2)
+		s = set_color(88, 44, 0);
 		t->p[(x + (z * t->trip3))] = couleur(s.r, s.g, s.b, 1);
 		z++;
+		i++;
 	}
-	return (0);
+
+}
+void		draw_ray(double dx, double dy, int x, t_wolf *t)
+{
+	t_color	c;
+	t_color	s;
+	double	wh;
+	int 	y;
+	int		z;
+
+	c = choose_color(dx, dy, t);
+	wh = (dx < dy) ? dx : dy;
+	c = shad(c, wh);
+	wh = (WALL / wh) * DIST;
+	y = (HEIGHT / 2) - (wh / 2);
+	z = ((HEIGHT / 2) + (wh / 2));
+	draw_ceiling(t, s, y, x);
+	draw_walls(t, c, x , wh);
+	draw_floor(t, s, x, z);
 }
