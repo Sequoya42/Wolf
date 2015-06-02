@@ -20,7 +20,6 @@ void		draw_ceiling(t_wolf *t, t_color c, double y, int x)
 
 	i = 0;
 	s = set_color(44, 47, 94);
-	f = set_color(0, 0, 0);
 	while (i < y - 1)
 	{
 		 t->p[(x + ((int)i * t->trip3))] = couleur(s.r, s.g, s.b, 100);
@@ -41,12 +40,10 @@ void		draw_walls(t_wolf *t, t_color c, int x, double wh)
 	double z;
 	double y;
 
-	// s = set_color(127, 255, 0);
-				s = set_color(102, 51, 0);
+	s = set_color(0, 0, 0);
 	z = ((HEIGHT / 2) + (wh / 2));
 	y = (HEIGHT / 2) - ((int)wh / 2);
 	y = (y < 0) ? 0 : y;
-	// printf("%f\t%f\n", y, z);
 	(void)c;
 	while (y < t->trip3 && y < z - 2)
 	{
@@ -54,7 +51,6 @@ void		draw_walls(t_wolf *t, t_color c, int x, double wh)
 		y++;
 	}
 	double cren = (z - (double)(int)z);
-	printf("%f\n", cren);
 	cren *= 100;
 	f.r = (s.r * (100 - cren) / 100) + ((c.r * (cren)) / 100);
 	f.g = (s.g * (100 - cren) / 100) + ((c.g * (cren)) / 100);
@@ -66,20 +62,20 @@ void		draw_floor(t_wolf *t, t_color c, int x, int z)
 {
 	t_color s;
 	// t_color f;
-	double i;
+	// double i;
 
-	i  = 0;
+	// i  = 0;
 	(void)c;
-		// s = set_color(127, 255, 0);
-		// s = set_color(44, 47, 94);
-			s = set_color(102, 51, 0);
+	int bl = z;
 	while (z < t->trip3)
 	{
-		// if (i < 2)
-		// s = set_color(88, 44, 0);
+		if (z == bl)
+		s = set_color(0,255,255);
+	else
+			s = set_color(0, 0, 0);
 		t->p[(x + ((int)z * t->trip3))] = couleur(s.r, s.g, s.b, 100);
 		z++;
-		i++;
+		// i++;
 	}
 
 }
