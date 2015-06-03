@@ -20,13 +20,11 @@
 #include <time.h>
 # include <stdio.h> // REMOVE THIS
 
-
 #define WIDTH 	800
-#define HEIGHT	600
+#define HEIGHT	(t->height)
 #define	WALL	64.0
-#define POV		32
 #define	FOV		60
-#define	DIST	(double)(400.0 / tan(30 D))
+#define	DIST	(((double)(400) / tan((FOV / 2) D)))
 
 #define KEY 	t->event.key.keysym.sym
 #define	ANG 	t->angle
@@ -41,7 +39,6 @@
 
 #define MAPX 	(abs((int)(x / WALL)))
 #define MAPY	(abs((int)(y / WALL)))
-
 
 #define	VALUE	(t->map[MAPY][MAPX])
 #define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
@@ -92,9 +89,8 @@ typedef struct 			s_wolf
 	double				posy;
 			// EFFECTS
 	int 				trip;
-	int 				trip2;
-	int 				trip3;
-	int  				choose;
+	int 				neon;
+	int 				height;
 }						t_wolf;
 
 

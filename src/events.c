@@ -26,6 +26,16 @@ void		rotate(t_wolf *t)
 		while (ANG >= 360)
 			ANG -= 360;
 	}
+	if (t->keystate[SDL_SCANCODE_W] && t->height < 1000)
+		t->height += 5;
+	if (t->keystate[SDL_SCANCODE_Q] && t->height > 200)
+		t->height -= 5;
+}
+
+void		look_away(t_wolf *t)
+{
+	if (KEY == SDLK_n)
+		t->neon = (t->neon == 0) ? 1 : 0;
 }
 
 void		move(t_wolf *t, int ix, int iy)
@@ -79,12 +89,6 @@ void		trip(t_wolf *t)
 	teleport(t);
 	if (KEY == SDLK_t)
 		t->trip = (t->trip == 0) ? 1 : 0;
-	if (KEY == SDLK_r)
-		t->trip2 = (t->trip2 == 1) ? 5 : 1;
-	if (KEY == SDLK_i)
-		t->trip3 = (t->trip3 == 800) ? 600: 800;
-	if (KEY == SDLK_c)
-		t->choose = (t->choose == 0) ? 1 : 0;
 }
 
 void		key_events(t_wolf *t)
@@ -98,5 +102,6 @@ void		key_events(t_wolf *t)
 			exit(1);
 		}
 		trip(t);
+		look_away(t);
 	}
 }

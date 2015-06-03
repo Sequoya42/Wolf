@@ -18,10 +18,9 @@ t_color		set_color(char r, char g, char b)
 
 	c.r = r;
 	c.g = g;
-	c.b = b;
+	c.b = b; 
 	return (c);
 }
-
 
 Uint32 couleur(int r, int g, int b, int m)
 { 
@@ -53,7 +52,6 @@ t_color		choose_color(double dx, double dy, t_wolf *t)
 	else
 		c = set_color(0, 102, 124);// mellow blue
 	return (c);
-
 }
 
 void		create_new_renderer(t_wolf *t)
@@ -66,7 +64,7 @@ void		create_new_renderer(t_wolf *t)
 t_color shad(t_color c, double dist)
 {
 	if (dist > MAX_DISTANCE)
-		return (set_color(0, 0, 0));
+	return (set_color(0, 0, 0));
 	c.r = (unsigned char)((double)c.r * (1.0 - (dist / MAX_DISTANCE)));
 	c.g = (unsigned char)((double)c.g * (1.0 - (dist / MAX_DISTANCE)));
 	c.b = (unsigned char)((double)c.b * (1.0 - (dist / MAX_DISTANCE)));
