@@ -32,6 +32,8 @@ int		ft_init(t_wolf *t)
 	t->trip = 0;
 	t->neon = 0;
 	t->height = 600;
+	t->cren = 0;
+	t->text = 0;
 	srand(time(NULL));
 	if ((SDL_Init(SDL_INIT_EVERYTHING)) == -1)
 		return (ft_error(NULL, NULL, "Cannot init SDL"));

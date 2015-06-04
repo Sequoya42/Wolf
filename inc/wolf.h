@@ -37,11 +37,15 @@
 #define MH 		t->map_height
 #define	MW 		t->map_width
 
-#define MAPX 	(abs((int)(x / WALL)))
-#define MAPY	(abs((int)(y / WALL)))
+#define MAPX 	(abs((int)(t->rxh / WALL)))
+#define MAPY	(abs((int)(t->ryh / WALL)))
+#define MAPXV 	(abs((int)(t->rxv / WALL)))
+#define MAPYV	(abs((int)(t->ryv / WALL)))
 
 #define	VALUE	(t->map[MAPY][MAPX])
+#define	VALUE2	(t->map[MAPYV][MAPXV])
 #define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
+#define SAFE2	(MAPXV > 0 && MAPXV < MW && MAPYV > 0 && MAPYV < MH)
 # define MAX_DISTANCE ((double)2500.0)
 
 #define PX  	(((int)((POSX  + (8 * ix))/ WALL)))
@@ -60,6 +64,7 @@
 # define KCYN  "\x1B[36m"
 # define KWHT  "\x1B[37m"
 
+// typedef struct
 
 typedef struct			s_color
 {
@@ -87,10 +92,17 @@ typedef struct 			s_wolf
 	double				alpha;
 	double				posx;
 	double				posy;
+	double				ryv;
+	double				rxv;
+	double				ryh;
+	double				rxh;
 			// EFFECTS
 	int 				trip;
 	int 				neon;
 	int 				height;
+	int  				cren;
+	int 				text;
+	t_color				c;
 }						t_wolf;
 
 
@@ -106,13 +118,14 @@ void		rotate(t_wolf *t);
 void		create_new_renderer(t_wolf *t);
 void		running(t_wolf *t);
 
-t_color		set_color(char r, char g, char b);
-Uint32 		couleur(int r, int g, int b, int m);
-int			shade(t_wolf *t, double wh);
-t_color		choose_color(double dx, double dy, t_wolf *t);
-void		create_new_renderer(t_wolf *t);
-t_color 	shad(t_color c, double dist);
 
+Uint32 		couleur(int r, int g, int b, int m);
+t_color		set_color(char r, char g, char b);
+t_color 	shad(t_color c, double dist);
+t_color		choose_color(double dx, double dy, t_wolf *t);
+int			shade(t_wolf *t, double wh);
+void		create_new_renderer(t_wolf *t);
+void		load_bmp(t_wolf *t, int x, double wh);
 
 #endif
 // 

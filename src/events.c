@@ -81,7 +81,6 @@ void		teleport(t_wolf *t)
 			&& (t->map[x - 1][y + 1] == 0))
 			break;
 		}
-		printf("x: %d\t\ty: %d\n", x, y);
 	}
 }
 void		trip(t_wolf *t)
@@ -89,6 +88,10 @@ void		trip(t_wolf *t)
 	teleport(t);
 	if (KEY == SDLK_t)
 		t->trip = (t->trip == 0) ? 1 : 0;
+	if (KEY == SDLK_c)
+		t->cren = (t->cren == 0) ? 1 : 0;
+	if (KEY == SDLK_t)
+		t->text = (t->text == 0) ? 1 : 0;
 }
 
 void		key_events(t_wolf *t)

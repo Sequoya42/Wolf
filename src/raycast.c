@@ -14,8 +14,6 @@
 
 static double		raycast_horizontal(double tang, t_wolf *t)
 {
-	double			y;
-	double			x;
 	double			ya;
 	double			xa;
 	double			dx;
@@ -24,23 +22,21 @@ static double		raycast_horizontal(double tang, t_wolf *t)
 	int ty = (int)POSY;
 	ya = (ALPHA > 180.0) ? 64.0 : -64.0;
 	xa = - ya / tang;
-	y = (double)(ty - ((int)ty % 64));
-	y = (ALPHA < 180.0) ? y - 0.0001 : y + 64.0;
-	x = tx + ((ty - y) / tang);
+	t->ryh = (double)(ty - ((int)ty % 64));
+	t->ryh = (ALPHA < 180.0) ? t->ryh - 0.0001 : t->ryh + 64.0;
+	t->rxh = tx + ((ty - t->ryh) / tang);
 	while (SAFE && VALUE != 1)
 	{
-		x += xa;
-		y += ya;
+		t->rxh += xa;
+		t->ryh += ya;
 	}
-	dx = fabs(((tx - x) / cos(ALPHA  D)));
+	dx = fabs(((tx - t->rxh) / cos(ALPHA  D)));
 	dx *= (cos(((ALPHA - ANG) D)));
 	return (dx);
 }
 
 static double		raycast_vertical(double tang, t_wolf *t)
 {
-	double 			x;
-	double			y;
 	double			xa;
 	double			ya;
 	double			dy;
@@ -49,15 +45,15 @@ static double		raycast_vertical(double tang, t_wolf *t)
 	int	ty = (int)POSY;
 	xa = (ALPHA > 90.0 && ALPHA < 270.0) ? -64.0 :  64.0;
 	ya = - xa * tang;
-	x = (double)(tx - ((int)tx % 64));
-	x = (ALPHA < 90.0 || ALPHA > 270.0) ? x + 64.0 : x - 0.0001;
-	y = ty + ((tx - x) * tang);
-	while (SAFE && VALUE != 1)
+	t->rxv = (double)(tx - ((int)tx % 64));
+	t->rxv = (ALPHA < 90.0 || ALPHA > 270.0) ? t->rxv + 64.0 : t->rxv - 0.0001;
+	t->ryv = ty + ((tx - t->rxv) * tang);
+	while (SAFE2 && VALUE2 != 1)
 	{
-		x += xa;
-		y += ya;
+		t->rxv += xa;
+		t->ryv += ya;
 	}
-	dy = fabs(((tx - x) / cos(ALPHA D)));
+	dy = fabs(((tx - t->rxv) / cos(ALPHA D)));
 	dy *= (cos(((ALPHA - ANG)) D));
 	return (dy);
 }
