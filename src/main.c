@@ -42,7 +42,7 @@ int		ft_init(t_wolf *t)
 	("Labyrinth", 500, 300, WIDTH, HEIGHT, 0);
 	t->renderer = SDL_CreateRenderer(t->window, -1, 
 		SDL_RENDERER_ACCELERATED);
-	t->surf = ft_loadbmp("./maps/bluestone2.bmp");
+	t->surf = ft_loadbmp("./maps/test.bmp");
 	SDL_RenderSetLogicalSize(t->renderer, WIDTH, HEIGHT);
 	create_new_renderer(t);
 	return (0);

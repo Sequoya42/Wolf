@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_bmp.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/06/05 18:59:47 by rbaum             #+#    #+#             */
+/*   Updated: 2015/06/05 18:59:48 by rbaum            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "wolf.h"
 
@@ -42,7 +53,8 @@ t_surface			*ft_loadbmp(const char *path)
 		ft_memdel((void **)&surf);
 		return (NULL);
 	}
-	if (!(surf->surf = SDL_ConvertSurfaceFormat(tmp, SDL_PIXELFORMAT_ARGB8888, 0)))
+	if (!(surf->surf = 
+		SDL_ConvertSurfaceFormat(tmp, SDL_PIXELFORMAT_ARGB8888, 0)))
 	{
 		SDL_FreeSurface(tmp), ft_memdel((void **)&surf);
 		return (NULL);
@@ -58,30 +70,26 @@ t_surface			*ft_loadbmp(const char *path)
 
 void		load_bmp(t_wolf *t, int x, double wh, double dx, double dy)
 {
-	double z;
-	double y;
+	double 		z;
+	double 		y;
 	double		i;
-	Uint32 **img;
-	int offset;
+	Uint32 		**img;
+	int 		offset;
+	double		inc;
 
 	z = ((HEIGHT / 2) + (wh / 2));
 	y = (HEIGHT / 2) - ((int)wh / 2);
 	y = (y < 0) ? 0 : y;
 	offset  = (dx > dy) ? 
 	(abs((int)(t->ryv)) % 64) : (abs((int)(t->rxh)) % 64);
-	// if (dx > dy)
-	// offset = (abs((int)t->ryv % 64));
-	// else
-	// offset = (abs((int)t->rxh % 64));
 	img = (Uint32**)(t->surf->pix);
 	i = 0.0;
+	inc = (double)t->surf->h / wh;
 	printf("Offset :%d\n", offset);
 	while (y < 600 && y < z - 2)	
 	{
-		t->p[x + ((int)y * 800)] = img[(int)i][offset];
-		// img[(int)i % t->surf->h][offset % t->surf->w];
-		// i *= wh / (double)t->surf->h;
-		i += (double)t->surf->h / wh;
+		t->p[x + ((int)y * 800)] = img[(int)i % t->surf->h][offset % t->surf->w];
+		i += inc;
 		y++;
 	}
 }
