@@ -34,13 +34,15 @@ int		ft_init(t_wolf *t)
 	t->height = 600;
 	t->cren = 0;
 	t->text = 0;
+
 	srand(time(NULL));
 	if ((SDL_Init(SDL_INIT_EVERYTHING)) == -1)
 		return (ft_error(NULL, NULL, "Cannot init SDL"));
 	t->window = SDL_CreateWindow
-	("test", 500, 300, WIDTH, HEIGHT, 0);
+	("Labyrinth", 500, 300, WIDTH, HEIGHT, 0);
 	t->renderer = SDL_CreateRenderer(t->window, -1, 
 		SDL_RENDERER_ACCELERATED);
+	t->surf = ft_loadbmp("./maps/bluestone2.bmp");
 	SDL_RenderSetLogicalSize(t->renderer, WIDTH, HEIGHT);
 	create_new_renderer(t);
 	return (0);
@@ -50,9 +52,9 @@ void		running(t_wolf *t)
 {
 	unsigned int	ti;
 	unsigned int	dif;
-	int inc;
-	int	ix;
-	int	iy;
+	int 			inc;
+	int				ix;
+	int				iy;
 
 	inc = 8;
 	t->keystate = SDL_GetKeyboardState(NULL);

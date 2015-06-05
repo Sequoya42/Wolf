@@ -44,14 +44,12 @@ void		draw_ceiling(t_wolf *t, double y, int x)
 	t->p[(x + ((int)i * 800))] = couleur(f.r, f.g, f.b, 100);
 }
 
-void		draw_walls(t_wolf *t, int x, double wh)
+void		draw_walls(t_wolf *t, int x, double wh, t_color s)
 {
 	t_color f;
-	t_color s;
 	double z;
 	double y;
 
-	s = set_color(0, 112, 0);
 	z = ((HEIGHT / 2) + (wh / 2));
 	y = (HEIGHT / 2) - ((int)wh / 2);
 	y = (y < 0) ? 0 : y;
@@ -64,26 +62,24 @@ void		draw_walls(t_wolf *t, int x, double wh)
 	t->p[(x + ((int)y * 800))] = couleur(f.r, f.g, f.b, 100);
 }
 
-void		draw_floor(t_wolf *t, int x, double z)
+void		draw_floor(t_wolf *t, int x, double z, t_color s)
 {
-	t_color s;
 	t_color f;
 	t_color	tmp;
 
-	s = set_color(0, 112,  0);
 	tmp = set_color(11,255,255);
 	if (t->neon == 1)
 	{
-		f = cren(z, t->c, tmp, t);
+		f = cren(z, tmp, t->c, t);
 		t->p[(x + ((int)z * 800))] = couleur(f.r, f.g, f.b, 100);
 		z++;
 		t->p[(x + ((int)z * 800))] = couleur(tmp.r, tmp.g, tmp.b, 100);
 		z++;
-		f = cren(z, tmp, s, t);
+		f = cren(z, s, tmp, t);
 		t->p[(x + ((int)z * 800))] = couleur(f.r, f.g, f.b, 100);
 		z++;
 	}
-	while (z < 800)
+	while (z < 600)
 	{
 		t->p[(x + ((int)z * 800))] = couleur(s.r, s.g, s.b, 100);
 		z++;
@@ -95,8 +91,10 @@ void		draw_ray(double dx, double dy, int x, t_wolf *t)
 	double	wh;
 	double 	y;
 	double	z;
+	t_color s;
 
 	t->c = choose_color(dx, dy, t);
+	s = set_color(0, 36, 17);
 	wh = (dx < dy) ? dx : dy;
 	t->c = shad(t->c, wh);
 	wh = (WALL / wh) * DIST;
@@ -104,9 +102,9 @@ void		draw_ray(double dx, double dy, int x, t_wolf *t)
 	z = ((HEIGHT / 2) + (wh / 2));
 	draw_ceiling(t, y, x);
 	if (t->text == 0)
-		draw_walls(t, x , wh);
+		draw_walls(t, x , wh, s);
 	else
-		load_bmp(t, x, wh);
+		load_bmp(t, x, wh, dx , dy);
 	if (z < WIDTH)
-		draw_floor(t, x, z);
+		draw_floor(t, x, z, s);
 }

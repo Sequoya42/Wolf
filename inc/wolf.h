@@ -74,10 +74,19 @@ typedef struct			s_color
 	unsigned char		buf;
 }						t_color;
 
+typedef struct			s_surface
+{
+	SDL_Surface			*surf;
+	int					w;
+	int					h;
+	t_color				**pix;
+}						t_surface;
+
 typedef struct 			s_wolf
 {
 			// SDL STUFF
 	SDL_Window			*window;
+	t_surface			*surf;
 	SDL_Event			event;
 	SDL_Renderer		*renderer;
 	Uint32				*p;
@@ -125,7 +134,10 @@ t_color 	shad(t_color c, double dist);
 t_color		choose_color(double dx, double dy, t_wolf *t);
 int			shade(t_wolf *t, double wh);
 void		create_new_renderer(t_wolf *t);
-void		load_bmp(t_wolf *t, int x, double wh);
+void		load_bmp(t_wolf *t, int x, double wh,double dx, double dy);
+
+void				del_surface(t_surface **surface);
+t_surface			*ft_loadbmp(const char *path);
 
 #endif
 // 
