@@ -43,6 +43,7 @@ int		ft_init(t_wolf *t)
 	t->renderer = SDL_CreateRenderer(t->window, -1, 
 		SDL_RENDERER_ACCELERATED);
 	t->surf = ft_loadbmp("./maps/test.bmp");
+	t->surf2 = ft_loadbmp("./maps/bluestone2.bmp");
 	SDL_RenderSetLogicalSize(t->renderer, WIDTH, HEIGHT);
 	create_new_renderer(t);
 	return (0);

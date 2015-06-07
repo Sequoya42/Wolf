@@ -87,6 +87,7 @@ typedef struct 			s_wolf
 			// SDL STUFF
 	SDL_Window			*window;
 	t_surface			*surf;
+	t_surface			*surf2;
 	SDL_Event			event;
 	SDL_Renderer		*renderer;
 	Uint32				*p;
@@ -105,6 +106,7 @@ typedef struct 			s_wolf
 	double				rxv;
 	double				ryh;
 	double				rxh;
+	double				wh;
 			// EFFECTS
 	int 				trip;
 	int 				neon;
@@ -134,10 +136,14 @@ t_color 	shad(t_color c, double dist);
 t_color		choose_color(double dx, double dy, t_wolf *t);
 int			shade(t_wolf *t, double wh);
 void		create_new_renderer(t_wolf *t);
-void		load_bmp(t_wolf *t, int x, double wh,double dx, double dy);
+
 
 void				del_surface(t_surface **surface);
 t_surface			*ft_loadbmp(const char *path);
+
+void		textured_wall(t_wolf *t, int x, double dx, double dy);
+void		textured_floor(t_wolf *t, int x, double dx, double dy);
+void		textured_ceiling(t_wolf *t, int x, double dx, double dy);
 
 #endif
 // 

@@ -68,28 +68,3 @@ t_surface			*ft_loadbmp(const char *path)
 
 }
 
-void		load_bmp(t_wolf *t, int x, double wh, double dx, double dy)
-{
-	double 		z;
-	double 		y;
-	double		i;
-	Uint32 		**img;
-	int 		offset;
-	double		inc;
-
-	z = ((HEIGHT / 2) + (wh / 2));
-	y = (HEIGHT / 2) - ((int)wh / 2);
-	y = (y < 0) ? 0 : y;
-	offset  = (dx > dy) ? 
-	(abs((int)(t->ryv)) % 64) : (abs((int)(t->rxh)) % 64);
-	img = (Uint32**)(t->surf->pix);
-	i = 0.0;
-	inc = (double)t->surf->h / wh;
-	printf("Offset :%d\n", offset);
-	while (y < 600 && y < z - 2)	
-	{
-		t->p[x + ((int)y * 800)] = img[(int)i % t->surf->h][offset % t->surf->w];
-		i += inc;
-		y++;
-	}
-}

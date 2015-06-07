@@ -44,14 +44,14 @@ void		draw_ceiling(t_wolf *t, double y, int x)
 	t->p[(x + ((int)i * 800))] = couleur(f.r, f.g, f.b, 100);
 }
 
-void		draw_walls(t_wolf *t, int x, double wh, t_color s)
+void		draw_walls(t_wolf *t, int x, t_color s)
 {
 	t_color f;
 	double z;
 	double y;
 
-	z = ((HEIGHT / 2) + (wh / 2));
-	y = (HEIGHT / 2) - ((int)wh / 2);
+	z = ((HEIGHT / 2) + (t->wh / 2));
+	y = (HEIGHT / 2) - ((int)t->wh / 2);
 	y = (y < 0) ? 0 : y;
 	while (y < 800 && y < z - 2)
 	{
@@ -88,23 +88,30 @@ void		draw_floor(t_wolf *t, int x, double z, t_color s)
 }
 void		draw_ray(double dx, double dy, int x, t_wolf *t)
 {
-	double	wh;
 	double 	y;
 	double	z;
 	t_color s;
 
 	t->c = choose_color(dx, dy, t);
 	s = set_color(0, 36, 17);
-	wh = (dx < dy) ? dx : dy;
-	t->c = shad(t->c, wh);
-	wh = (WALL / wh) * DIST;
-	y = (HEIGHT / 2) - (wh / 2);
-	z = ((HEIGHT / 2) + (wh / 2));
-	draw_ceiling(t, y, x);
+	t->wh = (dx < dy) ? dx : dy;
+	t->c = shad(t->c, t->wh);
+	t->wh = (WALL / t->wh) * DIST;
+	y = (HEIGHT / 2) - (t->wh / 2);
+	z = ((HEIGHT / 2) + (t->wh / 2));
 	if (t->text == 0)
-		draw_walls(t, x , wh, s);
+		draw_ceiling(t, y, x);
 	else
-		load_bmp(t, x, wh, dx , dy);
-	if (z < WIDTH)
-		draw_floor(t, x, z, s);
+		textured_ceiling(t, x, dx, dy);
+	if (t->text == 0)
+		draw_walls(t, x, s);
+	else
+		textured_wall(t, x, dx , dy);
+	if (z < HEIGHT)
+	{
+		if (t->text == 0)
+			draw_floor(t, x, z, s);
+		else
+			textured_floor(t, x, dx, dy);
+	}
 }
