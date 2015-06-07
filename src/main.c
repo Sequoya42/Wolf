@@ -36,14 +36,15 @@ int		ft_init(t_wolf *t)
 	t->text = 0;
 
 	srand(time(NULL));
-	if ((SDL_Init(SDL_INIT_EVERYTHING)) == -1)
+	if ((SDL_Init(SDL_INIT_VIDEO)) == -1)
 		return (ft_error(NULL, NULL, "Cannot init SDL"));
 	t->window = SDL_CreateWindow
 	("Labyrinth", 500, 300, WIDTH, HEIGHT, 0);
 	t->renderer = SDL_CreateRenderer(t->window, -1, 
 		SDL_RENDERER_ACCELERATED);
-	t->surf = ft_loadbmp("./maps/test.bmp");
-	t->surf2 = ft_loadbmp("./maps/bluestone2.bmp");
+	t->surf = ft_loadbmp("./maps/beard.bmp");
+	t->surf2 = ft_loadbmp("./maps/test.bmp");
+	t->surf3 = ft_loadbmp("./maps/test.bmp");
 	SDL_RenderSetLogicalSize(t->renderer, WIDTH, HEIGHT);
 	create_new_renderer(t);
 	return (0);

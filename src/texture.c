@@ -15,7 +15,7 @@ double		start_value(t_wolf *t)
 	return (start);
 }
 
-void		textured_wall(t_wolf *t, int x, double dx, double dy)
+void		textured_wall(t_wolf *t, int x)
 {
 	double 		z;
 	double 		y;
@@ -27,7 +27,7 @@ void		textured_wall(t_wolf *t, int x, double dx, double dy)
 	z = ((HEIGHT / 2) + (t->wh / 2));
 	y = (HEIGHT / 2) - ((int)t->wh / 2);
 	y = (y < 0) ? 0 : y;
-	offset  = (dx > dy) ? 
+	offset  = (t->dx > t->dy) ? 
 	(abs((int)(t->ryv)) % 64) : (abs((int)(t->rxh)) % 64);
 	img = (Uint32**)(t->surf->pix);
 	i = start_value(t);
@@ -42,7 +42,7 @@ void		textured_wall(t_wolf *t, int x, double dx, double dy)
 }
 
 
-void		textured_floor(t_wolf *t, int x, double dx, double dy)
+void		textured_floor(t_wolf *t, int x)
 {
 	double 		z;
 	double 		y;
@@ -54,21 +54,21 @@ void		textured_floor(t_wolf *t, int x, double dx, double dy)
 	z = ((HEIGHT / 2) + (t->wh / 2));
 	y = (HEIGHT / 2) - ((int)t->wh / 2);
 	y = (y < 0) ? 0 : y;
-	offset  = (dx > dy) ? 
+	offset  = (t->dx > t->dy) ? 
 	(abs((int)(t->ryv)) % 64) : (abs((int)(t->rxh)) % 64);
-	img = (Uint32**)(t->surf2->pix);
+	img = (Uint32**)(t->surf3->pix);
 	i = 0.0;
 	inc = (double)t->surf2->h / t->wh;
 	while (z < HEIGHT)
 	{
 		t->p[x + ((int)z * 800)] = 
-		 img[(int)i % t->surf2->h][offset % t->surf2->w];
+		 img[(int)i % t->surf3->h][offset % t->surf3->w];
 		i += inc;
 		z++;
 	}
 }
 
-void		textured_ceiling(t_wolf *t, int x, double dx, double dy)
+void		textured_ceiling(t_wolf *t, int x)
 {
 	double 		z;
 	double 		y;
@@ -80,11 +80,11 @@ void		textured_ceiling(t_wolf *t, int x, double dx, double dy)
 	z = ((HEIGHT / 2) + (t->wh / 2));
 	y = (HEIGHT / 2) - ((int)t->wh / 2);
 	y = (y < 0) ? 0 : y;
-	offset  = (dx > dy) ? 
+	offset  = (t->dx > t->dy) ? 
 	(abs((int)(t->ryv)) % 64) : (abs((int)(t->rxh)) % 64);
 	img = (Uint32**)(t->surf2->pix);
 	i = 0.0;
-	inc = (double)t->surf2->h / t->wh;
+	inc = (double)t->surf2->h / y;
 	int toto = 0;
 	while (toto < y)
 	{

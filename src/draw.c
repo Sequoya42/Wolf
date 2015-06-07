@@ -86,32 +86,29 @@ void		draw_floor(t_wolf *t, int x, double z, t_color s)
 	}
 
 }
-void		draw_ray(double dx, double dy, int x, t_wolf *t)
+void		draw_ray(int x, t_wolf *t)
 {
 	double 	y;
 	double	z;
 	t_color s;
 
-	t->c = choose_color(dx, dy, t);
+	t->c = choose_color(t->dx, t->dy, t);
 	s = set_color(0, 36, 17);
-	t->wh = (dx < dy) ? dx : dy;
+	t->wh = (t->dx < t->dy) ? t->dx : t->dy;
 	t->c = shad(t->c, t->wh);
 	t->wh = (WALL / t->wh) * DIST;
 	y = (HEIGHT / 2) - (t->wh / 2);
 	z = ((HEIGHT / 2) + (t->wh / 2));
-	if (t->text == 0)
+	// if (t->text == 0)
 		draw_ceiling(t, y, x);
-	else
-		textured_ceiling(t, x, dx, dy);
+	// else
+		// textured_ceiling(t, x);
 	if (t->text == 0)
 		draw_walls(t, x, s);
 	else
-		textured_wall(t, x, dx , dy);
-	if (z < HEIGHT)
-	{
+		textured_wall(t, x);
 		if (t->text == 0)
 			draw_floor(t, x, z, s);
 		else
-			textured_floor(t, x, dx, dy);
-	}
+			textured_floor(t, x);
 }
