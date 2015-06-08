@@ -66,23 +66,29 @@ void		textured_floor(t_wolf *t, int x)
 	double 		z;
 	double 		y;
 	double		i;
+	double		ix;
+	double		iy;
 	Uint32 		**img;
 	int 		offset;
-	double		inc;
 
 	z = ((HEIGHT / 2) + (t->wh / 2));
 	y = (HEIGHT / 2) - ((int)t->wh / 2);
 	y = (y < 0) ? 0 : y;
 	img = (Uint32**)(t->surf3->pix);
-	inc = (double)t->surf2->h / ((HEIGHT - z));
-	offset = find_floor(t);
+	offset = (t->dx < t->dy) ? t->rxh : t->rxv;
+	i = (t->dx < t->dy) ? t->ryh : t->ryv;
+	//OFFSET look below x OR y and % etc etc
+	//You'll succeed today
+	ix = 64.0 / (POSX - offset);
+	iy = 64.0 / (POSY - i);
 	while (z < HEIGHT)
 	{
-		i = 0.0;//MODIFY
-	t->p[x + (int)z * 800]=
+		t->p[x + (int)z * 800] =
 	 img[(int)i % t->surf3->h][offset % t->surf3->w];
-		i += inc;
 		z++;
+		offset += ix;
+		i += iy;
+
 	}
 }
 
