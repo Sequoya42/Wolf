@@ -75,8 +75,8 @@ void				raycast(t_wolf *t)
 		tang = (double)tan(ALPHA D);
 		i--;
 	}
-	for (i = 0; i < t->surf->h; i++)
-		ft_memmove(t->p + i * WIDTH, t->surf->pix[i], t->surf->w * sizeof(t_color));
+// for (i = 0; i < t->surf->h; i++)
+// ft_memmove(t->p + i * WIDTH, t->surf->pix[i], t->surf->w * sizeof(t_color));
 	SDL_UpdateTexture(t->screen, NULL, t->p, WIDTH * sizeof(Uint32));
 	SDL_RenderCopy(t->renderer, t->screen, NULL, NULL);
 	SDL_RenderPresent(t->renderer);

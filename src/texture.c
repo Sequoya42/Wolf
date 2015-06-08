@@ -41,55 +41,39 @@ void		textured_wall(t_wolf *t, int x)
 	}
 }
 
-int		find_floor(t_wolf *t)
-{
-	int fx;
-	int fy;
-	int ix;
-	int iy;
-	int os;
-
-	fx = (t->dx < t->dy) ? t->rxh : t->rxv;
-	fy = (t->dx < t->dy) ? t->ryh : t->ryv;
-	ix = (t->dx < t->dy) ? t->ixh : t->ixv;
-	iy = (t->dx < t->dy) ? t->iyh : t->iyv;
-	if (t->dx < t->dy)
-		os = (fx - ix) % 64;
-	else
-		os = (fy - iy) % 64;
-	return (os);
-
-}
-
 void		textured_floor(t_wolf *t, int x)
 {
 	double 		z;
 	double 		y;
-	double		i;
 	double		ix;
 	double		iy;
+	double		rx;
+	double		ry;
 	Uint32 		**img;
-	int 		offset;
+
+
 
 	z = ((HEIGHT / 2) + (t->wh / 2));
 	y = (HEIGHT / 2) - ((int)t->wh / 2);
 	y = (y < 0) ? 0 : y;
 	img = (Uint32**)(t->surf3->pix);
-	offset = (t->dx < t->dy) ? t->rxh : t->rxv;
-	i = (t->dx < t->dy) ? t->ryh : t->ryv;
-	//OFFSET look below x OR y and % etc etc
-	//You'll succeed today
-	ix = 64.0 / (POSX - offset);
-	iy = 64.0 / (POSY - i);
+	rx = (t->dx < t->dy) ? t->rxh : t->rxv;
+	ry = (t->dx < t->dy) ? t->ryh : t->ryv;
+	// double test = cos((ALPHA - ANG) D);
+	double tro = (HEIGHT - z);
+	ix = fabs(rx - POSX) / tro;
+	iy = fabs(ry - POSY) / tro;
+	ft_putnbrn(ALPHA);
+	ft_putchar('\n');
 	while (z < HEIGHT)
 	{
 		t->p[x + (int)z * 800] =
-	 img[(int)i % t->surf3->h][offset % t->surf3->w];
+	 img[((int)(ry )) % t->surf3->h][((int)(rx)) % t->surf3->w];
 		z++;
-		offset += ix;
-		i += iy;
-
+		rx = (ALPHA > 90 && ALPHA < 270) ? rx + ix : rx - ix;
+		ry = (ALPHA < 180) ? ry + iy : ry - iy;
 	}
+
 }
 
 void		textured_ceiling(t_wolf *t, int x)
