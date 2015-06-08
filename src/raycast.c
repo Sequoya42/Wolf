@@ -39,7 +39,7 @@ static double		raycast_vertical(double tang, t_wolf *t)
 
 	int	tx = (int)POSX;
 	int	ty = (int)POSY;
-	t->ixv = (ALPHA > 90.0 && ALPHA < 270.0) ? -64.0 :  64.0;
+	t->ixv = (ALPHA >= 90.0 && ALPHA <= 270.0) ? -64.0 :  64.0;
 	t->iyv = - t->ixv * tang;
 	t->rxv = (double)(tx - ((int)tx % 64));
 	t->rxv = (ALPHA < 90.0 || ALPHA > 270.0) ? t->rxv + 64.0 : t->rxv - 0.0001;

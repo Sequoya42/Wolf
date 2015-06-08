@@ -41,6 +41,25 @@ void		textured_wall(t_wolf *t, int x)
 	}
 }
 
+int		find_floor(t_wolf *t)
+{
+	int fx;
+	int fy;
+	int ix;
+	int iy;
+	int os;
+
+	fx = (t->dx < t->dy) ? t->rxh : t->rxv;
+	fy = (t->dx < t->dy) ? t->ryh : t->ryv;
+	ix = (t->dx < t->dy) ? t->ixh : t->ixv;
+	iy = (t->dx < t->dy) ? t->iyh : t->iyv;
+	if (t->dx < t->dy)
+		os = (fx - ix) % 64;
+	else
+		os = (fy - iy) % 64;
+	return (os);
+
+}
 
 void		textured_floor(t_wolf *t, int x)
 {
@@ -54,15 +73,14 @@ void		textured_floor(t_wolf *t, int x)
 	z = ((HEIGHT / 2) + (t->wh / 2));
 	y = (HEIGHT / 2) - ((int)t->wh / 2);
 	y = (y < 0) ? 0 : y;
-	offset  = (t->dx > t->dy) ? 
-	(abs((int)(t->ryv)) % 64) : (abs((int)(t->rxh)) % 64);
 	img = (Uint32**)(t->surf3->pix);
-	i = 0.0;
-	inc = (double)t->surf2->h / t->wh;
+	inc = (double)t->surf2->h / ((HEIGHT - z));
+	offset = find_floor(t);
 	while (z < HEIGHT)
 	{
-		t->p[x + ((int)z * 800)] = 
-		 img[(int)i % t->surf3->h][offset % t->surf3->w];
+		i = 0.0;//MODIFY
+	t->p[x + (int)z * 800]=
+	 img[(int)i % t->surf3->h][offset % t->surf3->w];
 		i += inc;
 		z++;
 	}

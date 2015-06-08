@@ -68,7 +68,7 @@ void		draw_floor(t_wolf *t, int x, double z, t_color s)
 	t_color	tmp;
 
 	tmp = set_color(11,255,255);
-	if (t->neon == 1)
+	if (t->neon && z < 600)
 	{
 		f = cren(z, tmp, t->c, t);
 		t->p[(x + ((int)z * 800))] = couleur(f.r, f.g, f.b, 100);

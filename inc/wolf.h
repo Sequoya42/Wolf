@@ -46,10 +46,13 @@
 #define	VALUE2	(t->map[MAPYV][MAPXV])
 #define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
 #define SAFE2	(MAPXV > 0 && MAPXV < MW && MAPYV > 0 && MAPYV < MH)
-# define MAX_DISTANCE ((double)2500.0)
+#define MAX_DISTANCE ((double)2500.0)
 
 #define PX  	(((int)((POSX  + (8 * ix))/ WALL)))
 #define PY  	(((int)((POSY - (8 * iy))/ WALL)))
+#define PXN  	(((int)((POSX  + (22 * ix))/ WALL)))
+#define PYN  	(((int)((POSY - (22 * iy))/ WALL)))
+
 #define PX2  	(((int)((POSX  - (8 * ix))/ WALL)))
 #define PY2  	(((int)((POSY + (8 * iy))/ WALL)))
 #define	MOVEUP	(t->map[PY][PX] != 1)
@@ -103,13 +106,16 @@ typedef struct 			s_wolf
 	double				alpha;
 	double				posx;
 	double				posy;
+			//INTERSECTION RAY
 	double				ryv;
 	double				rxv;
 	double				ryh;
 	double				rxh;
+		// WALL HEIGHT AND DIST WALL
 	double				wh;
 	double				dx;
 	double				dy;
+			//INCREMENT RAY VALUE
 	double				ixv;
 	double				iyv;
 	double				ixh;
@@ -130,7 +136,7 @@ void		draw_ray(int i, t_wolf *t);
 
 void		raycast(t_wolf *t);
 void		vector(t_wolf *t);
-void		key_events(t_wolf *t);
+void		key_events(t_wolf *t, int ix, int iy);
 void		move(t_wolf *t, int ix, int iy);
 void		rotate(t_wolf *t);
 void		create_new_renderer(t_wolf *t);

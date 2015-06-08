@@ -55,6 +55,18 @@ void		move(t_wolf *t, int ix, int iy)
 		if (t->map[PY2][((int)POSX / 64)] != 1)
 			POSY += iy;
 	}
+	if (t->keystate[SDL_SCANCODE_X] && PX < MW && PY < MH)
+		t->map[PYN][PXN] = 1;
+	if (t->keystate[SDL_SCANCODE_Z] && PX < MW && PY < MH)
+		t->map[PYN][PXN] = 0; // SEGFAULT CAREFULL BLABLA
+}
+
+void		new_block(t_wolf *t, int ix, int iy)
+{
+	if (KEY == SDLK_x)
+		t->map[PYN][PXN] = 1;
+	if (KEY == SDLK_z)
+		t->map[PYN][PXN] = 0;
 }
 
 void		teleport(t_wolf *t)
@@ -83,6 +95,7 @@ void		teleport(t_wolf *t)
 		}
 	}
 }
+
 void		trip(t_wolf *t)
 {
 	teleport(t);
@@ -94,8 +107,10 @@ void		trip(t_wolf *t)
 		t->text = (t->text == 0) ? 1 : 0;
 }
 
-void		key_events(t_wolf *t)
+void		key_events(t_wolf *t, int ix, int iy)
 {
+	(void)ix;
+	(void)iy;
 	if (t->event.type == SDL_KEYDOWN)
 	{
 		if (KEY == 27)
@@ -106,5 +121,6 @@ void		key_events(t_wolf *t)
 		}
 		trip(t);
 		look_away(t);
+		// new_block(t, ix, iy);
 	}
 }

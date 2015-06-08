@@ -42,8 +42,8 @@ int		ft_init(t_wolf *t)
 	("Labyrinth", 500, 300, WIDTH, HEIGHT, 0);
 	t->renderer = SDL_CreateRenderer(t->window, -1, 
 		SDL_RENDERER_ACCELERATED);
-	t->surf = ft_loadbmp("./maps/beard.bmp");
-	t->surf2 = ft_loadbmp("./maps/test.bmp");
+	t->surf = ft_loadbmp("./maps/nounours.bmp");
+	t->surf2 = ft_loadbmp("./maps/wall.bmp");
 	t->surf3 = ft_loadbmp("./maps/test.bmp");
 	SDL_RenderSetLogicalSize(t->renderer, WIDTH, HEIGHT);
 	create_new_renderer(t);
@@ -66,7 +66,7 @@ void		running(t_wolf *t)
 		ix = cos(ANG D) * inc;
 		iy = sin(ANG D) * inc;
 		while (SDL_PollEvent(&t->event))
-			key_events(t);
+			key_events(t, ix, iy);
 		move(t, ix, iy);
 		rotate(t);
 		raycast(t);
