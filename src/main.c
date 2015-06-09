@@ -16,7 +16,7 @@ int			main(int ac, char **av)
 {
 	t_wolf	t;
 
-	if (ac < 1)//Change to two to change maps
+	if (ac < 1)
 		return (0);
 	if ((ft_init(&t)) == -1)
 		return (-1);

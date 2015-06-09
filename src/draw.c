@@ -84,7 +84,6 @@ void		draw_floor(t_wolf *t, int x, double z, t_color s)
 		t->p[(x + ((int)z * 800))] = couleur(s.r, s.g, s.b, 100);
 		z++;
 	}
-
 }
 void		draw_ray(int x, t_wolf *t)
 {
