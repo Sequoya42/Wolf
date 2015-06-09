@@ -18,12 +18,12 @@ static double		raycast_horizontal(double tang, t_wolf *t)
 
 	int tx = (int)POSX;
 	int ty = (int)POSY;
-	t->iyh = (ALPHA > 180.0) ? 64.0 : -64.0;
+	t->iyh = (ALPHA > 180.0) ? WALL : - WALL;
 	t->ixh = - t->iyh / tang;
-	t->ryh = (double)(ty - ((int)ty % 64));
-	t->ryh = (ALPHA < 180.0) ? t->ryh - 0.0001 : t->ryh + 64.0;
+	t->ryh = (double)(ty - ((int)ty % (int)WALL));
+	t->ryh = (ALPHA < 180.0) ? t->ryh - 0.0001 : t->ryh + WALL;
 	t->rxh = tx + ((ty - t->ryh) / tang);
-	while (SAFE && VALUE != 1)
+	while (SAFE && (VALUE == 0 || VALUE == 2))
 	{
 		t->rxh += t->ixh;
 		t->ryh += t->iyh;
@@ -39,12 +39,12 @@ static double		raycast_vertical(double tang, t_wolf *t)
 
 	int	tx = (int)POSX;
 	int	ty = (int)POSY;
-	t->ixv = (ALPHA >= 90.0 && ALPHA <= 270.0) ? -64.0 :  64.0;
+	t->ixv = (ALPHA >= 90.0 && ALPHA <= 270.0) ? - WALL :  WALL;
 	t->iyv = - t->ixv * tang;
-	t->rxv = (double)(tx - ((int)tx % 64));
-	t->rxv = (ALPHA < 90.0 || ALPHA > 270.0) ? t->rxv + 64.0 : t->rxv - 0.0001;
+	t->rxv = (double)(tx - ((int)tx % (int)WALL));
+	t->rxv = (ALPHA < 90.0 || ALPHA > 270.0) ? t->rxv + WALL : t->rxv - 0.0001;
 	t->ryv = ty + ((tx - t->rxv) * tang);
-	while (SAFE2 && VALUE2 != 1)
+	while (SAFE2 && (VALUE2 == 0 || VALUE2 == 2))
 	{
 		t->rxv += t->ixv;
 		t->ryv += t->iyv;
@@ -75,8 +75,8 @@ void				raycast(t_wolf *t)
 		tang = (double)tan(ALPHA D);
 		i--;
 	}
-// for (i = 0; i < t->surf->h; i++)
-// ft_memmove(t->p + i * WIDTH, t->surf->pix[i], t->surf->w * sizeof(t_color));
+// for (i = 0; i < t->sw->h; i++)
+// ft_memmove(t->p + i * WIDTH, t->sw->pix[i], t->sw->w  * sizeof(t_color));
 	SDL_UpdateTexture(t->screen, NULL, t->p, WIDTH * sizeof(Uint32));
 	SDL_RenderCopy(t->renderer, t->screen, NULL, NULL);
 	SDL_RenderPresent(t->renderer);

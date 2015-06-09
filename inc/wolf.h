@@ -22,7 +22,7 @@
 
 #define WIDTH 	800
 #define HEIGHT	(t->height)
-#define	WALL	64.0
+#define	WALL	512.0
 #define	FOV		60
 #define	DIST	(((double)(400) / tan((FOV / 2) D)))
 
@@ -46,15 +46,18 @@
 #define	VALUE2	(t->map[MAPYV][MAPXV])
 #define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
 #define SAFE2	(MAPXV > 0 && MAPXV < MW && MAPYV > 0 && MAPYV < MH)
-#define MAX_DISTANCE ((double)2500.0)
+#define MAX_DISTANCE ((double)25000.0)
 
-#define PX  	(((int)((POSX  + (8 * ix))/ WALL)))
-#define PY  	(((int)((POSY - (8 * iy))/ WALL)))
+//MOVEMENT
+#define PX  	(((int)((POSX  + (4  * ix))/ WALL)))
+#define PY  	(((int)((POSY - (4 * iy))/ WALL)))
+#define PX2  	(((int)((POSX  - (4  * ix))/ WALL)))
+#define PY2  	(((int)((POSY + (4 * iy))/ WALL)))
+// CREATE BLOCK
 #define PXN  	(((int)((POSX  + (22 * ix))/ WALL)))
 #define PYN  	(((int)((POSY - (22 * iy))/ WALL)))
 
-#define PX2  	(((int)((POSX  - (8 * ix))/ WALL)))
-#define PY2  	(((int)((POSY + (8 * iy))/ WALL)))
+
 #define	MOVEUP	(t->map[PY][PX] != 1)
 #define	MOVEDW	(t->map[PY2][PX2] != 1)
 
@@ -95,6 +98,7 @@ typedef struct 			s_wolf
 	t_surface			*sw;
 	t_surface			*sf;
 	t_surface			*sc;
+	t_surface			*st;
 	SDL_Event			event;
 	SDL_Renderer		*renderer;
 	Uint32				*p;
@@ -160,6 +164,8 @@ t_surface			*ft_loadbmp(const char *path);
 void		textured_wall(t_wolf *t, int x);
 void		textured_floor(t_wolf *t, int x);
 void		textured_ceiling(t_wolf *t, int x);
+
+void		teleport(t_wolf *t);
 
 #endif
 // 

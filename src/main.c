@@ -42,9 +42,10 @@ int		ft_init(t_wolf *t)
 	("Labyrinth", 500, 300, WIDTH, HEIGHT, 0);
 	t->renderer = SDL_CreateRenderer(t->window, -1, 
 		SDL_RENDERER_ACCELERATED);
-	t->sw = ft_loadbmp("./maps/goinfrex.bmp");
-	t->sf = ft_loadbmp("./maps/bluestone2.bmp");
-	t->sc = ft_loadbmp("./maps/wall.bmp");
+	t->sw = ft_loadbmp("./bitmap/vang.bmp");
+	t->sf = ft_loadbmp("./bitmap/fox.bmp");
+	t->sc = ft_loadbmp("./bitmap/floor.bmp");
+	t->st = ft_loadbmp("./bitmap/batman.bmp");
 	SDL_RenderSetLogicalSize(t->renderer, WIDTH, HEIGHT);
 	create_new_renderer(t);
 	return (0);
@@ -58,7 +59,7 @@ void		running(t_wolf *t)
 	int				ix;
 	int				iy;
 
-	inc = 8;
+	inc = 96;
 	t->keystate = SDL_GetKeyboardState(NULL);
 	while (1)
 	{

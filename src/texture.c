@@ -28,7 +28,7 @@ void		textured_wall(t_wolf *t, int x)
 	y = (HEIGHT / 2) - ((int)t->wh / 2);
 	y = (y < 0) ? 0 : y;
 	offset  = (t->dx > t->dy) ? 
-	(abs((int)(t->ryv)) % 64) : (abs((int)(t->rxh)) % 64);
+	(abs((int)(t->ryv)) % (int)WALL) : (abs((int)(t->rxh)) % (int)WALL);
 	img = (Uint32**)(t->sw->pix);
 	i = start_value(t);
 	inc = (double)t->sw->h / t->wh;
@@ -47,21 +47,30 @@ void		textured_floor(t_wolf *t, int x)
 	double 	dy;
 	double 	dp;
 	Uint32 	**img;
+		Uint32 	**img2;
 	double 	z;
 	double 	angle; 
 	double 	tro;
+	double sinus;
+	double cosinus;
 
+	sinus = sin(ALPHA D);
+	cosinus = cos(ALPHA D);
 	img = (Uint32**)(t->sf->pix);
+	img2 = (Uint32**)(t->st->pix);
 	angle = cos((ALPHA - ANG) D);
 	z = ((HEIGHT / 2) + (t->wh / 2));
 	while (z < HEIGHT)
 	{
 		tro = ((double)z - (HEIGHT / 2));
 		dp = (WALL / 2) / tro * DIST / angle;
-		dy = -dp * sin(ALPHA D) + POSY;
-		dx = dp * cos(ALPHA D) + POSX;
-		t->p[x + (int)z * 800] = img[TX][TY];
-		z++;
+		dy = -dp * sinus + POSY;
+		dx = dp * cosinus + POSX;
+	if (t->map[(int)dy / (int)WALL][(int)dx / (int)WALL] != 2)
+			t->p[x + (int)z * 800] = img[TX][TY];
+	else
+			t->p[x + (int)z * 800] = img2[TX][TY];
+			z++;
 	}
 }
 
@@ -72,19 +81,22 @@ void		textured_ceiling(t_wolf *t, int x)
 	double dp;
 	double angle; 
 	double tro;
+	double sinus;
+	double cosinus;
 	double 		y;
 	Uint32 		**img;
 
+	sinus = sin(ALPHA D);
+	cosinus = cos(ALPHA D);
 	img = (Uint32**)(t->sc->pix);
 	angle = cos((ALPHA - ANG) D);
 	y = (HEIGHT / 2) - ((int)t->wh / 2);
-	y = (y < 0) ? 0 : y;
 	tro = t->wh / 2;
 	while (y > 0)
 	{
 		dp = (WALL / 2)  / tro * DIST / angle;
-		dy = -dp * sin(ALPHA D) + POSY;
-		dx = dp * cos(ALPHA D) + POSX;
+		dy = -dp * sinus + POSY;
+		dx = dp * cosinus + POSX;
 		t->p[x + (int)y * 800] = img[TX][TY];
 		tro++;
 		y--;

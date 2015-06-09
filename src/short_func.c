@@ -29,16 +29,6 @@ Uint32 couleur(int r, int g, int b, int m)
 	return (((((r << 8) + g) << 8)+ b) * m / 100);
 }
 
-int			shade(t_wolf *t, double wh)
-{
-	int m;
-
-	if (t->trip == 1)
-		m = wh;
-	else
-		m = 100;
-		return (m);
-}
 
 t_color		choose_color(double dx, double dy, t_wolf *t)
 {
