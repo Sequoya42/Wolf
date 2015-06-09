@@ -99,10 +99,10 @@ void		draw_ray(int x, t_wolf *t)
 	t->wh = (WALL / t->wh) * DIST;
 	y = (HEIGHT / 2) - (t->wh / 2);
 	z = ((HEIGHT / 2) + (t->wh / 2));
-	// if (t->text == 0)
+	if (t->text == 0)
 		draw_ceiling(t, y, x);
-	// else
-		// textured_ceiling(t, x);
+	else
+		textured_ceiling(t, x);
 	if (t->text == 0)
 		draw_walls(t, x, s);
 	else

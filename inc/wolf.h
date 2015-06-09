@@ -58,6 +58,9 @@
 #define	MOVEUP	(t->map[PY][PX] != 1)
 #define	MOVEDW	(t->map[PY2][PX2] != 1)
 
+#define TX 		((int)(dx)) % t->sf->w
+#define TY 		((int)(dy)) % t->sf->h
+
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
 # define KGRN  "\x1B[32m"
@@ -89,9 +92,9 @@ typedef struct 			s_wolf
 {
 			// SDL STUFF
 	SDL_Window			*window;
-	t_surface			*surf;
-	t_surface			*surf2;
-	t_surface			*surf3;
+	t_surface			*sw;
+	t_surface			*sf;
+	t_surface			*sc;
 	SDL_Event			event;
 	SDL_Renderer		*renderer;
 	Uint32				*p;
