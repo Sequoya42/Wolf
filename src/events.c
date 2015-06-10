@@ -32,16 +32,6 @@ void		rotate(t_wolf *t)
 		t->height -= 5;
 }
 
-void		change_map(t_wolf *t)
-{
-	if (t->map[(int)POSY / (int)WALL][(int)POSX / (int)WALL] == 2)
-	{
-	choose_map(t);
-	get_map(t->name, t);
-		teleport(t);
-	}
-}
-
 void		move(t_wolf *t, int ix, int iy)
 {
 
@@ -89,7 +79,7 @@ void		teleport(t_wolf *t)
 void		trip(t_wolf *t)
 {
 	if (KEY == SDLK_p)
-	teleport(t);
+		teleport(t);
 	if (KEY == SDLK_x)
 		t->trip = (t->trip == 0) ? 1 : 0;
 	if (KEY == SDLK_c)
@@ -112,8 +102,12 @@ void		key_events(t_wolf *t, int ix, int iy)
 		}
 		if (KEY == SDLK_s)
 		{
-			if (t->map[PYN][PXN] == 0)
-				t->map[PYN][PXN] = 2;
+			if (PYN < MH && PXN < MW)
+			{
+				if ( t->map[PYN][PXN] == 0)
+					t->map[PYN][PXN] = 2;
+			} 
+
 		}
 		trip(t);
 		if (KEY == SDLK_n)

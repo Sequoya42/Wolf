@@ -12,6 +12,24 @@
 
 #include "wolf.h"
 
+void		free_map(int ***tab, t_wolf *t)
+{
+	int		i;
+
+	i = MH;
+	if (*tab != NULL)
+	{
+		while (i >= 0)
+		{
+			free((*tab)[i]);
+			(*tab)[i] = NULL;
+			i--;
+		}
+		free(*tab);
+		*tab = NULL;
+	}
+}
+
 void	init_map(t_wolf *t)
 {
 	int i;
@@ -25,7 +43,6 @@ void	init_map(t_wolf *t)
 			return ;
 		i++;
 	}
-	
 }
 
 int		get_length(char *m, t_wolf *t)
@@ -46,8 +63,8 @@ int		get_length(char *m, t_wolf *t)
 		MH++;
 		free(line);
 	}
-	close(fd);
 	free(line);
+	close(fd);
 	MW /= MH;
 	init_map(t);
 	return (1);
@@ -83,6 +100,7 @@ void		read_map(char *m, t_wolf *t)
 
 int		get_map(char *s, t_wolf *t)
 {
+		free_map(&t->map, t);
 	if (get_length(s, t) == -1)
 		return (-1);
 	read_map(s, t);

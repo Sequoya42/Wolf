@@ -54,8 +54,8 @@
 #define PX2  	(((int)((POSX  - (4  * ix))/ WALL)))
 #define PY2  	(((int)((POSY + (4 * iy))/ WALL)))
 // CREATE BLOCK
-#define PXN  	(((int)((POSX  + (22 * ix))/ WALL)))
-#define PYN  	(((int)((POSY - (22 * iy))/ WALL)))
+#define PXN  	(((int)((POSX  + (17 * ix))/ WALL)))
+#define PYN  	(((int)((POSY - (17 * iy))/ WALL)))
 
 
 #define	MOVEUP	(t->map[PY][PX] != 1)
@@ -169,6 +169,8 @@ void		textured_ceiling(t_wolf *t, int x);
 void		teleport(t_wolf *t);
 
 void		choose_map(t_wolf *t);
+void		change_map(t_wolf *t);
+void				del_surface(t_surface **surface);
 
 #endif
 // 

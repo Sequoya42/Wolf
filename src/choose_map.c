@@ -12,20 +12,28 @@
 
 #include "wolf.h"
 
+void		clean_surface(t_wolf *t)
+{
+	del_surface(&t->sw);
+	del_surface(&t->sf);
+	del_surface(&t->sc);
+	del_surface(&t->st);
+}
+
 void		map_one(t_wolf *t)
 {
-	t->name = ft_strdup("maps/map02");
-	t->sw = ft_loadbmp("./bitmap/thewall.bmp");
-	t->sf = ft_loadbmp("./bitmap/elephant.bmp");
-	t->sc = ft_loadbmp("./bitmap/cath.bmp");
-	t->st = ft_loadbmp("./bitmap/fish.bmp");
-
-
+		clean_surface(t);
+		t->name = ("maps/map02");
+		t->sw = ft_loadbmp("./bitmap/thewall.bmp");
+		t->sf = ft_loadbmp("./bitmap/elephant.bmp");
+		t->sc = ft_loadbmp("./bitmap/cath.bmp");
+		t->st = ft_loadbmp("./bitmap/fish.bmp");
 }
 
 void		map_two(t_wolf *t)
 {
-	t->name = ft_strdup("maps/map03");
+	clean_surface(t);
+	t->name = ("maps/map03");
 	t->sw = ft_loadbmp("./bitmap/elephant.bmp");
 	t->sf = ft_loadbmp("./bitmap/fox.bmp");
 	t->sc = ft_loadbmp("./bitmap/fox.bmp");
@@ -35,7 +43,8 @@ void		map_two(t_wolf *t)
 
 void		map_three(t_wolf *t)
 {
-	t->name = ft_strdup("maps/map04");
+	clean_surface(t);
+	t->name = ("maps/map05");
 	t->sw = ft_loadbmp("./bitmap/floating.bmp");
 	t->sf = ft_loadbmp("./bitmap/thewall.bmp");
 	t->sc = ft_loadbmp("./bitmap/batman.bmp");
@@ -45,7 +54,8 @@ void		map_three(t_wolf *t)
 
 void		map_four(t_wolf *t)
 {
-	t->name = ft_strdup("maps/map05");
+	clean_surface(t);
+	t->name = ("maps/map05");
 	t->sw = ft_loadbmp("./bitmap/floor.bmp");
 	t->sf = ft_loadbmp("./bitmap/floor.bmp");
 	t->sc = ft_loadbmp("./bitmap/floor.bmp");
@@ -56,6 +66,8 @@ void		map_four(t_wolf *t)
 
 void		map_five(t_wolf *t)
 {
+	clean_surface(t);
+	t->name = ("maps/map01");
 	t->sw = ft_loadbmp("./bitmap/win.bmp");
 	t->sf = ft_loadbmp("./bitmap/win.bmp");
 	t->sc = ft_loadbmp("./bitmap/win.bmp");
@@ -76,4 +88,14 @@ void		choose_map(t_wolf *t)
 	else if (ft_strcmp(t->name, "maps/map05") == 0)
 		map_five(t);
 
+}
+
+void		change_map(t_wolf *t)
+{
+	if (t->map[(int)POSY / (int)WALL][(int)POSX / (int)WALL] == 2)
+	{
+		choose_map(t);
+		get_map(t->name, t);
+		teleport(t);
+	}
 }

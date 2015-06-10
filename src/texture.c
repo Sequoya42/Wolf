@@ -66,7 +66,9 @@ void		textured_floor(t_wolf *t, int x)
 		dp = (WALL / 2) / tro * DIST / angle;
 		dy = -dp * sinus + POSY;
 		dx = dp * cosinus + POSX;
-	if (t->map[(int)dy / (int)WALL][(int)dx / (int)WALL] != 2)
+		int tx = (int)dx / (int)WALL;
+		int ty = (int)dy / (int)WALL;
+	if (tx < MW && ty < MH && t->map[ty][tx] != 2)
 			t->p[x + (int)z * 800] = img[TX][TY];
 	else
 			t->p[x + (int)z * 800] = img2[TX][TY];
@@ -97,7 +99,7 @@ void		textured_ceiling(t_wolf *t, int x)
 		dp = (WALL / 2)  / tro * DIST / angle;
 		dy = -dp * sinus + POSY;
 		dx = dp * cosinus + POSX;
-		t->p[x + (int)y * 800] = img[TX][TY];
+ 		t->p[x + (int)y * 800] = img[TX][TY];
 		tro++;
 		y--;
 	}

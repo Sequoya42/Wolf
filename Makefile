@@ -15,7 +15,7 @@
 
 CC =			gcc
 
-CFLAG =			-Wall -Wextra -Werror
+CFLAG =			-O0 -g -Wall -Wextra -Werror
 
 NAME =			wolf
 

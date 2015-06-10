@@ -109,7 +109,7 @@ void		draw_ray(int x, t_wolf *t)
 		draw_walls(t, x, s);
 	else
 		textured_wall(t, x);
-		if (t->text == 0)
+		if (t->text == 0 || z >= 600)
 			draw_floor(t, x, z, s);
 		else
 			textured_floor(t, x);
