@@ -16,11 +16,13 @@ int			main(int ac, char **av)
 {
 	t_wolf	t;
 
+(void)av;
 	if (ac < 1)
 		return (0);
 	if ((ft_init(&t)) == -1)
 		return (-1);
-	if (get_map(av[1], &t) == -1)
+	t.name = ft_strdup("maps/map01");
+	if (get_map(t.name, &t) == -1)
 		return (-1);
 	running(&t);
 	return 0;

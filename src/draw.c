@@ -81,6 +81,9 @@ void		draw_floor(t_wolf *t, int x, double z, t_color s)
 	}
 	while (z < 600)
 	{
+		if (t->map[(int)POSY / (int)WALL][(int)POSX / (int)WALL] == 2)
+			t->p[(x + ((int)z * 800))] = couleur(255, 244, 255, 100);
+	else
 		t->p[(x + ((int)z * 800))] = couleur(s.r, s.g, s.b, 100);
 		z++;
 	}

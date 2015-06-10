@@ -16,13 +16,13 @@ void		rotate(t_wolf *t)
 {
 	if (t->keystate[SDL_SCANCODE_RIGHT])
 	{
-		ANG -= 1.7;
+		ANG -= 1.4;
 		while (ANG < 0)
 			ANG += 360;
 	}
 	else if (t->keystate[SDL_SCANCODE_LEFT])
 	{
-		ANG += 1.7;
+		ANG += 1.4;
 		while (ANG >= 360)
 			ANG -= 360;
 	}
@@ -32,10 +32,14 @@ void		rotate(t_wolf *t)
 		t->height -= 5;
 }
 
-void		look_away(t_wolf *t)
+void		change_map(t_wolf *t)
 {
-	if (KEY == SDLK_n)
-		t->neon = (t->neon == 0) ? 1 : 0;
+	if (t->map[(int)POSY / (int)WALL][(int)POSX / (int)WALL] == 2)
+	{
+	choose_map(t);
+	get_map(t->name, t);
+		teleport(t);
+	}
 }
 
 void		move(t_wolf *t, int ix, int iy)
@@ -55,20 +59,7 @@ void		move(t_wolf *t, int ix, int iy)
 		if (t->map[PY2][((int)(POSX / WALL))] != 1)
 			POSY += iy;
 	}
-	if (t->map[(int)POSY / (int)WALL][(int)POSX / (int)WALL] == 2)
-		teleport(t);
-	if (t->keystate[SDL_SCANCODE_X] && PXN < MW && PYN < MH)
-		t->map[PYN][PXN] = 1;
-	if (t->keystate[SDL_SCANCODE_Z] && PXN < MW && PYN < MH)
-		t->map[PYN][PXN] = 0; // SEGFAULT CAREFULL BLABLA
-}
-
-void		new_block(t_wolf *t, int ix, int iy)
-{
-	if (KEY == SDLK_x)
-		t->map[PYN][PXN] = 1;
-	if (KEY == SDLK_z)
-		t->map[PYN][PXN] = 0;
+	change_map(t);
 }
 
 void		teleport(t_wolf *t)
@@ -99,7 +90,7 @@ void		trip(t_wolf *t)
 {
 	if (KEY == SDLK_p)
 	teleport(t);
-	if (KEY == SDLK_t)
+	if (KEY == SDLK_x)
 		t->trip = (t->trip == 0) ? 1 : 0;
 	if (KEY == SDLK_c)
 		t->cren = (t->cren == 0) ? 1 : 0;
@@ -119,8 +110,13 @@ void		key_events(t_wolf *t, int ix, int iy)
 			SDL_Quit();
 			exit(1);
 		}
+		if (KEY == SDLK_s)
+		{
+			if (t->map[PYN][PXN] == 0)
+				t->map[PYN][PXN] = 2;
+		}
 		trip(t);
-		look_away(t);
-		// new_block(t, ix, iy);
+		if (KEY == SDLK_n)
+		t->neon = (t->neon == 0) ? 1 : 0;
 	}
 }

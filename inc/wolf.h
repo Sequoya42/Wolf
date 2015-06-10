@@ -108,6 +108,7 @@ typedef struct 			s_wolf
 	int					**map;
 	int					map_height;
 	int					map_width;
+	char				*name;
 			// CAMERA STUFF
 	double				angle;
 	double				alpha;
@@ -166,6 +167,8 @@ void		textured_floor(t_wolf *t, int x);
 void		textured_ceiling(t_wolf *t, int x);
 
 void		teleport(t_wolf *t);
+
+void		choose_map(t_wolf *t);
 
 #endif
 // 

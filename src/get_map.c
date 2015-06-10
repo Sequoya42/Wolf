@@ -83,7 +83,6 @@ void		read_map(char *m, t_wolf *t)
 
 int		get_map(char *s, t_wolf *t)
 {
-	s = "maps/map01";//Remove to choose map
 	if (get_length(s, t) == -1)
 		return (-1);
 	read_map(s, t);
