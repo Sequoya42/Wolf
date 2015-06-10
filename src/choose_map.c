@@ -34,17 +34,6 @@ void		map_two(t_wolf *t)
 {
 	clean_surface(t);
 	t->name = ("maps/map03");
-	t->sw = ft_loadbmp("./bitmap/elephant.bmp");
-	t->sf = ft_loadbmp("./bitmap/fox.bmp");
-	t->sc = ft_loadbmp("./bitmap/fox.bmp");
-	t->st = ft_loadbmp("./bitmap/batman.bmp");
-
-}
-
-void		map_three(t_wolf *t)
-{
-	clean_surface(t);
-	t->name = ("maps/map05");
 	t->sw = ft_loadbmp("./bitmap/floating.bmp");
 	t->sf = ft_loadbmp("./bitmap/thewall.bmp");
 	t->sc = ft_loadbmp("./bitmap/batman.bmp");
@@ -52,13 +41,24 @@ void		map_three(t_wolf *t)
 
 }
 
+void		map_three(t_wolf *t)
+{
+	clean_surface(t);
+	t->name = ("maps/map04");
+
+	t->sw = ft_loadbmp("./bitmap/floor.bmp");
+	t->sf = ft_loadbmp("./bitmap/floor.bmp");
+	t->sc = ft_loadbmp("./bitmap/floor.bmp");
+	t->st = ft_loadbmp("./bitmap/batman.bmp");
+}
+
 void		map_four(t_wolf *t)
 {
 	clean_surface(t);
 	t->name = ("maps/map05");
-	t->sw = ft_loadbmp("./bitmap/floor.bmp");
-	t->sf = ft_loadbmp("./bitmap/floor.bmp");
-	t->sc = ft_loadbmp("./bitmap/floor.bmp");
+t->sw = ft_loadbmp("./bitmap/win.bmp");
+	t->sf = ft_loadbmp("./bitmap/win.bmp");
+	t->sc = ft_loadbmp("./bitmap/win.bmp");
 	t->st = ft_loadbmp("./bitmap/batman.bmp");
 
 }
@@ -68,9 +68,9 @@ void		map_five(t_wolf *t)
 {
 	clean_surface(t);
 	t->name = ("maps/map01");
-	t->sw = ft_loadbmp("./bitmap/win.bmp");
-	t->sf = ft_loadbmp("./bitmap/win.bmp");
-	t->sc = ft_loadbmp("./bitmap/win.bmp");
+		t->sw = ft_loadbmp("./bitmap/vang.bmp");
+	t->sf = ft_loadbmp("./bitmap/fox.bmp");
+	t->sc = ft_loadbmp("./bitmap/floor.bmp");
 	t->st = ft_loadbmp("./bitmap/batman.bmp");
 
 }

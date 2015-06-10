@@ -28,8 +28,9 @@ void		rotate(t_wolf *t)
 	}
 	if (t->keystate[SDL_SCANCODE_W] && t->height < 1000)
 		t->height += 5;
-	if (t->keystate[SDL_SCANCODE_Q] && t->height > 200)
+	if (t->keystate[SDL_SCANCODE_Q] && t->height > 600)
 		t->height -= 5;
+	printf("%d\n", t->height);
 }
 
 void		move(t_wolf *t, int ix, int iy)
