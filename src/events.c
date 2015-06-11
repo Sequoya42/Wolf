@@ -30,7 +30,6 @@ void		rotate(t_wolf *t)
 		t->height += 5;
 	if (t->keystate[SDL_SCANCODE_Q] && t->height > 600)
 		t->height -= 5;
-	printf("%d\n", t->height);
 }
 
 void		move(t_wolf *t, int ix, int iy)
@@ -108,7 +107,6 @@ void		key_events(t_wolf *t, int ix, int iy)
 				if ( t->map[PYN][PXN] == 0)
 					t->map[PYN][PXN] = 2;
 			} 
-
 		}
 		trip(t);
 		if (KEY == SDLK_n)

@@ -11,58 +11,58 @@
 /* ************************************************************************** */
 
 #ifndef WOLF_H
-#define WOLF_H
+# define WOLF_H
 
 # include <fcntl.h>
 # include <math.h>
 # include "libft.h"
 # include "SDL2.framework/Headers/SDL.h"
-#include <time.h>
+# include <time.h>
 # include <stdio.h> // REMOVE THIS
 
-#define WIDTH 	800
-#define HEIGHT	(t->height)
-#define	WALL	512.0
-#define	FOV		60
-#define	DIST	(((double)(400) / tan((FOV / 2) D)))
+# define WIDTH 	800
+# define HEIGHT	(t->height)
+# define WALL	512.0
+# define FOV		60
+# define DIST	(((double)(400) / tan((FOV / 2) D)))
 
-#define KEY 	t->event.key.keysym.sym
-#define	ANG 	t->angle
-#define POSX 	t->posx
-#define	POSY 	t->posy
+# define KEY 	t->event.key.keysym.sym
+# define ANG 	t->angle
+# define POSX 	t->posx
+# define POSY 	t->posy
 
-#define	ALPHA	(t->alpha)
+# define ALPHA	(t->alpha)
 
-#define D 		* (double)(M_PI / 180.0)
-#define MH 		t->map_height
-#define	MW 		t->map_width
+# define D 		* (double)(M_PI / 180.0)
+# define MH 	t->map_height
+# define MW 	t->map_width
 
-#define MAPX 	(abs((int)(t->rxh / WALL)))
-#define MAPY	(abs((int)(t->ryh / WALL)))
-#define MAPXV 	(abs((int)(t->rxv / WALL)))
-#define MAPYV	(abs((int)(t->ryv / WALL)))
+# define MAPX 	(abs((int)(t->rxh / WALL)))
+# define MAPY	(abs((int)(t->ryh / WALL)))
+# define MAPXV 	(abs((int)(t->rxv / WALL)))
+# define MAPYV	(abs((int)(t->ryv / WALL)))
 
-#define	VALUE	(t->map[MAPY][MAPX])
-#define	VALUE2	(t->map[MAPYV][MAPXV])
-#define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
-#define SAFE2	(MAPXV > 0 && MAPXV < MW && MAPYV > 0 && MAPYV < MH)
-#define MAX_DISTANCE ((double)25000.0)
+# define VALUE	(t->map[MAPY][MAPX])
+# define VALUE2	(t->map[MAPYV][MAPXV])
+# define SAFE	(MAPX > 0 && MAPX < MW && MAPY > 0 && MAPY < MH)
+# define SAFE2	(MAPXV > 0 && MAPXV < MW && MAPYV > 0 && MAPYV < MH)
+# define MAX_DISTANCE ((double)25000.0)
 
 //MOVEMENT
-#define PX  	(((int)((POSX  + (4  * ix))/ WALL)))
-#define PY  	(((int)((POSY - (4 * iy))/ WALL)))
-#define PX2  	(((int)((POSX  - (4  * ix))/ WALL)))
-#define PY2  	(((int)((POSY + (4 * iy))/ WALL)))
+# define PX  	(((int)((POSX  + (4  * ix))/ WALL)))
+# define PY  	(((int)((POSY - (4 * iy))/ WALL)))
+# define PX2  	(((int)((POSX  - (4  * ix))/ WALL)))
+# define PY2  	(((int)((POSY + (4 * iy))/ WALL)))
 // CREATE BLOCK
-#define PXN  	(((int)((POSX  + (17 * ix))/ WALL)))
-#define PYN  	(((int)((POSY - (17 * iy))/ WALL)))
+# define PXN  	(((int)((POSX  + (17 * ix))/ WALL)))
+# define PYN  	(((int)((POSY - (17 * iy))/ WALL)))
 
 
-#define	MOVEUP	(t->map[PY][PX] != 1)
-#define	MOVEDW	(t->map[PY2][PX2] != 1)
+# define MOVEUP	(t->map[PY][PX] != 1)
+# define MOVEDW	(t->map[PY2][PX2] != 1)
 
-#define TX 		((int)(dx)) % t->sf->w
-#define TY 		((int)(dy)) % t->sf->h
+# define TX 	((int)(dx)) % t->sf->w
+# define TY 	((int)(dy)) % t->sf->h
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -73,7 +73,6 @@
 # define KCYN  "\x1B[36m"
 # define KWHT  "\x1B[37m"
 
-// typedef struct
 
 typedef struct			s_color
 {

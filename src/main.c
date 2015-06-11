@@ -67,6 +67,7 @@ void		running(t_wolf *t)
 	t->keystate = SDL_GetKeyboardState(NULL);
 	while (1)
 	{
+		SDL_RenderClear(t->renderer);
 		ti = SDL_GetTicks();
 		ix = cos(ANG D) * inc;
 		iy = sin(ANG D) * inc;
@@ -75,6 +76,7 @@ void		running(t_wolf *t)
 		move(t, ix, iy);
 		rotate(t);
 		raycast(t);
+		SDL_RenderPresent(t->renderer);
 		dif = (SDL_GetTicks() - ti);
 		if (dif < 20)
 			SDL_Delay(20 - dif);

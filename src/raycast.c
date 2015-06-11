@@ -79,6 +79,5 @@ void				raycast(t_wolf *t)
 // ft_memmove(t->p + i * WIDTH, t->sw->pix[i], t->sw->w  * sizeof(t_color));
 	SDL_UpdateTexture(t->screen, NULL, t->p, WIDTH * sizeof(Uint32));
 	SDL_RenderCopy(t->renderer, t->screen, NULL, NULL);
-	SDL_RenderPresent(t->renderer);
 	ft_bzero(t->p, sizeof(Uint32) * WIDTH * HEIGHT);
 }
