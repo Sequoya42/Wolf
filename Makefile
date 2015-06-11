@@ -33,7 +33,7 @@ SRC_NAME =		main.c 		get_map.c 	events.c 	raycast.c\
 
 # SDL_STUFF = 	./inc/SDL2.framework/SDL2
 
-SDL_PATH = 		./SDL2/
+SDL_PATH = 		./SDL2-2.0.3/
 
 LIBSDL_PATH_ROOT = 	./libSDL2/
 
@@ -65,6 +65,8 @@ LIBSDL_FLAG = 	-L$(LIBSDL_PATH) -lSDL2
 
 LIBFT_FLAG = 	-L$(LIBFT_PATH) -lft
 
+SDL_CURL = 		`curl https://www.libsdl.org/release/SDL2-2.0.3.zip -o sdl2.zip` 
+
 all:			libft sdl $(NAME) 
 
 $(NAME):		$(OBJ)
@@ -83,6 +85,9 @@ $(LIBFT):		$(LIBFT_PATH)
 sdl:			$(SDLBIN)
 
 $(SDLBIN): 		
+				$(SDL_CURL)
+				unzip sdl2.zip
+				rm sdl2.zip
 				mkdir -p $(LIBSDL_PATH_ROOT)
 				cd $(SDL_PATH) &&  ./configure --prefix=$(PWD)/$(LIBSDL_PATH_ROOT)
 				make -C $(SDL_PATH)
@@ -90,13 +95,13 @@ $(SDLBIN):
 
 clean:
 				@make -C $(LIBFT_PATH) clean
-				make -C $(SDL_PATH) clean
 				@rm -f $(OBJ)
 
 fclean:			
 				@rm -f $(OBJ)
 				@make -C $(LIBFT_PATH) fclean
 				rm -rf $(LIBSDL_PATH_ROOT)
+				rm -rf $(SDL_PATH)
 				@rm -f $(NAME)
 
 re: 			fclean all
