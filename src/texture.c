@@ -21,6 +21,7 @@ void		textured_wall(t_wolf *t, int x)
 	double 		y;
 	double		i;
 	Uint32 		**img;
+	Uint32 		**img2;
 	int 		offset;
 	double		inc;
 
@@ -30,6 +31,7 @@ void		textured_wall(t_wolf *t, int x)
 	offset  = (t->dx > t->dy) ? 
 	(abs((int)(t->ryv)) % (int)WALL) : (abs((int)(t->rxh)) % (int)WALL);
 	img = (Uint32**)(t->sw->pix);
+	img2 = (Uint32**)(t->sw2->pix);
 	i = start_value(t);
 	inc = (double)t->sw->h / t->wh;
 	while (y < 600 && y < z - 2)	

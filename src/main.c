@@ -47,7 +47,8 @@ int		ft_init(t_wolf *t)
 	t->renderer = SDL_CreateRenderer(t->window, -1, 
 		SDL_RENDERER_ACCELERATED);
 	t->sw = ft_loadbmp("./bitmap/vang.bmp");
-	t->sf = ft_loadbmp("./bitmap/fox.bmp");
+	t->sw2 = ft_loadbmp("./bitmap/dali.bmp");
+	t->sf = ft_loadbmp("./bitmap/thewall.bmp");
 	t->sc = ft_loadbmp("./bitmap/floor.bmp");
 	t->st = ft_loadbmp("./bitmap/batman.bmp");
 	SDL_RenderSetLogicalSize(t->renderer, WIDTH, HEIGHT);

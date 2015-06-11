@@ -6,7 +6,7 @@
 #    By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/11 17:48:47 by rbaum             #+#    #+#              #
-#    Updated: 2015/05/01 16:09:04 by rbaum            ###   ########.fr        #
+#    Updated: 2015/06/11 20:38:33 by rbaum            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,13 @@ CFLAG = -O0 -g -Wall -Werror -Wextra
 
 NAME = libft.a
 
-SRC = ft_atoi.c		ft_bzero.c		ft_isalnum.c	ft_isalpha.c	\
+INC_PATH =	./inc/
+
+OBJ_PATH = ./obj/
+
+SRC_PATH = ./src/
+
+SRC_NAME = ft_atoi.c		ft_bzero.c		ft_isalnum.c	ft_isalpha.c	\
     ft_isascii.c	ft_isdigit.c	ft_isprint.c	ft_itoa.c		\
 	ft_memalloc.c	ft_memccpy.c	ft_memchr.c		ft_memcmp.c		\
     ft_memcpy.c		ft_memdel.c		ft_memmove.c	ft_memset.c		\
@@ -34,23 +40,30 @@ SRC = ft_atoi.c		ft_bzero.c		ft_isalnum.c	ft_isalpha.c	\
 	ft_putnbrn.c	ft_putnbrendl.c	ft_strndup.c	ft_clear_tab.c	\
 	ft_nb_tab.c		ft_split_char.c	ft_update_tab.c	ft_error.c		\
 	ft_strdup_tab.c	debug.c
-OBJ = $(SRC:.c=.o)
+
+OBJ_NAME = $(SRC_NAME:.c=.o)
+
+SRC =		$(addprefix $(SRC_PATH),$(SRC_NAME))
+
+OBJ =		$(addprefix $(OBJ_PATH),$(OBJ_NAME))
 
 all: 		$(NAME)
 
 $(NAME): 	$(OBJ)
-			@ar rc $@ $^
+			@ar rcs $@ $^
 			@echo "compile done !"
 
-%.o:		%.c
-			@$(CC) $(CFLAG) -c $< -o $@
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+			@mkdir -p $(OBJ_PATH)
+			@$(CC) $(CFLAG) -I$(INC_PATH) -o $@ -c $<
 
 clean:
-			@rm -f $(OBJ)
+			@rm -rf $(OBJ)
 			@echo "clean done !"
 
 fclean:		clean
-			@rm -f $(NAME)
+			@rm -rf $(NAME)
 			@echo "fclean done !"
 
 re: 		fclean all

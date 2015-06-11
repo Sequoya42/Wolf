@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "libft.h"
-# include "SDL2.framework/Headers/SDL.h"
+# include "SDL2/SDL.h"
 # include <time.h>
 # include <stdio.h> // REMOVE THIS
 
@@ -95,6 +95,7 @@ typedef struct 			s_wolf
 			// SDL STUFF
 	SDL_Window			*window;
 	t_surface			*sw;
+	t_surface			*sw2;
 	t_surface			*sf;
 	t_surface			*sc;
 	t_surface			*st;
