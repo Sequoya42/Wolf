@@ -29,9 +29,7 @@ INC_PATH =		./inc/
 
 SRC_NAME =		main.c 		get_map.c 	events.c 	raycast.c\
 				short_func.c 			choose_map.c	draw.c\
-				load_bmp.c 	texture.c\
-
-# SDL_STUFF = 	./inc/SDL2.framework/SDL2
+				load_bmp.c 	texture.c 	maps.c\
 
 SDL_PATH = 		./SDL2-2.0.3/
 

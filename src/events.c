@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbaum <rbaum@student->42.fr>                +#+  +:+       +#+        */
+/*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/15 18:51:17 by rbaum             #+#    #+#             */
-/*   Updated: 2015/05/15 18:51:17 by rbaum            ###   ########.fr       */
+/*   Created: 2015/06/12 22:31:30 by rbaum             #+#    #+#             */
+/*   Updated: 2015/06/12 22:34:26 by rbaum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void		rotate(t_wolf *t)
 
 void		move(t_wolf *t, int ix, int iy)
 {
-
 	if (t->keystate[SDL_SCANCODE_UP])
 	{
 		if (t->map[((int)(POSY / WALL))][PX] != 1)
@@ -72,7 +71,7 @@ void		teleport(t_wolf *t)
 			&& (t->map[x][y - 1] == 0)
 			&& (t->map[x + 1][y - 1] == 0)
 			&& (t->map[x - 1][y + 1] == 0))
-			break;
+			break ;
 	}
 }
 
@@ -80,8 +79,6 @@ void		trip(t_wolf *t)
 {
 	if (KEY == SDLK_p)
 		teleport(t);
-	if (KEY == SDLK_x)
-		t->trip = (t->trip == 0) ? 1 : 0;
 	if (KEY == SDLK_c)
 		t->cren = (t->cren == 0) ? 1 : 0;
 	if (KEY == SDLK_t)
@@ -100,16 +97,14 @@ void		key_events(t_wolf *t, int ix, int iy)
 			SDL_Quit();
 			exit(1);
 		}
-		if (KEY == SDLK_s)
-		{
-			if (PYN < MH && PXN < MW)
-			{
-				if ( t->map[PYN][PXN] == 0)
-					t->map[PYN][PXN] = 2;
-			} 
-		}
-		trip(t);
+		if (KEY == SDLK_s && PYN < MH && PXN < MW && PYN > 0 && PXN > 0)
+			if (t->map[PYN][PXN] == 0)
+				t->map[PYN][PXN] = 2;
+		if (KEY == SDLK_d && PYN < MH && PXN < MW && PYN > 0 && PXN > 0)
+			if (t->map[PYN][PXN] == 0)
+				t->map[PYN][PXN] = 3;
 		if (KEY == SDLK_n)
-		t->neon = (t->neon == 0) ? 1 : 0;
+			t->neon = (t->neon == 0) ? 1 : 0;
+		trip(t);
 	}
 }

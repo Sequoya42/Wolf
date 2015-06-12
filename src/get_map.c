@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbaum <rbaum@student->42.fr>                +#+  +:+       +#+        */
+/*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/04/29 13:08:33 by rbaum             #+#    #+#             */
-/*   Updated: 2015/05/14 20:23:22 by rbaum            ###   ########.fr       */
+/*   Created: 2015/06/12 22:34:44 by rbaum             #+#    #+#             */
+/*   Updated: 2015/06/12 22:35:53 by rbaum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void		free_map(int ***tab, t_wolf *t)
 	}
 }
 
-void	init_map(t_wolf *t)
+void		init_map(t_wolf *t)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	if ((t->map = malloc(sizeof(int *) * (MH + 1))) == NULL)
@@ -45,14 +45,14 @@ void	init_map(t_wolf *t)
 	}
 }
 
-int		get_length(char *m, t_wolf *t)
+int			get_length(char *m, t_wolf *t)
 {
 	int		fd;
 	int		z;
 	char	*line;
-	
-	MH = 0;
-	MW = 0;
+
+	MH = -1;
+	MW = -1;
 	if ((fd = open(m, O_RDONLY)) == -1)
 		return (ft_error(NULL, NULL, "Failed to open"));
 	while (get_next_line(fd, &line))
@@ -77,7 +77,7 @@ void		read_map(char *m, t_wolf *t)
 	int		x;
 	int		i;
 	char	*line;
-	
+
 	y = 0;
 	x = 0;
 	fd = open(m, O_RDONLY);
@@ -98,9 +98,9 @@ void		read_map(char *m, t_wolf *t)
 	close(fd);
 }
 
-int		get_map(char *s, t_wolf *t)
+int			get_map(char *s, t_wolf *t)
 {
-		free_map(&t->map, t);
+	free_map(&t->map, t);
 	if (get_length(s, t) == -1)
 		return (-1);
 	read_map(s, t);

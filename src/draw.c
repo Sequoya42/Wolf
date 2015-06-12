@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/31 14:52:53 by rbaum             #+#    #+#             */
-/*   Updated: 2015/05/31 14:52:57 by rbaum            ###   ########.fr       */
+/*   Created: 2015/06/12 22:31:44 by rbaum             #+#    #+#             */
+/*   Updated: 2015/06/12 22:31:46 by rbaum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 t_color		cren(double y, t_color c, t_color s, t_wolf *t)
 {
-	if (t->cren == 0)
-		return (s);
 	double	cren;
 	t_color	f;
 
+	if (t->cren == 0)
+		return (s);
 	cren = (y - (double)(int)y);
 	cren *= 100;
 	f.r = (s.r * (cren) / 100) + ((c.r * (100 - cren)) / 100);
@@ -29,37 +29,51 @@ t_color		cren(double y, t_color c, t_color s, t_wolf *t)
 
 void		draw_ceiling(t_wolf *t, double y, int x)
 {
-	double 	i;
+	double	i;
 	t_color	s;
+	t_color s2;
 	t_color	f;
 
 	i = 0;
 	s = set_color(44, 47, 94);
+	s2 = set_color(255, 255, 255);
 	while (i < y - 1)
 	{
-		 t->p[(x + ((int)i * 800))] = couleur(s.r, s.g, s.b, 100);
+		t->p[(x + ((int)i * 800))] = couleur(s.r, s.g, s.b, 100);
 		i++;
 	}
-	f = cren(y, t->c, s, t);
+	f = (t->test == 0 || t->test2 == 0) ?
+	cren(y, t->c, s, t) : cren(y, s2, s, t);
 	t->p[(x + ((int)i * 800))] = couleur(f.r, f.g, f.b, 100);
 }
 
 void		draw_walls(t_wolf *t, int x, t_color s)
 {
-	t_color f;
-	double z;
-	double y;
+	t_color	f;
+	double	z;
+	double	y;
+	int		m;
 
+	m = (t->trip == 0) ? t->wh : 100;
 	z = ((HEIGHT / 2) + (t->wh / 2));
 	y = (HEIGHT / 2) - ((int)t->wh / 2);
 	y = (y < 0) ? 0 : y;
 	while (y < 800 && y < z - 2)
 	{
-		t->p[(x + ((int)y * 800))] = couleur(t->c.r , t->c.g, t->c.b, 100);
+		if ((t->dx < t->dy) ? t->test == 1 : t->test2 == 1)
+			t->p[(x + ((int)y * 800))] = couleur(0, 0, 0, m);
+		else if ((t->dx < t->dy) ? t->test == 2 : t->test2 == 2)
+		{
+			f = set_color(255, 255, 255);
+			f = cren(z, t->c, f, t);
+			t->p[(x + ((int)y * 800))] = couleur(f.r, f.g, f.b, m);
+		}
+		else
+			t->p[(x + ((int)y * 800))] = couleur(t->c.r, t->c.g, t->c.b, m);
 		y++;
 	}
 	f = cren(z, s, t->c, t);
-	t->p[(x + ((int)y * 800))] = couleur(f.r, f.g, f.b, 100);
+	t->p[(x + ((int)y * 800))] = couleur(f.r, f.g, f.b, m);
 }
 
 void		draw_floor(t_wolf *t, int x, double z, t_color s)
@@ -67,7 +81,7 @@ void		draw_floor(t_wolf *t, int x, double z, t_color s)
 	t_color f;
 	t_color	tmp;
 
-	tmp = set_color(11,255,255);
+	tmp = set_color(11, 255, 255);
 	if (t->neon && z < 600)
 	{
 		f = cren(z, tmp, t->c, t);
@@ -81,16 +95,14 @@ void		draw_floor(t_wolf *t, int x, double z, t_color s)
 	}
 	while (z < 600)
 	{
-		if (t->map[(int)POSY / (int)WALL][(int)POSX / (int)WALL] == 2)
-			t->p[(x + ((int)z * 800))] = couleur(255, 244, 255, 100);
-	else
 		t->p[(x + ((int)z * 800))] = couleur(s.r, s.g, s.b, 100);
 		z++;
 	}
 }
+
 void		draw_ray(int x, t_wolf *t)
 {
-	double 	y;
+	double	y;
 	double	z;
 	t_color s;
 
@@ -108,9 +120,9 @@ void		draw_ray(int x, t_wolf *t)
 	if (t->text == 0)
 		draw_walls(t, x, s);
 	else
-		textured_wall(t, x);
-		if (t->text == 0 || z >= 600)
-			draw_floor(t, x, z, s);
-		else
-			textured_floor(t, x);
+		textured_wall(t, x, z);
+	if (t->text == 0 || z >= 600)
+		draw_floor(t, x, z, s);
+	else
+		textured_floor(t, x);
 }

@@ -6,7 +6,7 @@
 /*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/05 18:59:47 by rbaum             #+#    #+#             */
-/*   Updated: 2015/06/05 18:59:48 by rbaum            ###   ########.fr       */
+/*   Updated: 2015/06/12 22:36:24 by rbaum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_color		**alloc_pix(SDL_Surface *surf)
 
 t_surface			*ft_loadbmp(const char *path)
 {
-	SDL_Surface	*tmp;	
+	SDL_Surface	*tmp;
 	t_surface	*surf;
 
 	if (!(surf = malloc(sizeof(t_surface))))
@@ -53,7 +53,7 @@ t_surface			*ft_loadbmp(const char *path)
 		ft_memdel((void **)&surf);
 		return (NULL);
 	}
-	if (!(surf->surf = 
+	if (!(surf->surf =
 		SDL_ConvertSurfaceFormat(tmp, SDL_PIXELFORMAT_ARGB8888, 0)))
 	{
 		SDL_FreeSurface(tmp), ft_memdel((void **)&surf);
@@ -65,6 +65,4 @@ t_surface			*ft_loadbmp(const char *path)
 	if (!(surf->pix = alloc_pix(surf->surf)))
 		del_surface(&surf);
 	return (surf);
-
 }
-

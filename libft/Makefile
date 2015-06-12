@@ -6,13 +6,13 @@
 #    By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/11 17:48:47 by rbaum             #+#    #+#              #
-#    Updated: 2015/06/11 20:38:33 by rbaum            ###   ########.fr        #
+#    Updated: 2015/06/12 22:24:47 by rbaum            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 CC = gcc
 
-CFLAG = -O0 -g -Wall -Werror -Wextra
+CFLAG = -Wall -Werror -Wextra
 
 NAME = libft.a
 
