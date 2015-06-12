@@ -6,7 +6,7 @@
 /*   By: rbaum <rbaum@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/12 22:31:30 by rbaum             #+#    #+#             */
-/*   Updated: 2015/06/12 22:34:26 by rbaum            ###   ########.fr       */
+/*   Updated: 2015/06/13 00:21:40 by rbaum            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ void		teleport(t_wolf *t)
 		POSY = rand() % MH * WALL;
 		y = (int)(POSX / WALL);
 		x = (int)(POSY / WALL);
-		if (t->map[x][y] == 0
+		if (y > 0 && y < MH
+			&& x > 0 && x < MW
+			&& t->map[x][y] == 0
 			&& (t->map[x + 1][y + 1] == 0)
 			&& (t->map[x + 1][y] == 0)
 			&& (t->map[x][y + 1] == 0)

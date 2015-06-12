@@ -33,18 +33,20 @@ void		draw_ceiling(t_wolf *t, double y, int x)
 	t_color	s;
 	t_color s2;
 	t_color	f;
+	int		m;
 
 	i = 0;
+	m = (t->trip == 0) ? t->wh : 100;
 	s = set_color(44, 47, 94);
 	s2 = set_color(255, 255, 255);
 	while (i < y - 1)
 	{
-		t->p[(x + ((int)i * 800))] = couleur(s.r, s.g, s.b, 100);
+		t->p[(x + ((int)i * 800))] = couleur(s.r, s.g, s.b, m);
 		i++;
 	}
 	f = (t->test == 0 || t->test2 == 0) ?
 	cren(y, t->c, s, t) : cren(y, s2, s, t);
-	t->p[(x + ((int)i * 800))] = couleur(f.r, f.g, f.b, 100);
+	t->p[(x + ((int)i * 800))] = couleur(f.r, f.g, f.b, m);
 }
 
 void		draw_walls(t_wolf *t, int x, t_color s)
@@ -80,7 +82,9 @@ void		draw_floor(t_wolf *t, int x, double z, t_color s)
 {
 	t_color f;
 	t_color	tmp;
+	int		m;
 
+	m = (t->trip == 0) ? (t->wh / 4) : 100;
 	tmp = set_color(11, 255, 255);
 	if (t->neon && z < 600)
 	{
@@ -95,7 +99,7 @@ void		draw_floor(t_wolf *t, int x, double z, t_color s)
 	}
 	while (z < 600)
 	{
-		t->p[(x + ((int)z * 800))] = couleur(s.r, s.g, s.b, 100);
+		t->p[(x + ((int)z * 800))] = couleur(s.r, s.g, s.b, m);
 		z++;
 	}
 }
